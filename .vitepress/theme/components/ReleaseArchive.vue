@@ -36,28 +36,65 @@ const isFrench = () => (lang.value || '').toLowerCase().startsWith('fr')
 const label = (key) => (isFrench() ? t.fr[key] : t.en[key])
 
 const fallbackRepo = 'ITDev-Success/billing'
+const repoHtmlBase = `https://github.com/${fallbackRepo}`
 
-const loadFromGithubReleases = async () => {
-    const res = await fetch(`https://api.github.com/repos/${fallbackRepo}/releases?per_page=30`)
-    if (!res.ok) throw new Error('Failed to load releases')
-    const ghReleases = await res.json()
-    const mapped = ghReleases.map((rel) => {
+const fetchAllPages = async (buildUrl, maxPages = 10) => {
+    const results = []
+    for (let page = 1; page <= maxPages; page += 1) {
+        const res = await fetch(buildUrl(page))
+        if (!res.ok) throw new Error('Failed to load releases')
+        const chunk = await res.json()
+        if (!Array.isArray(chunk) || chunk.length === 0) break
+        results.push(...chunk)
+        if (chunk.length < 100) break
+    }
+    return results
+}
+
+const loadFromGithubReleasesAndTags = async () => {
+    const ghReleases = await fetchAllPages(
+        (page) => `https://api.github.com/repos/${fallbackRepo}/releases?per_page=100&page=${page}`
+    )
+    const ghTags = await fetchAllPages(
+        (page) => `https://api.github.com/repos/${fallbackRepo}/tags?per_page=100&page=${page}`
+    )
+
+    const releasesFirst = ghReleases.map((rel) => {
         const firstAsset = Array.isArray(rel.assets) && rel.assets.length > 0 ? rel.assets[0] : null
         return {
             version: rel.tag_name || rel.name || 'unknown',
             date: (rel.published_at || rel.created_at || '').slice(0, 10),
             size: firstAsset?.size ?? 0,
-            download: firstAsset?.browser_download_url || rel.zipball_url || rel.html_url,
+            download: firstAsset?.browser_download_url || rel.zipball_url || `${repoHtmlBase}/archive/refs/tags/${rel.tag_name}.zip`,
             notes: rel.html_url,
             prerelease: Boolean(rel.prerelease),
             latest: false
         }
     })
-    const firstStableIndex = mapped.findIndex((r) => !r.prerelease)
+
+    const releaseVersions = new Set(releasesFirst.map((r) => r.version))
+    const tagsOnly = ghTags
+        .map((tag) => (tag?.name || '').trim())
+        .filter((name) => name !== '' && !releaseVersions.has(name))
+        .map((name) => ({
+            version: name,
+            date: '-',
+            size: 0,
+            download: `${repoHtmlBase}/archive/refs/tags/${name}.zip`,
+            notes: `${repoHtmlBase}/releases/tag/${name}`,
+            prerelease: false,
+            latest: false
+        }))
+
+    const merged = [...releasesFirst, ...tagsOnly]
+    const firstStableIndex = merged.findIndex((r) => !r.prerelease)
     if (firstStableIndex >= 0) {
-        mapped[firstStableIndex].latest = true
+        merged[firstStableIndex].latest = true
+    } else if (merged.length > 0) {
+        merged[0].latest = true
     }
-    return mapped
+
+    return merged
 }
 
 const formatSize = (bytes) => {
@@ -70,12 +107,12 @@ const formatSize = (bytes) => {
 
 onMounted(async () => {
     try {
-        const res = await fetch(withBase('/registry/releases.json'))
-        if (!res.ok) throw new Error('Failed to load releases')
-        releases.value = await res.json()
+        releases.value = await loadFromGithubReleasesAndTags()
     } catch (e) {
         try {
-            releases.value = await loadFromGithubReleases()
+            const res = await fetch(withBase('/registry/releases.json'))
+            if (!res.ok) throw new Error('Failed to load releases')
+            releases.value = await res.json()
         } catch (fallbackError) {
             error.value = fallbackError.message
             console.error(fallbackError)
