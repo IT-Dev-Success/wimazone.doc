@@ -1,6 +1,6 @@
 <script setup>
 import { ref, onMounted } from 'vue'
-import { useData } from 'vitepress'
+import { useData, withBase } from 'vitepress'
 
 const releases = ref([])
 const loading = ref(true)
@@ -35,6 +35,31 @@ const t = {
 const isFrench = () => (lang.value || '').toLowerCase().startsWith('fr')
 const label = (key) => (isFrench() ? t.fr[key] : t.en[key])
 
+const fallbackRepo = 'ITDev-Success/billing'
+
+const loadFromGithubReleases = async () => {
+    const res = await fetch(`https://api.github.com/repos/${fallbackRepo}/releases?per_page=30`)
+    if (!res.ok) throw new Error('Failed to load releases')
+    const ghReleases = await res.json()
+    const mapped = ghReleases.map((rel) => {
+        const firstAsset = Array.isArray(rel.assets) && rel.assets.length > 0 ? rel.assets[0] : null
+        return {
+            version: rel.tag_name || rel.name || 'unknown',
+            date: (rel.published_at || rel.created_at || '').slice(0, 10),
+            size: firstAsset?.size ?? 0,
+            download: firstAsset?.browser_download_url || rel.zipball_url || rel.html_url,
+            notes: rel.html_url,
+            prerelease: Boolean(rel.prerelease),
+            latest: false
+        }
+    })
+    const firstStableIndex = mapped.findIndex((r) => !r.prerelease)
+    if (firstStableIndex >= 0) {
+        mapped[firstStableIndex].latest = true
+    }
+    return mapped
+}
+
 const formatSize = (bytes) => {
     if (bytes === 0) return '-'
     const k = 1024
@@ -45,12 +70,16 @@ const formatSize = (bytes) => {
 
 onMounted(async () => {
     try {
-        const res = await fetch('/registry/releases.json')
+        const res = await fetch(withBase('/registry/releases.json'))
         if (!res.ok) throw new Error('Failed to load releases')
         releases.value = await res.json()
     } catch (e) {
-        error.value = e.message
-        console.error(e)
+        try {
+            releases.value = await loadFromGithubReleases()
+        } catch (fallbackError) {
+            error.value = fallbackError.message
+            console.error(fallbackError)
+        }
     } finally {
         loading.value = false
     }

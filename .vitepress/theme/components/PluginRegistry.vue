@@ -1,6 +1,6 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue'
-import { useData } from 'vitepress'
+import { useData, withBase } from 'vitepress'
 import MarkdownIt from 'markdown-it'
 import Modal from './Modal.vue'
 
@@ -77,14 +77,14 @@ const fetchPlugins = async () => {
     loading.value = true
     try {
         // Fetch from the external registry repository
-        const response = await fetch('/registry/plugins.json')
+        const response = await fetch(withBase('/registry/plugins.json'))
         if (!response.ok) throw new Error('Failed to fetch plugins')
         plugins.value = await response.json()
     } catch (e) {
         console.error(e)
         // Fallback for local dev or if registry is down
         try {
-            const localRes = await fetch('/plugins.json')
+            const localRes = await fetch(withBase('/plugins.json'))
             if (localRes.ok) plugins.value = await localRes.json()
         } catch (err) {
             console.error('Local fallback failed', err)
