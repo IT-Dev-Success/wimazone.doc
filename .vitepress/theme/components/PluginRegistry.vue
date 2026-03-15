@@ -1,5 +1,6 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue'
+import { useData } from 'vitepress'
 import MarkdownIt from 'markdown-it'
 import Modal from './Modal.vue'
 
@@ -11,7 +12,38 @@ const props = defineProps({
 const plugins = ref([])
 const loading = ref(true)
 const searchQuery = ref('')
-const activeCategory = ref('All')
+const activeCategory = ref('*')
+const { lang } = useData()
+
+const texts = {
+    fr: {
+        all: 'Tous',
+        searchPlaceholder: 'Rechercher des plugins...',
+        loadingRegistry: 'Chargement du registre...',
+        docs: 'Docs',
+        download: 'Télécharger',
+        empty: 'Aucun plugin trouvé pour',
+        clearFilters: 'Effacer les filtres',
+        readmeError: 'Impossible de charger la documentation',
+        readmeGithub: 'Voir sur GitHub',
+        authorTitle: 'Voir auteur'
+    },
+    en: {
+        all: 'All',
+        searchPlaceholder: 'Find plugins...',
+        loadingRegistry: 'Loading registry...',
+        docs: 'Docs',
+        download: 'Download',
+        empty: 'No plugins found matching',
+        clearFilters: 'Clear filters',
+        readmeError: 'Failed to load documentation',
+        readmeGithub: 'View on GitHub',
+        authorTitle: 'View Author'
+    }
+}
+
+const isFrench = () => (lang.value || '').toLowerCase().startsWith('fr')
+const t = (key) => (isFrench() ? texts.fr[key] : texts.en[key])
 
 // Docs Modal Logic
 const showModal = ref(false)
@@ -33,8 +65,8 @@ const fetchDocs = async (plugin) => {
         // Simple sanitization or just render
         modalContent.value = md.render(text)
     } catch (e) {
-        modalContent.value = `<p class="text-error">Failed to load documentation: ${e.message}</p>
-        <p><a href="${plugin.repo}" target="_blank" rel="noopener noreferrer">View on GitHub</a></p>`
+        modalContent.value = `<p class="text-error">${t('readmeError')}: ${e.message}</p>
+        <p><a href="${plugin.repo}" target="_blank" rel="noopener noreferrer">${t('readmeGithub')}</a></p>`
     } finally {
         loadingDocs.value = false
     }
@@ -68,9 +100,9 @@ onMounted(async () => {
 
 // Categories
 const categories = computed(() => {
-    if (!plugins.value.length) return ['All']
+    if (!plugins.value.length) return [{ key: '*', label: t('all') }]
     const cats = new Set(plugins.value.map(p => p.category).filter(Boolean))
-    return ['All', ...Array.from(cats).sort()]
+    return [{ key: '*', label: t('all') }, ...Array.from(cats).sort().map((cat) => ({ key: cat, label: cat }))]
 })
 
 // Filter Logic
@@ -84,7 +116,7 @@ const filteredPlugins = computed(() => {
                               desc.toLowerCase().includes(query) ||
                               (p.tags && p.tags.some(t => t && t.toLowerCase().includes(query)))
         
-        const matchesCategory = activeCategory.value === 'All' || p.category === activeCategory.value
+        const matchesCategory = activeCategory.value === '*' || p.category === activeCategory.value
 
         return matchesSearch && matchesCategory
     })
@@ -124,7 +156,7 @@ function copyToClipboard(text) {
                     <input 
                         v-model="searchQuery" 
                         type="text" 
-                        placeholder="Find plugins..."
+                        :placeholder="t('searchPlaceholder')"
                         class="search-input"
                     />
                 </div>
@@ -134,19 +166,19 @@ function copyToClipboard(text) {
                 <div class="categories">
                     <button 
                         v-for="cat in categories" 
-                        :key="cat"
-                        @click="activeCategory = cat"
-                        :class="{ active: activeCategory === cat }"
+                        :key="cat.key"
+                        @click="activeCategory = cat.key"
+                        :class="{ active: activeCategory === cat.key }"
                         class="category-pill"
                     >
-                        {{ cat }}
+                        {{ cat.label }}
                     </button>
                 </div>
             </div>
 
             <div v-if="loading" class="loading-state">
                 <div class="spinner"></div>
-                <span>Loading registry...</span>
+                <span>{{ t('loadingRegistry') }}</span>
             </div>
 
             <div v-else class="plugin-grid transition-opacity duration-500" :class="{ 'opacity-0': loading }">
@@ -159,7 +191,7 @@ function copyToClipboard(text) {
                             <div class="plugin-title-block">
                                 <h3 class="plugin-title group-hover:text-brand transition-colors">{{ plugin.name }}</h3>
                                 <div class="plugin-meta-row">
-                                    <a :href="plugin.repo" target="_blank" class="plugin-author" title="View Author">
+                                    <a :href="plugin.repo" target="_blank" class="plugin-author" :title="t('authorTitle')">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
                                         {{ plugin.author }}
                                     </a>
@@ -177,8 +209,8 @@ function copyToClipboard(text) {
                     </div>
 
                     <div class="card-footer">
-                        <button @click="fetchDocs(plugin)" class="VPButton alt action-btn">Docs</button>
-                        <a :href="plugin.download" class="VPButton brand action-btn">Download</a>
+                        <button @click="fetchDocs(plugin)" class="VPButton alt action-btn">{{ t('docs') }}</button>
+                        <a :href="plugin.download" class="VPButton brand action-btn">{{ t('download') }}</a>
                     </div>
                 </div>
             </div>
@@ -187,8 +219,8 @@ function copyToClipboard(text) {
                 <div class="empty-icon-wrapper">
                     <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
                 </div>
-                <p class="empty-text">No plugins found matching "{{ searchQuery }}"</p>
-                <button @click="searchQuery = ''; activeCategory = 'All'" class="link-btn">Clear filters</button>
+                <p class="empty-text">{{ t('empty') }} "{{ searchQuery }}"</p>
+                <button @click="searchQuery = ''; activeCategory = '*'" class="link-btn">{{ t('clearFilters') }}</button>
             </div>
         </div>
     </div>

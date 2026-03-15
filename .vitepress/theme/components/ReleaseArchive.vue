@@ -1,9 +1,39 @@
 <script setup>
 import { ref, onMounted } from 'vue'
+import { useData } from 'vitepress'
 
 const releases = ref([])
 const loading = ref(true)
 const error = ref(null)
+const { lang } = useData()
+
+const t = {
+    fr: {
+        loading: 'Chargement des archives...',
+        error: 'Erreur',
+        size: 'Taille',
+        action: 'Action',
+        latest: 'Dernière',
+        prerelease: 'Pré-version',
+        download: 'Télécharger',
+        notes: 'Notes',
+        empty: 'Aucune version trouvée.'
+    },
+    en: {
+        loading: 'Loading archive...',
+        error: 'Error',
+        size: 'Size',
+        action: 'Action',
+        latest: 'Latest',
+        prerelease: 'Pre-release',
+        download: 'Download',
+        notes: 'Notes',
+        empty: 'No releases found.'
+    }
+}
+
+const isFrench = () => (lang.value || '').toLowerCase().startsWith('fr')
+const label = (key) => (isFrench() ? t.fr[key] : t.en[key])
 
 const formatSize = (bytes) => {
     if (bytes === 0) return '-'
@@ -29,8 +59,8 @@ onMounted(async () => {
 
 <template>
     <div class="release-archive">
-        <div v-if="loading" class="text-center p-4 text-accents-5">Loading archive...</div>
-        <div v-else-if="error" class="text-error p-4">Error: {{ error }}</div>
+        <div v-if="loading" class="text-center p-4 text-accents-5">{{ label('loading') }}</div>
+        <div v-else-if="error" class="text-error p-4">{{ label('error') }}: {{ error }}</div>
         
         <div v-else class="overflow-x-auto">
             <table class="w-full text-left border-collapse">
@@ -38,26 +68,26 @@ onMounted(async () => {
                     <tr class="border-b border-accents-2">
                         <th class="py-2 px-4 font-semibold">Version</th>
                         <th class="py-2 px-4 font-semibold">Date</th>
-                        <th class="py-2 px-4 font-semibold">Size</th>
-                        <th class="py-2 px-4 font-semibold text-right">Action</th>
+                        <th class="py-2 px-4 font-semibold">{{ label('size') }}</th>
+                        <th class="py-2 px-4 font-semibold text-right">{{ label('action') }}</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr v-for="release in releases" :key="release.version" class="border-b border-accents-2 hover:bg-accents-1 transition-colors">
                         <td class="py-3 px-4">
                             <span class="font-mono font-bold">{{ release.version }}</span>
-                            <span v-if="release.latest" class="ml-2 text-xs px-2 py-0.5 rounded-full" style="background-color: var(--vp-c-brand-soft); color: var(--vp-c-brand-1);">Latest</span>
-                            <span v-if="release.prerelease" class="ml-2 text-xs bg-amber-500/10 text-amber-500 px-2 py-0.5 rounded-full">Pre-release</span>
+                            <span v-if="release.latest" class="ml-2 text-xs px-2 py-0.5 rounded-full" style="background-color: var(--vp-c-brand-soft); color: var(--vp-c-brand-1);">{{ label('latest') }}</span>
+                            <span v-if="release.prerelease" class="ml-2 text-xs bg-amber-500/10 text-amber-500 px-2 py-0.5 rounded-full">{{ label('prerelease') }}</span>
                         </td>
                         <td class="py-3 px-4 text-sm text-accents-5">{{ release.date }}</td>
                         <td class="py-3 px-4 text-sm font-mono text-accents-5">{{ formatSize(release.size) }}</td>
                         <td class="py-3 px-4 text-right">
-                            <a :href="release.download" class="text-brand hover:underline text-sm font-medium mr-4">Download</a>
-                            <a :href="release.notes" target="_blank" class="text-accents-4 hover:text-foreground text-sm">Notes</a>
+                            <a :href="release.download" class="text-brand hover:underline text-sm font-medium mr-4">{{ label('download') }}</a>
+                            <a :href="release.notes" target="_blank" class="text-accents-4 hover:text-foreground text-sm">{{ label('notes') }}</a>
                         </td>
                     </tr>
                    <tr v-if="releases.length === 0">
-                        <td colspan="4" class="text-center py-8 text-accents-4 italic">No releases found.</td>
+                        <td colspan="4" class="text-center py-8 text-accents-4 italic">{{ label('empty') }}</td>
                    </tr>
                 </tbody>
             </table>

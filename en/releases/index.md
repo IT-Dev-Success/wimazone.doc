@@ -15,4 +15,4 @@ Download previous versions of WimaZone Billing.
 <ReleaseArchive />
 
 > [!WARNING]
-> Older versions may contain security vulnerabilities or compatibility gaps. Always prefer the [latest stable version](/).
+> Older versions may contain security vulnerabilities or compatibility gaps. Always prefer the [latest stable version](/en/).

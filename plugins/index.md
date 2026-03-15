@@ -1,10 +1,10 @@
 ---
-title: Plugins Registry
-description: Browse and download extensions for WimaZone Billing.
+title: Registre des plugins
+description: Parcourez et téléchargez les extensions WimaZone Billing.
 layout: page
 ---
 
 <PluginRegistry 
-  title="WimaZone Plugin Registry" 
-  description="Explore official and community plugins to extend WimaZone Billing." 
+  title="Registre des plugins WimaZone" 
+  description="Explorez les plugins officiels et communautaires pour étendre WimaZone Billing." 
 />
