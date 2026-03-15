@@ -258,13 +258,14 @@
 
 /* Navbar logo size override */
 .VPNavBarTitle .logo {
-  height: 46px !important;
+  height: 68px !important;
   width: auto !important;
+  max-height: none !important;
 }
 
 @media (max-width: 960px) {
   .VPNavBarTitle .logo {
-    height: 40px !important;
+    height: 56px !important;
   }
 }
 
