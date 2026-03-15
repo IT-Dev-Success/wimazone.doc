@@ -1,80 +1,156 @@
-# Plugin Development Guide
+---
+title: Développement de templates plugin
+---
 
-WimaZone Billing supports a modular plugin model to extend hotspot features, themes, or integrations.
-This page documents the current expected structure.
+# Développement de templates plugin
 
-## Directory Structure
+Cette page reflète le comportement réel de **Paramètres > Plugins portail client** (`/settings/customer-portal/plugins`) dans WimaZone Billing.
 
-A valid plugin must have a flat structure with a `plugin.php` file in the root.
+## Ce que l'interface admin permet
+
+Sur la page d'extension, vous pouvez:
+
+- Revenir au template par défaut (`native`)
+- Mettre à jour tous les templates Git
+- Ajouter des templates depuis:
+  - dépôt GitHub (privé/public, avec branche)
+  - archive ZIP
+- Activer un template compatible
+- Rafraîchir un template
+- Supprimer un template (sauf template par défaut)
+
+## Sources supportées
+
+### 1) Dépôt GitHub
+
+Paramètres disponibles:
+
+- URL dépôt (`customer_portal_plugin_repo_url`)
+- Branche (`customer_portal_plugin_repo_branch`)
+- Token privé (`customer_portal_plugin_repo_token`)
+- Sync auto activée (`customer_portal_plugin_auto_sync_enabled`)
+- Intervalle sync auto (`customer_portal_plugin_auto_sync_interval`) : `5`, `10`, `15`, `30`, `60` minutes
+
+Le système clone/synchronise le dépôt dans:
 
 ```text
-plugin-name/
-├── plugin.php          # (Required) Entry point & Metadata
-├── composer.json       # (Optional) Dependencies
-├── README.md           # (Required) Documentation for Registry
-├── theme/              # (Optional) Captive Portal theme files
-│   └── styles.css
-└── src/                # (Optional) PHP Classes
+storage/extensions/customer-portal-plugins/installed/git
 ```
 
-## Metadata Header
+### 2) Import ZIP
 
-Your `plugin.php` **must** start with a specific comment block. The Registry crawler uses this to categorize and display your plugin.
+Le ZIP est installé dans:
 
-```php
-<?php
-/**
- * Plugin Name: My Awesome Plugin
- * Description: Adds a dark mode toggle to the hotspot login page.
- * Version: 1.0.0
- * Author: YourName
- * Category: Hotspot Tools
- * Scope: Global
- * Tags: theme, dark-mode, ui
- * Core Version: >=3.4.0
- */
-
-use App\Core\Hooks;
-
-// Plugin logic starts here...
+```text
+storage/extensions/customer-portal-plugins/installed/manual/<plugin-id>
 ```
 
-### Required Fields
-- **Plugin Name**: Displayed title.
-- **Description**: Short summary (max 160 chars).
-- **Version**: SemVer format (e.g., `1.0.0`).
-- **Category**: One of: `Hotspot Tools`, `System Tools`, `Payment Gateway`, `Reports`, `Language Pack`.
-- **Scope**: `Global` (available everywhere) or `Session` (specific to a router session).
-- **Tags**: Comma-separated search keywords.
+L'archive doit contenir un template valide avec un `plugin.json`.
 
-## Release & Registry Rules
+## Structure attendue d'un template
 
-To get your plugin listed in the [Registry](/plugins/):
+Un template valide est basé sur **`plugin.json`** (et non `plugin.php`).
 
-1.  **Public Repository**: Host your code on GitHub.
-2.  **Naming**: Repository name should start with `plugin-` (e.g., `plugin-advanced-login`).
-3.  **Versioning**: Use **Git Tags** for releases. The Registry strictly prefers tagged releases over the main branch.
-    -   Tag format: `v1.0.0`.
-    -   You can use GitHub Actions to auto-generate ZIPs.
-4.  **Documentation**: A comprehensive `README.md` is mandatory.
+Exemple minimal:
 
-## Sample GitHub Workflow
-
-Create `.github/workflows/release.yml` to automatically package your plugin:
-
-```yaml
-name: Release Plugin
-on:
-  push:
-    tags: ['v*']
-
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - run: zip -r plugin.zip . -x "*.git*"
-      - uses: softprops/action-gh-release@v1
-        with:
-          files: plugin.zip
+```text
+my-template/
+├── plugin.json
+├── views/
+│   └── layouts/
+│       ├── customer-layout-auth.blade.php
+│       └── customer-layout-dashboard.blade.php
+├── lang/
+│   ├── fr/
+│   └── en/
+└── images/
+    ├── img1.png
+    ├── desktop/
+    │   └── img1.png
+    └── mobile/
+        └── img1.png
 ```
+
+## Manifest `plugin.json`
+
+Champs principaux utilisés:
+
+- `id` (obligatoire, unique)
+- `name`
+- `version`
+- `description`
+- `author`
+- `compatible_with`
+- `source_url`
+- `featured`
+- `sort_order`
+- `commercial_badge`
+- `changelog`
+
+Règle d'ID:
+
+- Format autorisé: `^[a-z0-9][a-z0-9._-]*$`
+- IDs interdits: `native`, `native-default`
+
+Exemple:
+
+```json
+{
+  "id": "modern-orange",
+  "name": "Modern Orange Portal",
+  "version": "1.0.0",
+  "description": "Template client orienté mobile",
+  "author": "ITDev Success",
+  "compatible_with": "3.4.0",
+  "source_url": "https://github.com/example/customer-portal-templates",
+  "featured": true,
+  "sort_order": 10,
+  "commercial_badge": "",
+  "changelog": "Initial release"
+}
+```
+
+## Validation appliquée par WimaZone
+
+Le template est analysé et peut afficher des erreurs si:
+
+- nom manquant
+- aucun visuel détecté
+- layouts obligatoires manquants
+- dossier `lang` manquant
+- incompatibilité avec la version projet
+
+Layouts critiques vérifiés:
+
+- `views/layouts/customer-layout-auth.blade.php`
+- `views/layouts/customer-layout-dashboard.blade.php`
+
+Images preview acceptées:
+
+- `img1.png`, `img2.jpg`, etc.
+- sous-dossiers `images/desktop` et `images/mobile`
+- extensions: `png`, `jpg`, `jpeg`, `webp`
+
+## Priorité des sources
+
+Si un même `id` existe en Git et en ZIP:
+
+- la version Git est prioritaire dans la liste active
+- un message d'avertissement est affiché après synchronisation
+
+## Endpoints utiles (référence)
+
+- `GET /settings/customer-portal/plugins`
+- `POST /settings/customer-portal/plugins/sync-settings`
+- `POST /settings/customer-portal/plugins/install-zip`
+- `POST /settings/customer-portal/plugins/sync`
+- `POST /settings/customer-portal/plugins/{plugin}/refresh`
+- `DELETE /settings/customer-portal/plugins/{plugin}`
+
+## Bonnes pratiques
+
+- Garder des IDs stables (ne pas renommer après déploiement)
+- Versionner vos templates (`version`, changelog)
+- Tester auth + dashboard sur mobile et desktop
+- Éviter les conflits d'ID entre ZIP manuel et source Git
+- Préférer un dépôt dédié pour les templates portail client
