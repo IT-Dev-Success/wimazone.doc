@@ -26,7 +26,10 @@ export default defineConfig({
   },
 
   head: [
-    ["link", { rel: "icon", href: "/logo-m.svg" }],
+    ["link", { rel: "icon", type: "image/svg+xml", href: "/logo-m.svg" }],
+    ["link", { rel: "icon", type: "image/png", sizes: "32x32", href: "/favicon-32x32.png" }],
+    ["link", { rel: "apple-touch-icon", href: "/apple-touch-icon.png" }],
+    ["link", { rel: "shortcut icon", href: "/favicon.ico" }],
     ["meta", { name: "theme-color", content: "#0ea5e9" }],
     ["meta", { property: "og:type", content: "website" }],
     ["meta", { property: "og:site_name", content: "WimaZone Billing" }],
