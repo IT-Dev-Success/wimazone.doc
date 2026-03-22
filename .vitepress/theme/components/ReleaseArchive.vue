@@ -19,21 +19,21 @@ const t = {
         notes: 'Notes',
         empty: 'Aucune version trouvée.'
     },
-    en: {
-        loading: 'Loading archive...',
-        error: 'Error',
-        size: 'Size',
-        action: 'Action',
-        latest: 'Latest',
-        prerelease: 'Pre-release',
-        download: 'Download',
-        notes: 'Notes',
-        empty: 'No releases found.'
+    mg: {
+        loading: 'Mamorona ny tahiry...',
+        error: 'Hadisoana',
+        size: 'Habe',
+        action: 'Hetsika',
+        latest: 'Farany',
+        prerelease: 'Alohan\'ny famoahana',
+        download: 'Alao',
+        notes: 'Naoty',
+        empty: 'Tsy misy version hita.'
     }
 }
 
 const isFrench = () => (lang.value || '').toLowerCase().startsWith('fr')
-const label = (key) => (isFrench() ? t.fr[key] : t.en[key])
+const label = (key) => (isFrench() ? t.fr[key] : t.mg[key])
 
 const fallbackRepo = 'ITDev-Success/billing'
 const repoHtmlBase = `https://github.com/${fallbackRepo}`

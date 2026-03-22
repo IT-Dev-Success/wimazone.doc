@@ -1,7 +1,7 @@
 ---
 layout: doc
 title: Tahiry Famoahana
-description: Tahiry famoahana WimaZone Billing.
+description: Ny version rehetra ny WimaZone Billing — manomboka v1.0.0 ka hatramin'ny v3.5.0.
 ---
 
 <script setup>
@@ -10,7 +10,7 @@ import ReleaseArchive from '../../.vitepress/theme/components/ReleaseArchive.vue
 
 # Tahiry Famoahana
 
-Alao ny version taloha ny WimaZone Billing.
+Ny version rehetra navoaka ho an'ny WimaZone Billing. Ny version marin-toerana farany dia **v3.5.0** (22 martsa 2026).
 
 <ReleaseArchive />
 
