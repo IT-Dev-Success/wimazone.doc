@@ -48,49 +48,49 @@ export const sidebarFr: DefaultTheme.Sidebar = {
   ]
 }
 
-export const sidebarEn: DefaultTheme.Sidebar = {
-  '/en/docs/guide/': [
+export const sidebarMg: DefaultTheme.Sidebar = {
+  '/mg/docs/guide/': [
     {
-      text: 'Getting Started',
+      text: 'Fanombohana',
       collapsed: false,
       items: [
-        { text: 'Plugins', link: '/en/plugins/' },
-        { text: 'Requirements', link: '/en/docs/guide/installation#requirements' }
+        { text: 'Plugins', link: '/mg/plugins/' },
+        { text: 'Fepetra takiana', link: '/mg/docs/guide/installation#requirements' }
       ]
     },
     {
-      text: 'Installation',
+      text: 'Fametrahana',
       collapsed: false,
       items: [
-        { text: 'MikroTik', link: '/en/docs/guide/mikrotik' },
-        { text: 'Docker', link: '/en/docs/guide/docker' },
-        { text: 'aaPanel (Docker)', link: '/en/docs/guide/docker-aapanel' },
-        { text: 'Web Server', link: '/en/docs/guide/installation#web-servers' },
-        { text: 'Shared Hosting', link: '/en/docs/guide/installation#shared-hosting' },
-        { text: 'VPS & Cloud', link: '/en/docs/guide/installation#vps-cloud' }
+        { text: 'MikroTik', link: '/mg/docs/guide/mikrotik' },
+        { text: 'Docker', link: '/mg/docs/guide/docker' },
+        { text: 'aaPanel (Docker)', link: '/mg/docs/guide/docker-aapanel' },
+        { text: 'Serveur Web', link: '/mg/docs/guide/installation#web-servers' },
+        { text: 'Hébergement zaraina', link: '/mg/docs/guide/installation#shared-hosting' },
+        { text: 'VPS & Cloud', link: '/mg/docs/guide/installation#vps-cloud' }
       ]
     },
     {
       text: 'Configuration',
       items: [
-        { text: 'Post-Installation', link: '/en/docs/guide/installation#post-installation' }
+        { text: 'Aorian\'ny fametrahana', link: '/mg/docs/guide/installation#post-installation' }
       ]
     },
     {
-      text: 'Development',
+      text: 'Fampandrosoana',
       items: [
-        { text: 'Creating Plugins', link: '/en/docs/guide/plugin-development' }
+        { text: 'Mamorona Plugin', link: '/mg/docs/guide/plugin-development' }
       ]
     }
   ],
-  '/en/docs/manual/': [
+  '/mg/docs/manual/': [
     {
-      text: 'User Manual',
+      text: 'Boky Torolàlana Mpampiasa',
       items: [
-        { text: 'Overview', link: '/en/docs/manual/' },
-        { text: 'Global Settings', link: '/en/docs/manual/settings/' },
-        { text: 'Available APIs', link: '/en/docs/manual/settings/apis' },
-        { text: 'Router Operations', link: '/en/docs/manual/router/' }
+        { text: 'Fijery ankapobeny', link: '/mg/docs/manual/' },
+        { text: 'Paramètre ankapobeny', link: '/mg/docs/manual/settings/' },
+        { text: 'API misy', link: '/mg/docs/manual/settings/apis' },
+        { text: 'Asan\'ny routeur', link: '/mg/docs/manual/router/' }
       ]
     }
   ]

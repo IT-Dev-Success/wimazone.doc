@@ -17,19 +17,19 @@ export const navFr: DefaultTheme.NavItem[] = [
   }
 ]
 
-export const navEn: DefaultTheme.NavItem[] = [
-  { text: 'Home', link: '/en/' },
-  { text: 'Guide', link: '/en/docs/guide/installation' },
-  { text: 'Manual', link: '/en/docs/manual/' },
-  { text: 'APIs', link: '/en/docs/manual/settings/apis' },
-  { text: 'Plugins', link: '/en/plugins/' },
-  { text: 'Releases', link: '/en/releases/' },
-  { 
-    text: 'Project', 
+export const navMg: DefaultTheme.NavItem[] = [
+  { text: 'Fandraisana', link: '/mg/' },
+  { text: 'Torolàlana', link: '/mg/docs/guide/installation' },
+  { text: 'Boky', link: '/mg/docs/manual/' },
+  { text: 'API', link: '/mg/docs/manual/settings/apis' },
+  { text: 'Plugins', link: '/mg/plugins/' },
+  { text: 'Famoahana', link: '/mg/releases/' },
+  {
+    text: 'Tetikasa',
     items: [
-      { text: 'Changelog', link: 'https://github.com/ITDev-Success/billing/blob/main/CHANGELOG.md' },
-      { text: 'Source Code', link: 'https://github.com/ITDev-Success/billing' },
-      { text: 'Issues', link: 'https://github.com/ITDev-Success/billing/issues' }
+      { text: 'Tantaran\'ny fiovana', link: 'https://github.com/ITDev-Success/billing/blob/main/CHANGELOG.md' },
+      { text: 'Loharano', link: 'https://github.com/ITDev-Success/billing' },
+      { text: 'Olana', link: 'https://github.com/ITDev-Success/billing/issues' }
     ]
   }
 ]

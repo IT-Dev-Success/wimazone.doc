@@ -1,8 +1,8 @@
 import { defineConfig } from "vitepress";
 import { createWriteStream } from "fs";
 import { resolve } from "path";
-import { sidebarFr, sidebarEn } from "./config/sidebars";
-import { navFr, navEn } from "./config/nav";
+import { sidebarFr, sidebarMg } from "./config/sidebars";
+import { navFr, navMg } from "./config/nav";
 
 export default defineConfig({
   title: "WimaZone Billing",
@@ -103,12 +103,12 @@ export default defineConfig({
         sidebar: sidebarFr,
       },
     },
-    en: {
-      label: "English",
-      lang: "en-US",
+    mg: {
+      label: "Malagasy",
+      lang: "mg",
       themeConfig: {
-        nav: navEn,
-        sidebar: sidebarEn,
+        nav: navMg,
+        sidebar: sidebarMg,
       },
     },
   },
