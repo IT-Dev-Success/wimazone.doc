@@ -440,20 +440,20 @@
   background-position: center;
 }
 
-/* --- English Flag (US) --- */
-.VPNavBarTranslations a[href^="/en/"]::before,
-.VPNavBarTranslations a[href^="/en/"] span::before {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 480'%3E%3Cpath fill='%23bd3d44' d='M0 0h640v480H0z'/%3E%3Cpath stroke='%23fff' stroke-width='37' d='M0 74h640M0 148h640M0 222h640M0 296h640M0 370h640M0 444h640'/%3E%3Cpath fill='%23192f5d' d='M0 0h364v258.5H0z'/%3E%3Cg fill='%23fff'%3E%3Cg id='a'%3E%3Cg id='b'%3E%3Cpath id='c' d='M31 23l5 15.5-13.1-9.5H44l-13.1 9.5'/%3E%3Cuse href='%23c' x='62'/%3E%3Cuse href='%23c' x='124'/%3E%3Cuse href='%23c' x='186'/%3E%3Cuse href='%23c' x='248'/%3E%3C/g%3E%3Cuse href='%23b' x='31' y='21'/%3E%3C/g%3E%3Cuse href='%23a' y='42'/%3E%3Cuse href='%23a' y='84'/%3E%3Cuse href='%23a' y='126'/%3E%3Cuse href='%23a' y='168'/%3E%3C/g%3E%3C/svg%3E");
+/* --- Madagascar Flag (MG) --- */
+.VPNavBarTranslations a[href^="/mg/"]::before,
+.VPNavBarTranslations a[href^="/mg/"] span::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 900 600'%3E%3Cpath fill='%23fff' d='M0 0h300v600H0z'/%3E%3Cpath fill='%23fc3d32' d='M300 0h600v300H300z'/%3E%3Cpath fill='%23007e3a' d='M300 300h600v300H300z'/%3E%3C/svg%3E");
 }
 
-/* 2. Active English title */
-html[lang="en-US"] .VPNavBarTranslations .items .title::before {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 480'%3E%3Cpath fill='%23bd3d44' d='M0 0h640v480H0z'/%3E%3Cpath stroke='%23fff' stroke-width='37' d='M0 74h640M0 148h640M0 222h640M0 296h640M0 370h640M0 444h640'/%3E%3Cpath fill='%23192f5d' d='M0 0h364v258.5H0z'/%3E%3Cg fill='%23fff'%3E%3Cg id='a'%3E%3Cg id='b'%3E%3Cpath id='c' d='M31 23l5 15.5-13.1-9.5H44l-13.1 9.5'/%3E%3Cuse href='%23c' x='62'/%3E%3Cuse href='%23c' x='124'/%3E%3Cuse href='%23c' x='186'/%3E%3Cuse href='%23c' x='248'/%3E%3C/g%3E%3Cuse href='%23b' x='31' y='21'/%3E%3C/g%3E%3Cuse href='%23a' y='42'/%3E%3Cuse href='%23a' y='84'/%3E%3Cuse href='%23a' y='126'/%3E%3Cuse href='%23a' y='168'/%3E%3C/g%3E%3C/svg%3E");
+/* 2. Active Malagasy title */
+html[lang="mg"] .VPNavBarTranslations .items .title::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 900 600'%3E%3Cpath fill='%23fff' d='M0 0h300v600H0z'/%3E%3Cpath fill='%23fc3d32' d='M300 0h600v300H300z'/%3E%3Cpath fill='%23007e3a' d='M300 300h600v300H300z'/%3E%3C/svg%3E");
 }
 
 /* --- French Flag (FR) --- */
-.VPNavBarTranslations a:not([href^="/en/"])::before,
-.VPNavBarTranslations a:not([href^="/en/"]) span::before {
+.VPNavBarTranslations a:not([href^="/mg/"])::before,
+.VPNavBarTranslations a:not([href^="/mg/"]) span::before {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 3 2'%3E%3Cpath fill='%230055a4' d='M0 0h1v2H0z'/%3E%3Cpath fill='%23fff' d='M1 0h1v2H1z'/%3E%3Cpath fill='%23ef4135' d='M2 0h1v2H2z'/%3E%3C/svg%3E");
 }
 
