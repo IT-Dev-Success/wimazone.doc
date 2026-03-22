@@ -20,8 +20,8 @@ hero:
 features:
   - title: Laravel 11 Stack
     details: Architecture robuste avec files d'attente, scheduler, migrations et tests.
-  - title: MikroTik v6/v7 Compatible
-    details: Intégration API RouterOS avec protections contre les routeurs instables et synchro au démarrage.
+  - title: MikroTik RouterOS V7
+    details: Intégration API RouterOS V7 avec protections contre les routeurs instables et synchro au démarrage.
   - title: Captive Portal + Customer Area
     details: Activation de vouchers, tableau de bord client, géolocalisation et redirections de secours.
   - title: APIs Externe
