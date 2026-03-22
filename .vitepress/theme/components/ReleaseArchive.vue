@@ -107,12 +107,17 @@ const formatSize = (bytes) => {
 
 onMounted(async () => {
     try {
-        releases.value = await loadFromGithubReleasesAndTags()
+        const res = await fetch(withBase('/registry/releases.json'))
+        if (!res.ok) throw new Error('Failed to load local releases')
+        const localReleases = await res.json()
+        if (Array.isArray(localReleases) && localReleases.length > 0) {
+            releases.value = localReleases
+        } else {
+            releases.value = await loadFromGithubReleasesAndTags()
+        }
     } catch (e) {
         try {
-            const res = await fetch(withBase('/registry/releases.json'))
-            if (!res.ok) throw new Error('Failed to load releases')
-            releases.value = await res.json()
+            releases.value = await loadFromGithubReleasesAndTags()
         } catch (fallbackError) {
             error.value = fallbackError.message
             console.error(fallbackError)
