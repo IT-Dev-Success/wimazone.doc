@@ -24,8 +24,8 @@ This approach avoids overloading RouterOS containers and keeps queue/scheduler e
 *   **PHP**: 8.2 or higher (8.4 recommended)
 *   **Composer**: 2.x
 *   **Node.js**: 20+ for asset build
-*   **Database**: SQLite (dev) or MySQL/MariaDB (production)
-*   **Extensions**: Standard Laravel runtime extensions (`mbstring`, `openssl`, `json`, PDO driver)
+*   **Database**: SQLite 3.x (dev/MikroTik) or MySQL 8.0 / MariaDB 11.5 (production)
+*   **Extensions**: `mbstring`, `openssl`, `json`, `pdo_sqlite`, `pdo_mysql`
 
 ---
 
@@ -65,7 +65,18 @@ Development (SQLite):
 touch database/database.sqlite
 ```
 
-Production (MySQL): update `.env` with your database credentials.
+Production (MySQL/MariaDB): update `.env` with your database credentials:
+
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=wimazone
+DB_USERNAME=wimazone
+DB_PASSWORD=your-password
+```
+
+For Docker deployment with MySQL 8.0 or MariaDB 11.5, see the [Docker Guide](/en/docs/guide/docker).
 
 ### 6. Migrate
 ```bash

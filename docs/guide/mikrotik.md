@@ -16,6 +16,8 @@ Ce guide couvre l’installation complète de WimaZone Billing sur un routeur Mi
 | hAP ax2 | ARM 64 bits | 1 GB | Compatible |
 | hAP ax3 | ARM 64 bits | 1 GB | Compatible |
 
+Les routeurs MikroTik compatibles sont disponibles à l’achat sur la boutique en ligne : **[wimazone.mg/boutique](https://wimazone.mg/boutique)**
+
 ## Cibles d’image
 
 - `linux/arm/v7` (MikroTik ARM 32)

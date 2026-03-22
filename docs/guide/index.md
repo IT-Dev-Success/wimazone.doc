@@ -15,7 +15,8 @@ WimaZone Billing est une plateforme Laravel 11 de facturation hotspot MikroTik, 
 Explorez les sections suivantes pour démarrer :
 
 - **[Guide d'installation](/docs/guide/installation)** : installation en local/dev ou serveur de production.
-- **[Guide Docker](/docs/guide/docker)** : exécution en conteneurs (serveur ou contexte RouterOS).
+- **[Guide Docker](/docs/guide/docker)** : exécution en conteneurs (SQLite, MySQL 8.0 ou MariaDB 11.5, CasaOS, production).
+- **[Guide MikroTik](/docs/guide/mikrotik)** : déploiement container sur routeur MikroTik.
 - **[Manuel](/docs/manual/)** : documentation fonctionnelle pour l'usage quotidien.
 
 ## <Icon name="Heart" color="danger" /> Source et support

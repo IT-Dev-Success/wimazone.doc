@@ -34,7 +34,8 @@ WimaZone Billing est un **système de facturation hotspot MikroTik** orienté ex
 
 ### Points clés
 
-- <Icon name="Server" color="warning" /> **Déploiement hybride** : serveur standard ou mode container RouterOS.
+- <Icon name="Server" color="warning" /> **Déploiement hybride** : serveur standard (MySQL/MariaDB) ou mode container RouterOS (SQLite).
+- <Icon name="Database" color="info" /> **Multi-base de données** : support SQLite 3.x, MySQL 8.0 et MariaDB 11.5 via configuration d'environnement.
 - <Icon name="Users" color="info" /> **Parcours client** : login hotspot, activation voucher, dashboard et support.
 - <Icon name="Receipt" color="success" /> **Cœur billing** : forfaits, charges, factures, relances et intégrations paiement.
 - <Icon name="Wrench" color="primary" /> **Outillage ops** : tâches scheduler, commandes de synchro, diagnostics et gestion de versions.

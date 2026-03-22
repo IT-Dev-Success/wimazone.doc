@@ -6,7 +6,17 @@ title: Docker Guide
 
 WimaZone Billing supports Docker deployments on standard servers and RouterOS-related workflows.
 
-## <Icon name="Zap" color="warning" /> Quick Start
+## <Icon name="Database" color="info" /> Supported Databases
+
+| Engine | Version | Use Case | Charset |
+| :--- | :--- | :--- | :--- |
+| SQLite | 3.x | MikroTik deployment (embedded) | — |
+| MySQL | 8.0 | Server / CasaOS deployment | `utf8mb4` / `utf8mb4_unicode_ci` |
+| MariaDB | 11.5 | Production deployment (Docker) | `utf8mb4` / `utf8mb4_unicode_ci` |
+
+The database engine is selected via `DB_CONNECTION` (values: `sqlite` or `mysql`). Both `pdo_mysql` and `pdo_sqlite` PHP extensions are installed in the Docker image.
+
+## <Icon name="Zap" color="warning" /> Quick Start (SQLite)
 
 Clone the project and run with compose:
 
@@ -25,7 +35,7 @@ docker exec -it billing php artisan key:generate
 docker exec -it billing php artisan migrate --force
 ```
 
-## <Icon name="Wrench" color="primary" /> Docker Compose
+## <Icon name="Wrench" color="primary" /> Docker Compose (SQLite / MikroTik)
 
 Minimal example:
 
@@ -49,6 +59,73 @@ services:
     volumes:
       - ./:/var/www/html
 ```
+
+## <Icon name="Server" color="success" /> CasaOS Deployment (MySQL)
+
+The `deploy/docker-compose.yml` file deploys a full stack with MySQL 8.0 and phpMyAdmin:
+
+| Service | Image | Port | Role |
+| :--- | :--- | :--- | :--- |
+| `wima-zone` | `shinsenter/laravel:php8.4` | 8081 (HTTP), 8443 (HTTPS) | Laravel application |
+| `wima-zone-mysql` | `mysql:8.0` | 3306 | MySQL database |
+| `wima-zone-phpmyadmin` | `phpmyadmin/phpmyadmin:latest` | 8080 | DB administration |
+
+```bash
+cd deploy
+docker compose up -d
+docker exec -it wima-zone php artisan migrate --force
+```
+
+MySQL environment variables:
+
+```env
+DB_CONNECTION=mysql
+DB_HOST=mysql
+DB_PORT=3306
+DB_DATABASE=wimazone
+DB_USERNAME=laravel
+DB_PASSWORD=change_me
+DB_ROOT_PASSWORD=change_root_password
+```
+
+CasaOS persistent volumes:
+
+| Host Path | Container Path | Content |
+| :--- | :--- | :--- |
+| `/DATA/AppData/wima-zone/wwwroot` | `/var/www/html` | Laravel source code |
+| `/DATA/AppData/wima-zone/mysql` | `/var/lib/mysql` | MySQL data |
+
+## <Icon name="Shield" color="danger" /> Production Deployment (MariaDB)
+
+The `deploy/docker-compose.prod.yml` file deploys a full production stack with MariaDB 11.5, Nginx, Redis and dedicated workers:
+
+| Service | Image | Role |
+| :--- | :--- | :--- |
+| `app` | Custom image (Dockerfile) | PHP-FPM application |
+| `web` | `nginx:1.27-alpine` | Web server (port 8080) |
+| `worker` | Custom image | Laravel queue worker |
+| `scheduler` | Custom image | Laravel scheduler |
+| `db` | `mariadb:11.5` | MariaDB database |
+| `redis` | `redis:7-alpine` | Cache and sessions |
+
+```bash
+cd deploy
+docker compose -f docker-compose.prod.yml up -d
+```
+
+Production MariaDB variables:
+
+```env
+DB_CONNECTION=mysql
+DB_HOST=db
+DB_PORT=3306
+DB_DATABASE=billing
+DB_USERNAME=billing
+DB_PASSWORD=change_me
+DB_ROOT_PASSWORD=change_root_password
+```
+
+Built-in health checks: MariaDB (`mariadb-admin ping`, 10 retries), PHP App (`php -v`), Nginx (`wget http://localhost/up`). The `app`, `worker` and `scheduler` services wait for the database to be healthy (`service_healthy`) before starting.
 
 ## <Icon name="Tags" color="info" /> Tags
 
@@ -83,6 +160,7 @@ Important paths:
 - `/var/www/html/storage`
 - `/var/www/html/bootstrap/cache`
 - `/var/www/html/database` (if SQLite)
+- `/var/lib/mysql` (if MySQL/MariaDB, via Docker volume)
 
 ## <Icon name="RefreshCw" color="warning" /> Updating
 

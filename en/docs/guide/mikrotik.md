@@ -16,6 +16,8 @@ This guide covers the full installation of WimaZone Billing on a MikroTik router
 | hAP ax2 | ARM 64-bit | 1 GB | Compatible |
 | hAP ax3 | ARM 64-bit | 1 GB | Compatible |
 
+Compatible MikroTik routers are available for purchase on the online shop: **[wimazone.mg/boutique](https://wimazone.mg/boutique)**
+
 ## Target image architectures
 
 - `linux/arm/v7` (MikroTik ARM 32)

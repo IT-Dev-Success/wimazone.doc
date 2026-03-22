@@ -25,8 +25,8 @@ Cette approche évite de surcharger les containers RouterOS et stabilise l'exéc
 - **PHP** : 8.2 ou supérieur (8.4 recommandé)
 - **Composer** : 2.x
 - **Node.js** : 20+ (build frontend)
-- **Base** : SQLite (dev) ou MySQL/MariaDB (production)
-- **Extensions** : `mbstring`, `openssl`, `json`, driver PDO adapté
+- **Base** : SQLite 3.x (dev/MikroTik) ou MySQL 8.0 / MariaDB 11.5 (production)
+- **Extensions** : `mbstring`, `openssl`, `json`, `pdo_sqlite`, `pdo_mysql`
 
 ## <Icon name="Terminal" color="secondary" /> Installation manuelle (Linux/VPS) {#manual-linux}
 
@@ -70,7 +70,18 @@ Développement (SQLite) :
 touch database/database.sqlite
 ```
 
-Production (MySQL) : renseignez les identifiants dans `.env`.
+Production (MySQL/MariaDB) : renseignez les identifiants dans `.env` :
+
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=wimazone
+DB_USERNAME=wimazone
+DB_PASSWORD=votre-mot-de-passe
+```
+
+Pour un déploiement Docker avec MySQL 8.0 ou MariaDB 11.5, consultez le [Guide Docker](/docs/guide/docker).
 
 ### 6. Migrations
 
