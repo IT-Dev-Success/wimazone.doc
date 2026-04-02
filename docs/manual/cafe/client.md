@@ -30,8 +30,8 @@ Au premier lancement, l'ecran de configuration demande :
 
 | Champ | Description | Exemple |
 |---|---|---|
-| URL du serveur Billing | Adresse HTTP du serveur Laravel | `http://192.168.88.1:8080` |
-| URL WebSocket | Adresse WebSocket pour les commandes temps reel | `ws://192.168.88.1:8080/ws/cafe-client` |
+| URL du serveur Billing | Adresse HTTP du serveur Laravel | `http://172.17.0.2:80` |
+| URL WebSocket | Adresse WebSocket pour les commandes temps reel | `ws://172.17.0.2:80/ws/cafe-client` |
 | Nom du poste | Identifiant unique du poste (doit correspondre au dashboard) | `PC-01` |
 | Code d'activation | Token au format `XXX-XXX-XXX-XXX` (12 chiffres) | `123-456-789-012` |
 | Nom de l'entreprise | Affiche sur l'ecran de verrouillage | `WimaZone Cafe` |
