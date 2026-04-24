@@ -1,191 +1,68 @@
 ---
-title: Torolàlana Fametrahana
+title: Fepetra Takiana MikroTik
+description: Fitaovana, RouterOS ary fanamarinana alohan'ny hametrahana WimaZone Billing amin'ny container MikroTik
 ---
 
-# Torolàlana Fametrahana
+# Fepetra Takiana MikroTik
 
-Ity torolàlana ity dia mikasika ny fametrahana WimaZone Billing avy amin'ny tahiry ofisialy.
+Ity pejy ity dia mamintina ny zavatra rehetra tokony ho vonona **alohan'ny** hanarahana ny [Torolàlana fametrahana MikroTik](/mg/docs/guide/mikrotik). WimaZone Billing dia apetraka amin'ny **mode container RouterOS v7** ihany, miaraka amin'ny **MariaDB** ao anatin'ny container ary maharitra amin'ny USB.
 
-## <Icon name="Router" color="warning" /> Fametrahana MikroTik Aloha {#mikrotik}
+## <Icon name="Router" color="warning" /> Fitaovana mifanaraka {#requirements}
 
-Raha ny MikroTik no tanjona voalohany, ity ny lalana arahina:
+Routeur MikroTik voatsapa sy tohanana :
 
-1. Apetraho ny WimaZone Billing amin'ny serveur na Docker host (soso-kevitra), avy eo ampifandraiso ny routeur amin'ny API.
-2. Jereo aloha ny pejy manokana:
-   - [Torolàlana fametrahana MikroTik](/mg/docs/guide/mikrotik)
-3. Ho an'ny dingana container RouterOS sy ny stratejia sary, araho:
-   - [Torolàlana Docker](/mg/docs/guide/docker)
-   - Fizarana README ny tetikasa: *MikroTik RouterOS 7 (container)*.
-4. Hamarino ny porofon'ny API, port (`8728`/`8729`) ary ny fampifandraisana rakitra hotspot alohan'ny hampiasaina amin'ny production.
+| Modely | Architecture | RAM | USB soso-kevitra |
+|---|---|---:|---|
+| L009UiGS-2HaxD-IN | ARM 32 bits | 512 MB | USB ≥ 8 GB |
+| L009UiGS-RM | ARM 32 bits | 512 MB | USB ≥ 8 GB |
+| hAP ax2 | ARM 64 bits | 1 GB | USB ≥ 16 GB |
+| hAP ax3 | ARM 64 bits | 1 GB | USB ≥ 16 GB |
 
-Ity fomba ity dia misoroka ny fanavesarana ny container RouterOS ary mitazona ny fahamarinan'ny queue/scheduler.
+::: tip Fivarotana
+Ireo modely ireo dia azo vidiana ao amin'ny **[wimazone.mg/boutique](https://wimazone.mg/boutique)**.
+:::
 
-## <Icon name="ClipboardList" color="primary" /> Fepetra Takiana {#requirements}
-*   **PHP**: 8.2 na ambony (8.4 soso-kevitra)
-*   **Composer**: 2.x
-*   **Node.js**: 20+ ho an'ny fananganana asset
-*   **Database**: SQLite 3.x (dev/MikroTik) na MySQL 8.0 / MariaDB 11.5 (production)
-*   **Fanitarana**: `mbstring`, `openssl`, `json`, `pdo_sqlite`, `pdo_mysql`
+## <Icon name="Cpu" color="info" /> RouterOS
 
----
+- **RouterOS 7.10+** (fitohanana maharitra an'ny mode container).
+- License **Level 4** farafahakeliny.
+- `device-mode` amin'ny **`advanced`** (ny `home` default dia manakana ny container).
+- Ny `container` azo alefa amin'ny `/system/device-mode` (fanamarinana amin'ny bouton reset).
+- Ora NTP mifandrindra (raha tsy izay dia mety tsy handeha ny TLS).
 
-## <Icon name="Terminal" color="secondary" /> Fametrahana Mivantana (Linux/VPS) {#manual-linux}
-Soso-kevitra ho an'ny VPS Ubuntu/Debian miaraka amin'ny Nginx/Apache.
+## <Icon name="HardDrive" color="primary" /> Fitehirizana USB
 
-### 1. Fepetra takiana
-Hamarino fa efa voapetraka ny `git`, `unzip` ary `php`.
-```bash
-sudo apt update
-sudo apt install git unzip php php-cli php-fpm php-mysql php-sqlite3 php-curl php-mbstring php-xml php-zip
-```
+- USB voatsipika amin'ny **ext4** (tsy handeha ny MariaDB amin'ny FAT32/NTFS).
+- **16 GB** soso-kevitra (sary ~500 MB + data MariaDB + backup + log).
+- Herinaratra mirindra : halaviro ny USB hub tsy misy adapteur amin'ny ax2/ax3.
 
-### 2. Clone ny tahiry
-```bash
-cd /var/www/html
-git clone https://github.com/ITDev-Success/billing.git
-cd billing
-```
+## <Icon name="Network" color="success" /> Tambajotra
 
-### 3. Hametraka ny dependencies
-```bash
-composer install --no-dev --optimize-autoloader
-npm ci
-npm run build
-```
+- Fidirana Internet ivelany (port 443) ho an'ny `docker.io`, `github.com` ary ny API ITDevSuccess.
+- Port **8728** (API MikroTik) na **8729** (API-SSL) malalaka an-trano.
+- Plage IP ho an'ny bridge container : `172.17.0.0/24` (azo ovaina).
+- DNS mandeha tsara amin'ny routeur (`/ip/dns`).
 
-### 4. Tontolo iainana sy lakile
-```bash
-cp .env.example .env
-php artisan key:generate
-```
+## <Icon name="Key" color="warning" /> License & fidirana
 
-### 5. Database
-Fampandrosoana (SQLite):
-```bash
-touch database/database.sqlite
-```
+- **Token GitHub** omen'ny ITDevSuccess (variable `GITHUB_PRIVATE_ACCESS_TOKEN`).
+- Porofon'ny **MVola** raha alefa ny fandoavana mobile.
+- Fidirana **Befiana SMS** raha alefa ny fampandrenesana SMS.
 
-Production (MySQL/MariaDB): ovao ny `.env` amin'ny porofon'ny database-nao:
+## <Icon name="CheckCircle" color="success" /> Lisitra hamarinina {#post-installation}
 
-```env
-DB_CONNECTION=mysql
-DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_DATABASE=wimazone
-DB_USERNAME=wimazone
-DB_PASSWORD=your-password
-```
+Alohan'ny hanombohana ny baiko fametrahana :
 
-Ho an'ny fametrahana Docker miaraka amin'ny MySQL 8.0 na MariaDB 11.5, jereo ny [Torolàlana Docker](/mg/docs/guide/docker).
+- [ ] RouterOS v7.10+ apetraka sy nohavaozina (`/system/package/update check-for-updates`)
+- [ ] `device-mode` amin'ny `advanced` (`/system/device-mode/print`)
+- [ ] USB voapetraka sy voatsipika ext4 (`/disk/print`) miaraka amin'ny lahatahiry `tmp/`, `layer/` sy `billing-data/`
+- [ ] DNS routeur mandeha (`/ip/dns/print`)
+- [ ] Ora system mifandrindra (`/system/ntp/client/print`)
+- [ ] Token GitHub azo tamin'ny ITDevSuccess
+- [ ] Tenimiafina MariaDB voafidy (`DB_PASSWORD` + `MARIADB_ROOT_PASSWORD`)
+- [ ] URL portail captif voadidy (`REDIRECT_URL`)
+- [ ] Walled Garden voakasa ho an'ny domain lehibe (MVola, Befiana, Tawk)
 
-### 6. Migration
-```bash
-php artisan migrate --force
-php artisan optimize:clear
-```
-
----
-
-## <Icon name="Container" color="info" /> Docker (Soso-kevitra)
-Ho an'ny fametrahana container, ampiasao ny torolàlana Docker manokana:
-
-- [Torolàlana Docker](/mg/docs/guide/docker)
-
----
-
-## <Icon name="Server" color="success" /> Serveur Web {#web-servers}
-
-### Apache / OpenLiteSpeed
-1.  Apetraho ny document root amin'ny rakitra `public/`.
-2.  Alefaso ny URL rewriting.
-3.  Hamarino ny alalana fanoratana ho an'ny `storage/` sy `bootstrap/cache/`.
-
-### Nginx
-Tsy mamaky `.htaccess` ny Nginx. Ampiasao ity configuration ity ao amin'ny `server` block-nao:
-
-```nginx
-server {
-    listen 80;
-    server_name your-domain.com;
-    root /var/www/billing/public;
-    index index.php;
-
-    location / {
-        try_files $uri $uri/ /index.php?$query_string;
-    }
-
-    location ~ \.php$ {
-        include snippets/fastcgi-php.conf;
-        fastcgi_pass unix:/run/php/php8.2-fpm.sock; # Ovao ny version
-    }
-
-    location ~ /\.ht {
-        deny all;
-    }
-}
-```
-
-## <Icon name="Globe" color="info" /> Hébergement Zaraina {#shared-hosting}
-Azo atao ny ankamaroan'ny hébergement zaraina, saingy ny VPS no soso-kevitra kokoa ho an'ny fahamarinan'ny scheduler/queue.
-
-1.  Alefaso ny source amin'ny rakitra hosting-nao.
-2.  Atondro ny domain document root amin'ny `public/`.
-3.  Ampiasao PHP 8.2+.
-4.  Hamarino ny fanitarana ilaina sy ny `storage/` azo soratana.
-
----
-
-## <Icon name="Cloud" color="primary" /> VPS & Cloud {#vps-cloud}
-
-### aaPanel
-1.  **Mamorona Website**: Ampio site -> PHP-8.x.
-2.  **Rakitra Site**:
-    *   Apetraho ny **Running Directory** (fa tsy ny Site Directory) amin'ny `/public`.
-    *   Esory ny tsipika "Anti-XSS" (matetika manakana ny fitahirizana config).
-3.  **URL Rewrite**: Ampiasao modely rewrite mifanaraka amin'ny Laravel.
-4.  **Alalana**: Chown ny mpampiasa `www` amin'ny rakitra site.
-
-### PaaS Cloud (Railway / Render / Heroku)
-Raha mametraka amin'ny PaaS ianao, ampiasao fitahirizana maharitra ary alefaso mazava tsara ny queue/scheduler workers.
-
----
-
-## <Icon name="Settings" color="success" /> Aorian'ny Fametrahana {#post-installation}
-Aorian'ny fametrahana:
-1. Apetraho ny queue worker:
-   ```bash
-   php artisan queue:work --queue=mikrotik,default --tries=2 --timeout=300
-   ```
-2. Apetraho ny scheduler cron:
-   ```cron
-   * * * * * cd /var/www/billing && php artisan schedule:run >> /dev/null 2>&1
-   ```
-3. Apetraho ny routeur MikroTik avy amin'ny panel admin ary hamarino ny fampifandraisana API.
-
-## <Icon name="Shield" color="warning" /> Variables Production Manan-danja {#critical-vars}
-
-Ampio sy hamarino ireto sanda ireto amin'ny production:
-
-```env
-APP_ENV=production
-APP_DEBUG=false
-APP_URL=https://billing.example.com
-REDIRECT_URL=https://portal.example.com
-
-SEED_SUPER_ADMIN_EMAIL=admin@example.com
-SEED_SUPER_ADMIN_PASSWORD=replace-with-strong-password
-
-LARAVEL_ENABLE_QUEUE_WORKER=true
-LARAVEL_ENABLE_SCHEDULER=true
-LARAVEL_QUEUE_WORKER_OPTIONS=--queue=mikrotik,default --tries=1 --timeout=1200 --sleep=2
-```
-
-Soso-kevitra ho an'ny fahamarinan'ny hotspot:
-
-```env
-HOTSPOT_STATUS_TIMEOUT_SECONDS=2
-HOTSPOT_STATUS_CACHE_SECONDS=3
-HOTSPOT_STATUS_FAILURE_COOLDOWN_SECONDS=20
-MIKROTIK_BOOT_HOTSPOT_SYNC=false
-MIKROTIK_BOOT_HOTSPOT_SYNC_PROCESS_NOW=false
-```
+::: warning Dingana manaraka
+Vonona daholo ny fepetra ? Tohizo amin'ny **[Torolàlana fametrahana MikroTik](/mg/docs/guide/mikrotik)** ho an'ny baiko tsirairay.
+:::

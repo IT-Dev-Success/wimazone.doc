@@ -13,14 +13,14 @@ export default defineConfig({
   cleanUrls: true,
   lastUpdated: true,
   sitemap: {
-    hostname: "https://itdev-success.github.io/wimazone.github.io",
+    hostname: "https://itdev-success.github.io/wimazone.doc",
   },
   buildEnd: ({ outDir }) => {
     const sitemap = createWriteStream(resolve(outDir, "robots.txt"));
     sitemap.write("User-agent: *\n");
     sitemap.write("Allow: /\n");
     sitemap.write(
-      "Sitemap: https://itdev-success.github.io/wimazone.docsitemap.xml\n",
+      "Sitemap: https://itdev-success.github.io/wimazone.doc/sitemap.xml\n",
     );
     sitemap.end();
   },
@@ -37,7 +37,7 @@ export default defineConfig({
       "meta",
       {
         property: "og:image",
-        content: "https://itdev-success.github.io/wimazone.docog-image.png",
+        content: "https://itdev-success.github.io/wimazone.doc/og-image.png",
       },
     ],
     ["meta", { name: "twitter:card", content: "summary_large_image" }],
@@ -45,7 +45,7 @@ export default defineConfig({
       "meta",
       {
         name: "twitter:image",
-        content: "https://itdev-success.github.io/wimazone.docog-image.png",
+        content: "https://itdev-success.github.io/wimazone.doc/og-image.png",
       },
     ],
     [
@@ -64,7 +64,7 @@ export default defineConfig({
     const description =
       pageData.description ||
       "Laravel billing platform for MikroTik hotspot and ISP operations";
-    const url = `https://itdev-success.github.io/wimazone.doc${pageData.relativePath.replace(/((^|\/)index)?\.md$/, "$2")}`;
+    const url = `https://itdev-success.github.io/wimazone.doc/${pageData.relativePath.replace(/((^|\/)index)?\.md$/, "$2")}`;
 
     return [
       ["meta", { property: "og:title", content: title }],

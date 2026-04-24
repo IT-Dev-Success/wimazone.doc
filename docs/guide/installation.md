@@ -1,191 +1,68 @@
 ---
-title: Guide d'installation
+title: Prérequis MikroTik
+description: Matériel, RouterOS et pré-vérifications avant d'installer WimaZone Billing en container sur MikroTik
 ---
 
-# Guide d'installation
+# Prérequis MikroTik
 
-Ce guide couvre l'installation de WimaZone Billing depuis le dépôt officiel.
+Cette page récapitule tout ce qu'il faut avoir prêt **avant** de suivre le [Guide d'installation MikroTik](/docs/guide/mikrotik). WimaZone Billing s'installe exclusivement en **mode container RouterOS v7**, avec une base **MariaDB embarquée** dans le container et persistée sur stockage USB.
 
-## <Icon name="Router" color="warning" /> Déploiement MikroTik en priorité {#mikrotik}
+## <Icon name="Router" color="warning" /> Matériel compatible {#requirements}
 
-Si votre cible principale est MikroTik, commencez par ce parcours :
+Routeurs MikroTik testés et supportés :
 
-1. Déployez WimaZone Billing sur un serveur ou un hôte Docker (recommandé), puis connectez les routeurs via API.
-2. Consultez d'abord la page dédiée :
-   - [Guide d'installation MikroTik](/docs/guide/mikrotik)
-3. Pour les workflows container RouterOS et la stratégie d'image :
-   - [Guide Docker](/docs/guide/docker)
-   - section README projet : *MikroTik RouterOS 7 (container)*.
-4. Validez les identifiants API, le port (`8728`/`8729`) et la synchronisation hotspot avant trafic réel.
+| Modèle | Architecture | RAM | Stockage conseillé |
+|---|---|---:|---|
+| L009UiGS-2HaxD-IN | ARM 32 bits | 512 MB | USB ≥ 8 GB |
+| L009UiGS-RM | ARM 32 bits | 512 MB | USB ≥ 8 GB |
+| hAP ax2 | ARM 64 bits | 1 GB | USB ≥ 16 GB |
+| hAP ax3 | ARM 64 bits | 1 GB | USB ≥ 16 GB |
 
-Cette approche évite de surcharger les containers RouterOS et stabilise l'exécution queue/scheduler.
+::: tip Boutique
+Les modèles ci-dessus sont disponibles à l'achat sur **[wimazone.mg/boutique](https://wimazone.mg/boutique)**.
+:::
 
-## <Icon name="ClipboardList" color="primary" /> Prérequis généraux {#requirements}
+## <Icon name="Cpu" color="info" /> RouterOS
 
-- **PHP** : 8.2 ou supérieur (8.4 recommandé)
-- **Composer** : 2.x
-- **Node.js** : 20+ (build frontend)
-- **Base** : SQLite 3.x (dev/MikroTik) ou MySQL 8.0 / MariaDB 11.5 (production)
-- **Extensions** : `mbstring`, `openssl`, `json`, `pdo_sqlite`, `pdo_mysql`
+- **RouterOS 7.10+** (support stable du mode container).
+- Licence **Level 4** minimum.
+- `device-mode` en **`advanced`** (le mode par défaut `home` bloque la fonctionnalité container).
+- Fonctionnalité `container` activable via `/system/device-mode` (confirmation par bouton reset physique).
+- Temps NTP synchronisé (sinon les certificats TLS échouent).
 
-## <Icon name="Terminal" color="secondary" /> Installation manuelle (Linux/VPS) {#manual-linux}
+## <Icon name="HardDrive" color="primary" /> Stockage USB
 
-Recommandé pour VPS Ubuntu/Debian avec Nginx/Apache.
+- Clé USB formatée en **ext4** (MariaDB refuse de démarrer sur FAT32/NTFS).
+- **16 GB** recommandés (image ~500 MB + data MariaDB + backups + logs).
+- Alimentation stable : évitez les hubs USB non alimentés sur les modèles ax2/ax3.
 
-### 1. Préparer le système
+## <Icon name="Network" color="success" /> Réseau
 
-```bash
-sudo apt update
-sudo apt install git unzip php php-cli php-fpm php-mysql php-sqlite3 php-curl php-mbstring php-xml php-zip
-```
+- Accès Internet sortant (port 443) pour `docker.io`, `github.com` et l'API ITDevSuccess.
+- Port **8728** (API MikroTik) ou **8729** (API-SSL) disponibles en interne.
+- Plage IP dédiée au bridge container : `172.17.0.0/24` (ajustable).
+- DNS fonctionnel sur le routeur (`/ip/dns`).
 
-### 2. Cloner le dépôt
+## <Icon name="Key" color="warning" /> Licence & accès
 
-```bash
-cd /var/www/html
-git clone https://github.com/ITDev-Success/billing.git
-cd billing
-```
+- **Token GitHub** fourni par ITDevSuccess (variable `GITHUB_PRIVATE_ACCESS_TOKEN`).
+- Identifiants **MVola** prêts si paiement mobile activé.
+- Accès **Befiana SMS** si notifications SMS activées.
 
-### 3. Installer les dépendances
+## <Icon name="CheckCircle" color="success" /> Checklist pré-installation {#post-installation}
 
-```bash
-composer install --no-dev --optimize-autoloader
-npm ci
-npm run build
-```
+Avant de lancer les commandes d'installation :
 
-### 4. Configurer l'environnement
+- [ ] RouterOS v7.10+ installé et à jour (`/system/package/update check-for-updates`)
+- [ ] `device-mode` en `advanced` (`/system/device-mode/print`)
+- [ ] Clé USB montée et formatée ext4 (`/disk/print`) avec dossiers `tmp/`, `layer/` et `billing-data/` accessibles
+- [ ] DNS du routeur fonctionnel (`/ip/dns/print`)
+- [ ] Temps système synchronisé (`/system/ntp/client/print`)
+- [ ] Token GitHub reçu d'ITDevSuccess
+- [ ] Mots de passe MariaDB choisis (`DB_PASSWORD` + `MARIADB_ROOT_PASSWORD`)
+- [ ] URL du portail captif décidée (`REDIRECT_URL`)
+- [ ] Walled Garden prévu pour les domaines critiques (MVola, Befiana, Tawk)
 
-```bash
-cp .env.example .env
-php artisan key:generate
-```
-
-### 5. Base de données
-
-Développement (SQLite) :
-
-```bash
-touch database/database.sqlite
-```
-
-Production (MySQL/MariaDB) : renseignez les identifiants dans `.env` :
-
-```env
-DB_CONNECTION=mysql
-DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_DATABASE=wimazone
-DB_USERNAME=wimazone
-DB_PASSWORD=votre-mot-de-passe
-```
-
-Pour un déploiement Docker avec MySQL 8.0 ou MariaDB 11.5, consultez le [Guide Docker](/docs/guide/docker).
-
-### 6. Migrations
-
-```bash
-php artisan migrate --force
-php artisan optimize:clear
-```
-
-## <Icon name="Container" color="info" /> Docker (recommandé)
-
-Pour un déploiement en conteneurs, utilisez :
-
-- [Guide Docker](/docs/guide/docker)
-
-## <Icon name="Server" color="success" /> Serveurs Web {#web-servers}
-
-### Apache / OpenLiteSpeed
-
-1. Définir le `document root` sur `public/`.
-2. Activer la réécriture d'URL.
-3. Vérifier les permissions d'écriture sur `storage/` et `bootstrap/cache/`.
-
-### Nginx
-
-```nginx
-server {
-    listen 80;
-    server_name your-domain.com;
-    root /var/www/billing/public;
-    index index.php;
-
-    location / {
-        try_files $uri $uri/ /index.php?$query_string;
-    }
-
-    location ~ \.php$ {
-        include snippets/fastcgi-php.conf;
-        fastcgi_pass unix:/run/php/php8.2-fpm.sock;
-    }
-
-    location ~ /\.ht {
-        deny all;
-    }
-}
-```
-
-## <Icon name="Globe" color="info" /> Hébergement mutualisé {#shared-hosting}
-
-Possible, mais VPS recommandé pour la fiabilité queue/scheduler.
-
-1. Téléverser le code source.
-2. Pointer le `document root` vers `public/`.
-3. Utiliser PHP 8.2+.
-4. Vérifier extensions et permissions d'écriture.
-
-## <Icon name="Cloud" color="primary" /> VPS et Cloud {#vps-cloud}
-
-### aaPanel
-
-1. Créer le site avec PHP 8.x.
-2. Régler le *Running Directory* sur `/public`.
-3. Utiliser une règle de réécriture compatible Laravel.
-4. Vérifier les permissions de l'utilisateur web.
-
-### PaaS (Railway / Render / Heroku)
-
-Utiliser un stockage persistant et lancer explicitement les workers queue/scheduler.
-
-## <Icon name="Settings" color="success" /> Post-installation {#post-installation}
-
-1. Lancer le worker queue :
-   ```bash
-   php artisan queue:work --queue=mikrotik,default --tries=2 --timeout=300
-   ```
-2. Ajouter le cron scheduler :
-   ```cron
-   * * * * * cd /var/www/billing && php artisan schedule:run >> /dev/null 2>&1
-   ```
-3. Configurer les routeurs MikroTik depuis l'interface admin et valider la connectivité API.
-
-## <Icon name="Shield" color="warning" /> Variables critiques en production {#critical-vars}
-
-Ajouter et vérifier ces variables:
-
-```env
-APP_ENV=production
-APP_DEBUG=false
-APP_URL=https://billing.example.com
-REDIRECT_URL=https://portail.example.com
-
-SEED_SUPER_ADMIN_EMAIL=admin@example.com
-SEED_SUPER_ADMIN_PASSWORD=remplacer-par-un-mot-de-passe-fort
-
-LARAVEL_ENABLE_QUEUE_WORKER=true
-LARAVEL_ENABLE_SCHEDULER=true
-LARAVEL_QUEUE_WORKER_OPTIONS=--queue=mikrotik,default --tries=1 --timeout=1200 --sleep=2
-```
-
-Recommandé pour la stabilité hotspot:
-
-```env
-HOTSPOT_STATUS_TIMEOUT_SECONDS=2
-HOTSPOT_STATUS_CACHE_SECONDS=3
-HOTSPOT_STATUS_FAILURE_COOLDOWN_SECONDS=20
-MIKROTIK_BOOT_HOTSPOT_SYNC=false
-MIKROTIK_BOOT_HOTSPOT_SYNC_PROCESS_NOW=false
-```
+::: warning Prochaine étape
+Tous les prérequis sont OK ? Continuez vers le **[Guide d'installation MikroTik](/docs/guide/mikrotik)** pour les commandes pas-à-pas.
+:::

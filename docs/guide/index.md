@@ -4,20 +4,17 @@ title: Introduction
 
 # Introduction
 
-Bienvenue dans le guide WimaZone Billing. Cette section vous aide à déployer et exploiter le projet en environnement réel.
+Bienvenue dans le guide WimaZone Billing. Cette section couvre le déploiement de la plateforme **en container sur MikroTik RouterOS v7**.
 
 ## <Icon name="Zap" color="warning" /> Qu'est-ce que WimaZone Billing ?
 
-WimaZone Billing est une plateforme Laravel 11 de facturation hotspot MikroTik, incluant vouchers, clients, forfaits, paiements et outillage d'exploitation.
+WimaZone Billing est une plateforme Laravel 11 de facturation hotspot MikroTik, incluant vouchers, clients, forfaits, paiements et outillage d'exploitation, conçue pour tourner **directement sur le routeur** en mode container.
 
 ## <Icon name="BookOpen" color="primary" /> Navigation
 
-Explorez les sections suivantes pour démarrer :
-
-- **[Guide d'installation](/docs/guide/installation)** : installation en local/dev ou serveur de production.
-- **[Guide Docker](/docs/guide/docker)** : exécution en conteneurs (SQLite, MySQL 8.0 ou MariaDB 11.5, CasaOS, production).
-- **[Guide MikroTik](/docs/guide/mikrotik)** : déploiement container sur routeur MikroTik.
-- **[Manuel](/docs/manual/)** : documentation fonctionnelle pour l'usage quotidien.
+- **[Prérequis MikroTik](/docs/guide/installation)** : matériel, RouterOS, USB, licence.
+- **[Guide d'installation MikroTik](/docs/guide/mikrotik)** : commandes RouterOS pas-à-pas, du container au walled garden.
+- **[Manuel utilisateur](/docs/manual/)** : documentation fonctionnelle pour l'usage quotidien.
 
 ## <Icon name="Heart" color="danger" /> Source et support
 

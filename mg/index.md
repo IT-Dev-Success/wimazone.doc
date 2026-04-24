@@ -3,39 +3,43 @@ layout: home
 
 hero:
   name: "WimaZone Billing"
-  text: "Sehatra faktiora Hotspot MikroTik"
-  tagline: Vahaolana faktiora sy portail captive mifototra amin'ny Laravel ho an'ny routeur, voucher, mpanjifa ary fandoavana.
+  text: "Faktiora Hotspot amin'ny container MikroTik"
+  tagline: Fametrahana tsotra amin'ny RouterOS v7 — voucher, mpanjifa, fandoavana ary sync routeur, rehetra avy amin'ny MikroTik-nao.
   image:
     light: /logo-m.svg
     dark: /logo-m-dark.svg
     alt: WimaZone Logo
   actions:
     - theme: brand
-      text: Hanomboka
-      link: /mg/docs/guide/installation
-    - theme: alt
-      text: MikroTik
+      text: Apetraho amin'ny MikroTik
       link: /mg/docs/guide/mikrotik
+    - theme: alt
+      text: Fepetra takiana
+      link: /mg/docs/guide/installation
 
 features:
-  - title: Laravel 11 Stack
-    details: Rafitra matanjaka miaraka amin'ny queue, scheduler, migration ary test coverage.
-  - title: MikroTik RouterOS V7
-    details: Fampifandraisana API RouterOS V7 miaraka amin'ny fiarovana ho an'ny routeur tsy marin-toerana sy dingana sync fanombohana.
-  - title: Portail Captive + Faritra Mpanjifa
-    details: Fampiasana voucher, tableau de bord mpanjifa, fanamarinana geolocation ary redirect fallback.
-  - title: API Ivelany
-    details: Fampifandraisana API fandoavana sy fampandrenesana (MVola, SMS Befiana, Mail SMTP, Tawk.to).
+  - title: Container RouterOS v7
+    details: Sary ARM/ARM64 apetraka mivantana amin'ny routeur. Tsy mila serveur hafa, tsy mila VPS.
+  - title: MikroTik RouterOS API v7
+    details: Fampifandraisana hotspot, IP bindings, walled garden ary session mandeha avy hatrany amin'ny API an'ny routeur.
+  - title: MariaDB ao anaty container
+    details: MariaDB tafiditra ao amin'ny container, data maharitra amin'ny USB ext4. Dump sy famerenana amin'ny mysqldump.
+  - title: Walled Garden vonona
+    details: Fitsipika walled garden omena ho an'ny MVola, Befiana SMS, Tawk.to ary portail captive.
 ---
 
-## Nahoana no WimaZone Billing?
+## Nahoana WimaZone amin'ny MikroTik ?
 
-WimaZone Billing dia **rafitra faktiora hotspot MikroTik** mifantoka amin'ny asan'ny ISP/opérateur tena izy: fikarakarana mpanjifa, voucher, drafitra, fandoavana ary fampifandraisana routeur.
+WimaZone Billing dia **rafitra faktiora hotspot** natao mba handeha **mivantana amin'ny routeur MikroTik-nao** amin'ny mode container. Tsy mila serveur hofaina, tsy mila Docker hafa — rehetra eo amin'ny routeur.
 
-### Toetra Manan-danja
+### Toetra manan-danja
 
-- <Icon name="Server" color="warning" /> **Fametrahana hybrid**: alefaso amin'ny serveur mahazatra (MySQL/MariaDB) na amin'ny fomba container RouterOS (SQLite).
-- <Icon name="Database" color="info" /> **Multi-database**: manohana SQLite 3.x, MySQL 8.0 ary MariaDB 11.5 amin'ny alalan'ny configuration tontolo iainana.
-- <Icon name="Users" color="info" /> **Fikarakarana mpanjifa**: fidirana hotspot, fampiasana voucher, tableau de bord ary fanohanana.
-- <Icon name="Receipt" color="success" /> **Votoatin'ny faktiora**: drafitra, saram-bidy, faktiora, fampahatsiahivana ary fampifandraisana fandoavana.
-- <Icon name="Wrench" color="primary" /> **Fitaovana fiasana**: asan'ny scheduler, baiko sync, diagnostika ary fitantanana famoahana.
+- <Icon name="Router" color="warning" /> **Fametrahana amin'ny routeur** : sary container amin'ny Docker Hub, alaina mivantana amin'ny RouterOS v7.
+- <Icon name="Database" color="info" /> **MariaDB ao anaty container** : mandeha ao anatin'ny container, data maharitra amin'ny USB ext4, tsy mila serveur DB ivelany.
+- <Icon name="Users" color="info" /> **Fikarakarana mpanjifa feno** : fidirana hotspot, voucher, tableau de bord, fanohanana.
+- <Icon name="Receipt" color="success" /> **Votoaty billing** : drafitra, faktiora, fandoavana MVola, fampahatsiahivana.
+- <Icon name="Wrench" color="primary" /> **Fitaovana ops** : scheduler, queue, diagnostika API MikroTik, fanavaozana container amin'ny baiko iray.
+
+::: tip Fitaovana soso-kevitra
+Ny routeur **hAP ax2 / ax3** (ARM 64, 1 GB RAM) no tsara indrindra. Azo vidiana ao amin'ny [wimazone.mg/boutique](https://wimazone.mg/boutique).
+:::

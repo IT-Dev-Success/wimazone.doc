@@ -1,12 +1,11 @@
 # WimaZone Billing Installation
 
-This documentation project is now aligned with **WimaZone Billing**.
+This documentation project is focused on **MikroTik RouterOS v7 container deployment**.
 
-Use these updated pages:
+Use these pages:
 
-- [Guide: Installation](./docs/guide/installation.md)
-- [Guide: Docker](./docs/guide/docker.md)
-- [Guide: aaPanel (Docker)](./docs/guide/docker-aapanel.md)
+- [Prérequis MikroTik](./docs/guide/installation.md)
+- [Guide d'installation MikroTik](./docs/guide/mikrotik.md)
 
 Main source repository:
 

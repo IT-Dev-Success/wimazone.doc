@@ -6,26 +6,26 @@ export const sidebarFr: DefaultTheme.Sidebar = {
       text: 'Démarrage',
       collapsed: false,
       items: [
-        { text: 'Plugins', link: '/plugins/' },
-        { text: 'Prérequis', link: '/docs/guide/installation#requirements' }
+        { text: 'Prérequis MikroTik', link: '/docs/guide/installation#requirements' },
+        { text: 'Plugins', link: '/plugins/' }
       ]
     },
     {
-      text: 'Installation',
+      text: 'Installation MikroTik',
       collapsed: false,
       items: [
-        { text: 'MikroTik', link: '/docs/guide/mikrotik' },
-        { text: 'Docker', link: '/docs/guide/docker' },
-        { text: 'aaPanel (Docker)', link: '/docs/guide/docker-aapanel' },
-        { text: 'Serveur Web', link: '/docs/guide/installation#web-servers' },
-        { text: 'Hébergement mutualisé', link: '/docs/guide/installation#shared-hosting' },
-        { text: 'VPS & Cloud', link: '/docs/guide/installation#vps-cloud' }
+        { text: 'Guide complet', link: '/docs/guide/mikrotik' },
+        { text: 'Premier accès', link: '/docs/guide/mikrotik#premier-acces' },
+        { text: 'Walled Garden', link: '/docs/guide/mikrotik#walled-garden' }
       ]
     },
     {
-      text: 'Configuration',
+      text: 'Exploitation',
+      collapsed: false,
       items: [
-        { text: 'Post-installation', link: '/docs/guide/installation#post-installation' }
+        { text: 'Backup & restore', link: '/docs/guide/mikrotik#backup-restore' },
+        { text: 'Mise à jour', link: '/docs/guide/mikrotik#mise-a-jour' },
+        { text: 'Dépannage', link: '/docs/guide/mikrotik#depannage' }
       ]
     },
     {
@@ -54,26 +54,26 @@ export const sidebarMg: DefaultTheme.Sidebar = {
       text: 'Fanombohana',
       collapsed: false,
       items: [
-        { text: 'Plugins', link: '/mg/plugins/' },
-        { text: 'Fepetra takiana', link: '/mg/docs/guide/installation#requirements' }
+        { text: 'Fepetra takiana MikroTik', link: '/mg/docs/guide/installation#requirements' },
+        { text: 'Plugins', link: '/mg/plugins/' }
       ]
     },
     {
-      text: 'Fametrahana',
+      text: 'Fametrahana MikroTik',
       collapsed: false,
       items: [
-        { text: 'MikroTik', link: '/mg/docs/guide/mikrotik' },
-        { text: 'Docker', link: '/mg/docs/guide/docker' },
-        { text: 'aaPanel (Docker)', link: '/mg/docs/guide/docker-aapanel' },
-        { text: 'Serveur Web', link: '/mg/docs/guide/installation#web-servers' },
-        { text: 'Hébergement zaraina', link: '/mg/docs/guide/installation#shared-hosting' },
-        { text: 'VPS & Cloud', link: '/mg/docs/guide/installation#vps-cloud' }
+        { text: 'Torolalana feno', link: '/mg/docs/guide/mikrotik' },
+        { text: 'Fidirana voalohany', link: '/mg/docs/guide/mikrotik#premier-acces' },
+        { text: 'Walled Garden', link: '/mg/docs/guide/mikrotik#walled-garden' }
       ]
     },
     {
-      text: 'Configuration',
+      text: 'Fikarakarana',
+      collapsed: false,
       items: [
-        { text: 'Aorian\'ny fametrahana', link: '/mg/docs/guide/installation#post-installation' }
+        { text: 'Backup sy famerenana', link: '/mg/docs/guide/mikrotik#backup-restore' },
+        { text: 'Fanavaozana', link: '/mg/docs/guide/mikrotik#mise-a-jour' },
+        { text: 'Famahana olana', link: '/mg/docs/guide/mikrotik#depannage' }
       ]
     },
     {

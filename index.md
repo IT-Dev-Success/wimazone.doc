@@ -3,39 +3,43 @@ layout: home
 
 hero:
   name: "WimaZone Billing"
-  text: "Plateforme de facturation Hotspot MikroTik"
-  tagline: Solution Laravel de billing et portail captif pour routeurs, vouchers, clients et paiements.
+  text: "Facturation Hotspot en container MikroTik"
+  tagline: Installation clé en main sur RouterOS v7 — vouchers, clients, paiements et synchro routeur, le tout depuis votre MikroTik.
   image:
     light: /logo-m.svg
     dark: /logo-m-dark.svg
     alt: WimaZone Logo
   actions:
     - theme: brand
-      text: Démarrer
-      link: /docs/guide/installation
-    - theme: alt
-      text: MikroTik
+      text: Installer sur MikroTik
       link: /docs/guide/mikrotik
+    - theme: alt
+      text: Prérequis
+      link: /docs/guide/installation
 
 features:
-  - title: Laravel 11 Stack
-    details: Architecture robuste avec files d'attente, scheduler, migrations et tests.
-  - title: MikroTik RouterOS V7
-    details: Intégration API RouterOS V7 avec protections contre les routeurs instables et synchro au démarrage.
-  - title: Captive Portal + Customer Area
-    details: Activation de vouchers, tableau de bord client, géolocalisation et redirections de secours.
-  - title: APIs Externe
-    details: Intégration des APIs de paiement et notification (MVola, SMS by Befiana, Mail SMTP, Tawk.to).
+  - title: Container RouterOS v7
+    details: Image ARM/ARM64 déployée directement sur le routeur. Pas de serveur séparé, pas de VPS à gérer.
+  - title: MikroTik RouterOS API v7
+    details: Synchronisation hotspot, IP bindings, walled garden et sessions en temps réel via l'API native du routeur.
+  - title: MariaDB embarquée sur USB
+    details: Base de données MariaDB intégrée au container, persistée sur clé USB ext4. Dump et restore via mysqldump.
+  - title: Walled Garden prêt à l'emploi
+    details: Règles walled garden fournies pour MVola, Befiana SMS, Tawk.to et le portail captif.
 ---
 
-## Pourquoi WimaZone Billing ?
+## Pourquoi WimaZone sur MikroTik ?
 
-WimaZone Billing est un **système de facturation hotspot MikroTik** orienté exploitation réelle ISP/opérateur : cycle client, vouchers, forfaits, paiements et synchronisation routeurs.
+WimaZone Billing est un **système de facturation hotspot** conçu pour tourner **directement sur votre routeur MikroTik** en mode container. Pas de serveur à louer, pas de Docker à installer ailleurs — tout vit sur le routeur.
 
 ### Points clés
 
-- <Icon name="Server" color="warning" /> **Déploiement hybride** : serveur standard (MySQL/MariaDB) ou mode container RouterOS (SQLite).
-- <Icon name="Database" color="info" /> **Multi-base de données** : support SQLite 3.x, MySQL 8.0 et MariaDB 11.5 via configuration d'environnement.
-- <Icon name="Users" color="info" /> **Parcours client** : login hotspot, activation voucher, dashboard et support.
-- <Icon name="Receipt" color="success" /> **Cœur billing** : forfaits, charges, factures, relances et intégrations paiement.
-- <Icon name="Wrench" color="primary" /> **Outillage ops** : tâches scheduler, commandes de synchro, diagnostics et gestion de versions.
+- <Icon name="Router" color="warning" /> **Déploiement sur routeur** : image container publiée sur Docker Hub, tirée directement par RouterOS v7.
+- <Icon name="Database" color="info" /> **Base MariaDB embarquée** : tourne à l'intérieur du container, données persistées sur USB ext4, sans serveur DB externe.
+- <Icon name="Users" color="info" /> **Parcours client complet** : login hotspot, activation voucher, dashboard client, support.
+- <Icon name="Receipt" color="success" /> **Cœur billing** : forfaits, factures, paiements MVola, relances automatiques.
+- <Icon name="Wrench" color="primary" /> **Outillage ops** : scheduler, queue, diagnostics API MikroTik, mises à jour container en une commande.
+
+::: tip Matériel recommandé
+Les routeurs **hAP ax2 / ax3** (ARM 64, 1 GB RAM) offrent le meilleur confort d'exécution. Disponibles sur [wimazone.mg/boutique](https://wimazone.mg/boutique).
+:::
