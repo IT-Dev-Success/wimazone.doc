@@ -1,11 +1,11 @@
 ---
 title: Prérequis MikroTik
-description: Matériel, RouterOS et pré-vérifications avant d'installer WimaZone Billing en container sur MikroTik
+description: Matériel, RouterOS et pré-vérifications avant d'installer Wima Zone Billing en container sur MikroTik
 ---
 
 # Prérequis MikroTik
 
-Cette page récapitule tout ce qu'il faut avoir prêt **avant** de suivre le [Guide d'installation MikroTik](/docs/guide/mikrotik). WimaZone Billing s'installe exclusivement en **mode container RouterOS v7**, avec une base **MariaDB embarquée** dans le container et persistée sur stockage USB.
+Cette page récapitule tout ce qu'il faut avoir prêt **avant** de suivre le [Guide d'installation MikroTik](/docs/guide/mikrotik). Wima Zone Billing s'installe exclusivement en **mode container RouterOS v7**, avec une base **MariaDB embarquée** dans le container et persistée sur stockage USB.
 
 ## <Icon name="Router" color="warning" /> Matériel compatible {#requirements}
 
@@ -45,7 +45,7 @@ Les modèles ci-dessus sont disponibles à l'achat sur **[wimazone.mg/boutique](
 
 ## <Icon name="Key" color="warning" /> Licence & accès
 
-- **Token GitHub** fourni par ITDevSuccess (variable `GITHUB_PRIVATE_ACCESS_TOKEN`).
+- **Licence** fourni par ITDevSuccess (variable `GITHUB_PRIVATE_ACCESS_TOKEN`).
 - Identifiants **MVola** prêts si paiement mobile activé.
 - Accès **Befiana SMS** si notifications SMS activées.
 
@@ -58,7 +58,7 @@ Avant de lancer les commandes d'installation :
 - [ ] Clé USB montée et formatée ext4 (`/disk/print`) avec dossiers `tmp/`, `layer/` et `billing-data/` accessibles
 - [ ] DNS du routeur fonctionnel (`/ip/dns/print`)
 - [ ] Temps système synchronisé (`/system/ntp/client/print`)
-- [ ] Token GitHub reçu d'ITDevSuccess
+- [ ] Licence reçu d'ITDevSuccess
 - [ ] Mots de passe MariaDB choisis (`DB_PASSWORD` + `MARIADB_ROOT_PASSWORD`)
 - [ ] URL du portail captif décidée (`REDIRECT_URL`)
 - [ ] Walled Garden prévu pour les domaines critiques (MVola, Befiana, Tawk)

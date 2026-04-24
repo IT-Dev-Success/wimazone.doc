@@ -21,7 +21,7 @@ Executez cette commande dans le terminal MikroTik pour creer la regle de blocage
 
 ```routeros
 /ip/firewall/filter/add chain=forward src-address-list=cafe-blocked action=drop \
-  comment="WimaZone Cafe - bloquer postes sans session"
+  comment="Wima Zone Cafe - bloquer postes sans session"
 ```
 
 ::: warning Important
@@ -58,13 +58,13 @@ Pour verifier l'etat actuel sur MikroTik :
 
 ```routeros
 # Voir les IP bindings cafe
-/ip/hotspot/ip-binding/print where comment~"WimaZone Cafe"
+/ip/hotspot/ip-binding/print where comment~"Wima Zone Cafe"
 
 # Voir la liste des postes bloques
 /ip/firewall/address-list/print where list="cafe-blocked"
 
 # Voir la regle firewall
-/ip/firewall/filter/print where comment~"WimaZone Cafe"
+/ip/firewall/filter/print where comment~"Wima Zone Cafe"
 ```
 
 ## Choix du routeur

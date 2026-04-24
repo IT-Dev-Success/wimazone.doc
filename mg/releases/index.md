@@ -1,7 +1,7 @@
 ---
 layout: doc
 title: Tahiry Famoahana
-description: Ny version rehetra ny WimaZone Billing — manomboka v1.0.0 ka hatramin'ny v3.5.0.
+description: Ny version rehetra ny Wima Zone Billing — manomboka v1.0.0 ka hatramin'ny v4.6.10.
 ---
 
 <script setup>
@@ -10,7 +10,7 @@ import ReleaseArchive from '../../.vitepress/theme/components/ReleaseArchive.vue
 
 # Tahiry Famoahana
 
-Ny version rehetra navoaka ho an'ny WimaZone Billing. Ny version marin-toerana farany dia **v3.5.0** (22 martsa 2026).
+Ny version rehetra navoaka ho an'ny Wima Zone Billing. Ny version marin-toerana farany dia **v4.6.10** (23 aprily 2026).
 
 <ReleaseArchive />
 

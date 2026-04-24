@@ -37,6 +37,19 @@ export const sidebarFr: DefaultTheme.Sidebar = {
         { text: 'APIs disponibles', link: '/docs/manual/settings/apis' },
         { text: 'Opérations routeur', link: '/docs/manual/router/' }
       ]
+    },
+    {
+      text: 'Tutoriels',
+      collapsed: false,
+      items: [
+        { text: 'Vue d’ensemble', link: '/docs/manual/tutoriels/' },
+        { text: 'Première connexion', link: '/docs/manual/tutoriels/premiere-connexion' },
+        { text: 'Configurer les APIs externes', link: '/docs/manual/tutoriels/apis-externes' },
+        { text: 'Créer forfait & vouchers', link: '/docs/manual/tutoriels/forfait-voucher' },
+        { text: 'Activer un voucher client', link: '/docs/manual/tutoriels/activation-client' },
+        { text: 'Suivre les sessions actives', link: '/docs/manual/tutoriels/sessions-actives' },
+        { text: 'Consulter les rapports', link: '/docs/manual/tutoriels/rapports' }
+      ]
     }
   ]
 }
@@ -77,6 +90,19 @@ export const sidebarMg: DefaultTheme.Sidebar = {
         { text: 'Paramètre ankapobeny', link: '/mg/docs/manual/settings/' },
         { text: 'API misy', link: '/mg/docs/manual/settings/apis' },
         { text: 'Asan\'ny routeur', link: '/mg/docs/manual/router/' }
+      ]
+    },
+    {
+      text: 'Tutoriel',
+      collapsed: false,
+      items: [
+        { text: 'Fijery ankapobeny', link: '/mg/docs/manual/tutoriels/' },
+        { text: 'Fidirana voalohany', link: '/mg/docs/manual/tutoriels/premiere-connexion' },
+        { text: 'Apetraho ny API ivelany', link: '/mg/docs/manual/tutoriels/apis-externes' },
+        { text: 'Forfait sy voucher', link: '/mg/docs/manual/tutoriels/forfait-voucher' },
+        { text: 'Manomboka voucher mpanjifa', link: '/mg/docs/manual/tutoriels/activation-client' },
+        { text: 'Manaraha ny session', link: '/mg/docs/manual/tutoriels/sessions-actives' },
+        { text: 'Zahao ny tatitra', link: '/mg/docs/manual/tutoriels/rapports' }
       ]
     }
   ]

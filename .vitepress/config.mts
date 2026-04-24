@@ -5,7 +5,7 @@ import { sidebarFr, sidebarMg } from "./config/sidebars";
 import { navFr, navMg } from "./config/nav";
 
 export default defineConfig({
-  title: "WimaZone Billing",
+  title: "Wima Zone Billing",
   description:
     "Laravel billing platform for MikroTik hotspot and ISP operations",
   base: "/wimazone.doc",
@@ -27,12 +27,20 @@ export default defineConfig({
 
   head: [
     ["link", { rel: "icon", type: "image/svg+xml", href: "/logo-m.svg" }],
-    ["link", { rel: "icon", type: "image/png", sizes: "32x32", href: "/favicon-32x32.png" }],
+    [
+      "link",
+      {
+        rel: "icon",
+        type: "image/png",
+        sizes: "32x32",
+        href: "/favicon-32x32.png",
+      },
+    ],
     ["link", { rel: "apple-touch-icon", href: "/apple-touch-icon.png" }],
     ["link", { rel: "shortcut icon", href: "/favicon.ico" }],
     ["meta", { name: "theme-color", content: "#0ea5e9" }],
     ["meta", { property: "og:type", content: "website" }],
-    ["meta", { property: "og:site_name", content: "WimaZone Billing" }],
+    ["meta", { property: "og:site_name", content: "Wima Zone Billing" }],
     [
       "meta",
       {
@@ -59,8 +67,8 @@ export default defineConfig({
 
   transformHead: ({ pageData }) => {
     const title = pageData.title
-      ? `${pageData.title} | WimaZone Billing`
-      : "WimaZone Billing";
+      ? `${pageData.title} | Wima Zone Billing`
+      : "Wima Zone Billing";
     const description =
       pageData.description ||
       "Laravel billing platform for MikroTik hotspot and ISP operations";

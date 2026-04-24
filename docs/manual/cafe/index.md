@@ -4,7 +4,7 @@ title: Module Cyber Cafe
 
 # Module Cyber Cafe
 
-Le module Cyber Cafe de WimaZone Billing permet de gerer des postes de travail dans un cyber cafe avec facturation automatique et controle d'acces reseau MikroTik.
+Le module Cyber Cafe de Wima Zone Billing permet de gerer des postes de travail dans un cyber cafe avec facturation automatique et controle d'acces reseau MikroTik.
 
 ## Vue d'ensemble
 

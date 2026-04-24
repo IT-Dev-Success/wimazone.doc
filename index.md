@@ -2,13 +2,13 @@
 layout: home
 
 hero:
-  name: "WimaZone Billing"
+  name: "Wima Zone Billing"
   text: "Facturation Hotspot en container MikroTik"
   tagline: Installation clé en main sur RouterOS v7 — vouchers, clients, paiements et synchro routeur, le tout depuis votre MikroTik.
   image:
     light: /logo-m.svg
     dark: /logo-m-dark.svg
-    alt: WimaZone Logo
+    alt: Wima Zone Logo
   actions:
     - theme: brand
       text: Installer sur MikroTik
@@ -28,9 +28,17 @@ features:
     details: Règles walled garden fournies pour MVola, Befiana SMS, Tawk.to et le portail captif.
 ---
 
-## Pourquoi WimaZone sur MikroTik ?
+## Aperçu du tableau de bord
 
-WimaZone Billing est un **système de facturation hotspot** conçu pour tourner **directement sur votre routeur MikroTik** en mode container. Pas de serveur à louer, pas de Docker à installer ailleurs — tout vit sur le routeur.
+![Tableau de bord Wima Zone Billing](/screenshots/dashboard.png)
+
+<p style="text-align: center; opacity: 0.7; margin-top: -1rem;">
+  Vue temps réel : revenus, clients actifs, statut APIs (MVola, SMS, SMTP), stock de tickets et graphiques de ventes mensuelles.
+</p>
+
+## Pourquoi Wima Zone sur MikroTik ?
+
+Wima Zone Billing est un **système de facturation hotspot** conçu pour tourner **directement sur votre routeur MikroTik** en mode container. Pas de serveur à louer, pas de Docker à installer ailleurs — tout vit sur le routeur.
 
 ### Points clés
 

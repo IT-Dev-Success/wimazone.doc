@@ -1,6 +1,6 @@
 # APIs disponibles
 
-Cette page résume les APIs externes visibles dans **Paramètres > API** (`/settings/apis`) de WimaZone Billing.
+Cette page résume les APIs externes visibles dans **Paramètres > API** (`/settings/apis`) de Wima Zone Billing.
 
 ## Paiement
 

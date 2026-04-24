@@ -1,4 +1,4 @@
-# WimaZone Billing Installation
+# Wima Zone Billing Installation
 
 This documentation project is focused on **MikroTik RouterOS v7 container deployment**.
 

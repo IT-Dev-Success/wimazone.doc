@@ -2,13 +2,13 @@
 layout: home
 
 hero:
-  name: "WimaZone Billing"
+  name: "Wima Zone Billing"
   text: "Faktiora Hotspot amin'ny container MikroTik"
   tagline: Fametrahana tsotra amin'ny RouterOS v7 — voucher, mpanjifa, fandoavana ary sync routeur, rehetra avy amin'ny MikroTik-nao.
   image:
     light: /logo-m.svg
     dark: /logo-m-dark.svg
-    alt: WimaZone Logo
+    alt: Wima Zone Logo
   actions:
     - theme: brand
       text: Apetraho amin'ny MikroTik
@@ -28,9 +28,17 @@ features:
     details: Fitsipika walled garden omena ho an'ny MVola, Befiana SMS, Tawk.to ary portail captive.
 ---
 
-## Nahoana WimaZone amin'ny MikroTik ?
+## Fijerena ny tableau de bord
 
-WimaZone Billing dia **rafitra faktiora hotspot** natao mba handeha **mivantana amin'ny routeur MikroTik-nao** amin'ny mode container. Tsy mila serveur hofaina, tsy mila Docker hafa — rehetra eo amin'ny routeur.
+![Tableau de bord Wima Zone Billing](/screenshots/dashboard.png)
+
+<p style="text-align: center; opacity: 0.7; margin-top: -1rem;">
+  Fijerena amin'ny fotoana tena izy : fidiram-bola, mpanjifa mavitrika, statut API (MVola, SMS, SMTP), stock tikety sy graphika varotra isam-bolana.
+</p>
+
+## Nahoana Wima Zone amin'ny MikroTik ?
+
+Wima Zone Billing dia **rafitra faktiora hotspot** natao mba handeha **mivantana amin'ny routeur MikroTik-nao** amin'ny mode container. Tsy mila serveur hofaina, tsy mila Docker hafa — rehetra eo amin'ny routeur.
 
 ### Toetra manan-danja
 

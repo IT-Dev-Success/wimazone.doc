@@ -1,26 +1,29 @@
-# WimaZone Billing Documentation
+# Wima Zone Billing Documentation
 
-This directory hosts the VitePress documentation site for WimaZone Billing.
+This directory hosts the VitePress documentation site for Wima Zone Billing.
 
 ## Overview
 
-WimaZone Billing is a Laravel-based billing platform for MikroTik hotspot operations. This documentation covers installation, deployment, and usage guides.
+Wima Zone Billing is a Laravel-based billing platform for MikroTik hotspot operations. This documentation covers installation, deployment, and usage guides.
 
 ## Running Locally
 
 This project uses [VitePress](https://vitepress.dev). To run the documentation locally:
 
-1.  **Install Dependencies**:
+1. **Install Dependencies**:
+
     ```bash
     npm install
     ```
 
-2.  **Start Development Server**:
+2. **Start Development Server**:
+
     ```bash
     npm run dev
     ```
 
-3.  **Build**:
+3. **Build**:
+
     ```bash
     npm run build
     ```

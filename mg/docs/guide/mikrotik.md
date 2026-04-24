@@ -1,11 +1,11 @@
 ---
 title: Fametrahana MikroTik
-description: Torolàlana feno hametrahana ny WimaZone Billing amin'ny container MikroTik RouterOS v7
+description: Torolàlana feno hametrahana ny Wima Zone Billing amin'ny container MikroTik RouterOS v7
 ---
 
 # Fametrahana amin'ny MikroTik
 
-Ity torolàlana ity dia mikasika ny fametrahana **dingana tsirairay** ny WimaZone Billing amin'ny mode container amin'ny routeur MikroTik RouterOS v7.
+Ity torolàlana ity dia mikasika ny fametrahana **dingana tsirairay** ny Wima Zone Billing amin'ny mode container amin'ny routeur MikroTik RouterOS v7.
 
 ::: tip Alohan'ny hanombohana
 Hamarino fa vita daholo ny [lisitra fepetra takiana](/mg/docs/guide/installation#requirements) : RouterOS v7.10+, USB ext4, token GitHub ITDevSuccess.
@@ -178,7 +178,7 @@ Ny mount container dia tsy mandeha raha tsy amin'ny stockage voatsipika **ext4**
 /container/envs/add list=billing-env key=MIKROTIK_BOOT_HOTSPOT_SYNC_PROCESS_NOW value=false
 ```
 
-::: info Token GitHub
+::: info Licence
 `GITHUB_PRIVATE_ACCESS_TOKEN` dia omen'ny ITDevSuccess rehefa mividy license.
 :::
 
@@ -373,7 +373,7 @@ Hafatra mahazatra :
 | Hafatra | Antony | Vahaolana |
 |---|---|---|
 | `SIGKILL` / `OOMKilled` | Tsy ampy RAM | Ahena ny queue workers, ampiasao ax2/ax3 |
-| `git clone failed` | Token GitHub diso | Hamarino `GITHUB_PRIVATE_ACCESS_TOKEN` |
+| `git clone failed` | Licence diso | Hamarino `GITHUB_PRIVATE_ACCESS_TOKEN` |
 | `Can't connect to MySQL server on '127.0.0.1'` | Mbola tsy vonona ny MariaDB | Miandrasa 30 s aorian'ny boot ; jereo `s6-svstat mariadb` |
 | `Access denied for user 'wimazone'` | Tenimiafina DB diso | Hamarino `DB_PASSWORD` sy `MARIADB_ROOT_PASSWORD` |
 | `Unknown database 'wimazone'` | Mount `/var/lib/mysql` foana na simba | Esory ny mount, avelao ny MariaDB hamorona indray |

@@ -4,20 +4,20 @@
 
 /* Fonts Setup */
 @font-face {
-  font-family: 'Geist';
-  src: url('/assets/fonts/Geist-Regular.woff2') format('woff2');
+  font-family: "Geist";
+  src: url("/assets/fonts/Geist-Regular.woff2") format("woff2");
   font-weight: 400;
   font-style: normal;
 }
 @font-face {
-  font-family: 'Geist';
-  src: url('/assets/fonts/Geist-Bold.woff2') format('woff2');
+  font-family: "Geist";
+  src: url("/assets/fonts/Geist-Bold.woff2") format("woff2");
   font-weight: 700;
   font-style: normal;
 }
 @font-face {
-  font-family: 'Geist Mono';
-  src: url('/assets/fonts/GeistMono-Regular.woff2') format('woff2');
+  font-family: "Geist Mono";
+  src: url("/assets/fonts/GeistMono-Regular.woff2") format("woff2");
   font-weight: 400;
   font-style: normal;
 }
@@ -27,13 +27,13 @@
   --vp-font-family-base: "Geist", sans-serif;
   --vp-font-family-mono: "Geist Mono", monospace;
 
-  /* Colors Override to match WimaZone (Orange) */
+  /* Colors Override to match Wima Zone (Orange) */
   --vp-c-bg: #ffffff;
   --vp-c-bg-alt: #fafafa;
   --vp-c-bg-elv: #ffffff;
   --vp-c-text-1: #000000;
   --vp-c-text-2: #666666;
-  
+
   --vp-c-brand-1: #f97316;
   --vp-c-brand-2: #ea580c;
   --vp-c-brand-3: #c2410c;
@@ -67,7 +67,7 @@
   --vp-c-bg-elv: #111111;
   --vp-c-text-1: #ffffff;
   --vp-c-text-2: #888888;
-  
+
   --vp-c-brand-1: #fb923c;
   --vp-c-brand-2: #f97316;
   --vp-c-brand-3: #ea580c;
@@ -99,22 +99,22 @@
 .VPNav {
   background-color: rgba(255, 255, 255, 0.6) !important;
   backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(0,0,0,0.05);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
 .dark .VPNav {
   background-color: rgba(0, 0, 0, 0.6) !important;
-  border-bottom: 1px solid rgba(255,255,255,0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 /* Sidebar Glass */
 .VPSidebar {
   background-color: rgba(255, 255, 255, 0.3) !important;
   backdrop-filter: blur(12px);
-  border-right: 1px solid rgba(0,0,0,0.05);
+  border-right: 1px solid rgba(0, 0, 0, 0.05);
 }
 .dark .VPSidebar {
   background-color: rgba(0, 0, 0, 0.3) !important;
-  border-right: 1px solid rgba(255,255,255,0.1);
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 /* Content Container - Transparent to show particles */
@@ -125,19 +125,19 @@
 /* Footer Glass */
 .VPFooter {
   background-color: transparent !important;
-  border-top: 1px solid rgba(0,0,0,0.05);
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
 }
 .dark .VPFooter {
-  border-top: 1px solid rgba(255,255,255,0.1);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 /* Local Search Box Glass */
 .VPLocalSearchBox {
-   background-color: rgba(255, 255, 255, 0.8) !important;
-   backdrop-filter: blur(12px);
+  background-color: rgba(255, 255, 255, 0.8) !important;
+  backdrop-filter: blur(12px);
 }
 .dark .VPLocalSearchBox {
-   background-color: rgba(0, 0, 0, 0.8) !important;
+  background-color: rgba(0, 0, 0, 0.8) !important;
 }
 
 /* Glassmorphism Cards (Feature Cards) */
@@ -158,7 +158,7 @@
   border-color: rgba(255, 255, 255, 0.4) !important;
   background-color: rgba(255, 255, 255, 0.4) !important;
   transform: translateY(-4px);
-  box-shadow: 0 10px 30px -10px rgba(0,0,0,0.1);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.1);
 }
 
 .dark .VPFeature:hover {
@@ -178,7 +178,9 @@
 
 .VPButton:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
 .VPButton:active {
@@ -213,13 +215,15 @@
   left: 0 !important;
   right: 0 !important;
   width: 100% !important;
-  height: calc(100vh - var(--vp-nav-height, 64px)) !important; /* Force Height */
+  height: calc(
+    100vh - var(--vp-nav-height, 64px)
+  ) !important; /* Force Height */
   z-index: 90 !important;
   overflow-y: auto !important;
   opacity: 1 !important; /* Always opacity 1 if visible */
   pointer-events: auto !important;
   /* Remove transition that might delay visibility */
-  transition: background-color 0.25s !important; 
+  transition: background-color 0.25s !important;
 }
 
 /* Rely on VitePress/Vue to toggle 'display' property */
@@ -232,12 +236,17 @@
 /* Mobile Sidebar (Slide-out) */
 @media (max-width: 960px) {
   .VPSidebar {
-    background-color: rgba(255, 255, 255, 0.9) !important; /* Less transparent on mobile for readability */
+    background-color: rgba(
+      255,
+      255,
+      255,
+      0.9
+    ) !important; /* Less transparent on mobile for readability */
     backdrop-filter: blur(20px);
     border-right: none !important;
-    box-shadow: 10px 0 30px rgba(0,0,0,0.1);
+    box-shadow: 10px 0 30px rgba(0, 0, 0, 0.1);
   }
-  
+
   .dark .VPSidebar {
     background-color: rgba(20, 20, 20, 0.9) !important;
   }
@@ -274,8 +283,8 @@
 /* High Contrast Sidebar & TOC */
 .VPSidebarItem .text {
   color: var(--vp-c-text-2) !important;
-  opacity: 1 !important; 
-  font-weight: 400 !important; 
+  opacity: 1 !important;
+  font-weight: 400 !important;
 }
 
 /* Level 0 Parent Headers (Collapsible) */
@@ -311,7 +320,7 @@
 
 .VPSidebarItem.is-active > .item > .text,
 .VPSidebarItem.is-active > .item > .VPLink > .text {
-  color: var(--vp-c-brand-1) !important; 
+  color: var(--vp-c-brand-1) !important;
   font-weight: 400 !important; /* Keep active sub-item thinner than collapsible header */
   background-color: transparent !important; /* Clean style */
 }
@@ -333,9 +342,9 @@
 }
 
 .VPDocOutlineItem .text {
-   color: var(--vp-c-text-2) !important;
-   font-size: 0.85rem;
-   font-weight: 400 !important;
+  color: var(--vp-c-text-2) !important;
+  font-size: 0.85rem;
+  font-weight: 400 !important;
 }
 
 .VPDocOutlineItem.active .text {
@@ -360,10 +369,10 @@
 
 /* Fix Code Block Background to be Glassy too */
 .vp-code-group .tabs {
-    background-color: rgba(255,255,255,0.5) !important;
+  background-color: rgba(255, 255, 255, 0.5) !important;
 }
 .dark .vp-code-group .tabs {
-    background-color: rgba(0,0,0,0.5) !important;
+  background-color: rgba(0, 0, 0, 0.5) !important;
 }
 
 /* Markdown Divider Contrast */

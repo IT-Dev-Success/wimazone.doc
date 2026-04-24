@@ -4,11 +4,11 @@ title: Fampidirana
 
 # Fampidirana
 
-Tongasoa eto amin'ny Torolàlana WimaZone Billing. Ity fizarana ity dia mikasika ny fametrahana ny sehatra **amin'ny container MikroTik RouterOS v7**.
+Tongasoa eto amin'ny Torolàlana Wima Zone Billing. Ity fizarana ity dia mikasika ny fametrahana ny sehatra **amin'ny container MikroTik RouterOS v7**.
 
-## <Icon name="Zap" color="warning" /> Inona ny WimaZone Billing ?
+## <Icon name="Zap" color="warning" /> Inona ny Wima Zone Billing ?
 
-WimaZone Billing dia sehatra faktiora Laravel 11 ho an'ny hotspot MikroTik, ahitana voucher, mpanjifa, drafitra, fandoavana ary fitaovana fiasana, natao mba handeha **mivantana amin'ny routeur** amin'ny mode container.
+Wima Zone Billing dia sehatra faktiora Laravel 11 ho an'ny hotspot MikroTik, ahitana voucher, mpanjifa, drafitra, fandoavana ary fitaovana fiasana, natao mba handeha **mivantana amin'ny routeur** amin'ny mode container.
 
 ## <Icon name="BookOpen" color="primary" /> Fitetezana
 

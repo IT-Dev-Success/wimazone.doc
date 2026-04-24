@@ -24,7 +24,7 @@ La gestion routeur s'effectue dans **Routeurs** (`/routers`).
 
 ## Compatibilité API MikroTik
 
-WimaZone Billing prend en charge **RouterOS V7** uniquement. Le support de RouterOS V6 a été abandonné.
+Wima Zone Billing prend en charge **RouterOS V7** uniquement. Le support de RouterOS V6 a été abandonné.
 
 Recommandé:
 

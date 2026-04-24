@@ -4,7 +4,7 @@ title: Boky Torolàlana Mpampiasa
 
 # Boky Torolàlana Mpampiasa
 
-Ity boky torolàlana ity dia mikasika ny asa andavanandro ao amin'ny **WimaZone Billing** ho an'ny fitantanana hotspot.
+Ity boky torolàlana ity dia mikasika ny asa andavanandro ao amin'ny **Wima Zone Billing** ho an'ny fitantanana hotspot.
 
 ## Fepetra takiana
 
@@ -20,6 +20,13 @@ Ity boky torolàlana ity dia mikasika ny asa andavanandro ao amin'ny **WimaZone 
 - API/CORS, SMTP, SMS sy configuration fandoavana.
 - Modely fanontana tikety.
 - Marque (logo, loko, paramètre rafitra).
+
+### [Tutoriel](/mg/docs/manual/tutoriels/)
+
+- Fidirana voalohany sy fametrahana (branding, kaonty admin).
+- Apetraho ny API ivelany (MVola, SMS, SMTP).
+- Mamorona forfait sy voucher.
+- Manaraha ny session mavitrika sy zahao ny tatitra.
 
 ### [Asan'ny Routeur](/mg/docs/manual/router/)
 

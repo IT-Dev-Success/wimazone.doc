@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 1370 1370" role="img" aria-label="WimaZone logo dark">
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 1370 1370" role="img" aria-label="Wima Zone logo dark">
   <defs>
     <filter id="white-to-black" x="-10%" y="-10%" width="120%" height="120%" color-interpolation-filters="sRGB">
       <feColorMatrix in="SourceGraphic" type="luminanceToAlpha" result="lum" />

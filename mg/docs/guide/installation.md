@@ -1,11 +1,11 @@
 ---
 title: Fepetra Takiana MikroTik
-description: Fitaovana, RouterOS ary fanamarinana alohan'ny hametrahana WimaZone Billing amin'ny container MikroTik
+description: Fitaovana, RouterOS ary fanamarinana alohan'ny hametrahana Wima Zone Billing amin'ny container MikroTik
 ---
 
 # Fepetra Takiana MikroTik
 
-Ity pejy ity dia mamintina ny zavatra rehetra tokony ho vonona **alohan'ny** hanarahana ny [Torolàlana fametrahana MikroTik](/mg/docs/guide/mikrotik). WimaZone Billing dia apetraka amin'ny **mode container RouterOS v7** ihany, miaraka amin'ny **MariaDB** ao anatin'ny container ary maharitra amin'ny USB.
+Ity pejy ity dia mamintina ny zavatra rehetra tokony ho vonona **alohan'ny** hanarahana ny [Torolàlana fametrahana MikroTik](/mg/docs/guide/mikrotik). Wima Zone Billing dia apetraka amin'ny **mode container RouterOS v7** ihany, miaraka amin'ny **MariaDB** ao anatin'ny container ary maharitra amin'ny USB.
 
 ## <Icon name="Router" color="warning" /> Fitaovana mifanaraka {#requirements}
 
@@ -45,7 +45,7 @@ Ireo modely ireo dia azo vidiana ao amin'ny **[wimazone.mg/boutique](https://wim
 
 ## <Icon name="Key" color="warning" /> License & fidirana
 
-- **Token GitHub** omen'ny ITDevSuccess (variable `GITHUB_PRIVATE_ACCESS_TOKEN`).
+- **Licence** omen'ny ITDevSuccess (variable `GITHUB_PRIVATE_ACCESS_TOKEN`).
 - Porofon'ny **MVola** raha alefa ny fandoavana mobile.
 - Fidirana **Befiana SMS** raha alefa ny fampandrenesana SMS.
 
@@ -58,7 +58,7 @@ Alohan'ny hanombohana ny baiko fametrahana :
 - [ ] USB voapetraka sy voatsipika ext4 (`/disk/print`) miaraka amin'ny lahatahiry `tmp/`, `layer/` sy `billing-data/`
 - [ ] DNS routeur mandeha (`/ip/dns/print`)
 - [ ] Ora system mifandrindra (`/system/ntp/client/print`)
-- [ ] Token GitHub azo tamin'ny ITDevSuccess
+- [ ] Licence azo tamin'ny ITDevSuccess
 - [ ] Tenimiafina MariaDB voafidy (`DB_PASSWORD` + `MARIADB_ROOT_PASSWORD`)
 - [ ] URL portail captif voadidy (`REDIRECT_URL`)
 - [ ] Walled Garden voakasa ho an'ny domain lehibe (MVola, Befiana, Tawk)

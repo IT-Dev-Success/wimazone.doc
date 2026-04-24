@@ -1,11 +1,11 @@
 ---
 title: Installation MikroTik
-description: Guide complet pour installer WimaZone Billing en container sur MikroTik RouterOS v7
+description: Guide complet pour installer Wima Zone Billing en container sur MikroTik RouterOS v7
 ---
 
 # Installation sur MikroTik
 
-Ce guide couvre l'installation **pas-à-pas** de WimaZone Billing en mode container sur un routeur MikroTik RouterOS v7.
+Ce guide couvre l'installation **pas-à-pas** de Wima Zone Billing en mode container sur un routeur MikroTik RouterOS v7.
 
 ::: tip Avant de commencer
 Assurez-vous d'avoir validé toute la [checklist de prérequis](/docs/guide/installation#requirements) : RouterOS v7.10+, USB ext4, token GitHub ITDevSuccess.
@@ -178,7 +178,7 @@ Les mounts container ne fonctionnent qu'avec un stockage formaté **ext4**. Vér
 /container/envs/add list=billing-env key=MIKROTIK_BOOT_HOTSPOT_SYNC_PROCESS_NOW value=false
 ```
 
-::: info Token GitHub
+::: info Licence
 `GITHUB_PRIVATE_ACCESS_TOKEN` est fourni par ITDevSuccess lors de l'achat d'une licence.
 :::
 
@@ -373,7 +373,7 @@ Symptômes courants :
 | Message | Cause probable | Solution |
 |---|---|---|
 | `SIGKILL` / `OOMKilled` | Manque de RAM | Réduire les workers queue, utiliser modèle ax2/ax3 |
-| `git clone failed` | Token GitHub invalide | Vérifier `GITHUB_PRIVATE_ACCESS_TOKEN` |
+| `git clone failed` | Licence invalide | Vérifier `GITHUB_PRIVATE_ACCESS_TOKEN` |
 | `Can't connect to MySQL server on '127.0.0.1'` | MariaDB pas encore prête | Attendre 30 s après le démarrage ; vérifier `s6-svstat mariadb` |
 | `Access denied for user 'wimazone'` | Mot de passe DB incorrect | Vérifier `DB_PASSWORD` et `MARIADB_ROOT_PASSWORD` |
 | `Unknown database 'wimazone'` | Mount `/var/lib/mysql` vide ou corrompu | Supprimer le mount, laisser MariaDB réinitialiser |

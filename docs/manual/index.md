@@ -4,7 +4,7 @@ title: Manuel utilisateur
 
 # Manuel utilisateur
 
-Ce manuel décrit l'utilisation quotidienne de **WimaZone Billing** côté administration hotspot.
+Ce manuel décrit l'utilisation quotidienne de **Wima Zone Billing** côté administration hotspot.
 
 ## Prérequis
 
@@ -27,6 +27,13 @@ Ce manuel décrit l'utilisation quotidienne de **WimaZone Billing** côté admin
 - Gestion hotspot (provisioning, Walled Garden, IP bindings, snapshots).
 - Impression vouchers et exploitation terrain.
 - Rapports par date, forfait, routeur et exports.
+
+### [Tutoriels](/docs/manual/tutoriels/)
+
+- Première connexion et configuration initiale (branding, comptes admin).
+- Configurer les APIs externes (MVola, SMS, SMTP).
+- Créer un forfait et générer des vouchers.
+- Suivre les sessions actives et consulter les rapports.
 
 ### [Module Cyber Cafe](/docs/manual/cafe/)
 

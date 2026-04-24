@@ -24,7 +24,7 @@ Ny fitantanana routeur dia misy ao amin'ny **Routeur** (`/routers`).
 
 ## Fitoviana API MikroTik
 
-WimaZone Billing dia manohana **RouterOS V7** ihany. Ny fanohanana RouterOS V6 dia efa natsahatra.
+Wima Zone Billing dia manohana **RouterOS V7** ihany. Ny fanohanana RouterOS V6 dia efa natsahatra.
 
 Soso-kevitra:
 
