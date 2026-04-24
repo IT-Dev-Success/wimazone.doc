@@ -50,13 +50,26 @@ Ao anaty `/data` ao amin'ny container :
 - `config.php` — credentials MikroTik (server/user/password) sy settings
 - `img-uploads/` — logos napetraka avy amin'ny admin
 
-## 3) Variables tontolo iainana (azo atao)
+## 3) Variables tontolo iainana
 
-Ny wimalite dia **tsy mitaky variable** — ny config dia atao amin'ny admin UI. Ilaina fotsiny :
+Toy ny `wimazone/billing`, ny sary wimalite **tsy mitondra ny kaody PHP** — izy **maka izany avy amin'ny GitHub eo am-piaingana**. Roa variable ilaina :
 
 ```routeros
+/container/envs/add list=wimalite-env key=GIT_REPOSITORY_URL value=https://github.com/ITDev-Success/wimalite.git
+/container/envs/add list=wimalite-env key=GITHUB_PRIVATE_ACCESS_TOKEN value=TOKEN_OMEN_ITDEVSUCCESS
+/container/envs/add list=wimalite-env key=GIT_BRANCH value=main
+/container/envs/add list=wimalite-env key=GIT_SYNC_ENABLED value=true
+/container/envs/add list=wimalite-env key=GIT_OFFLINE_FALLBACK value=true
 /container/envs/add list=wimalite-env key=TZ value=Indian/Antananarivo
 ```
+
+::: info License / token
+`GITHUB_PRIVATE_ACCESS_TOKEN` dia omen'ny ITDevSuccess rehefa mividy license — **token mitovy amin'ny wimazone/billing**.
+:::
+
+::: tip Fanavaozana ho azy
+Isaky ny `/container stop` + `/container start`, ny entrypoint dia manao `git pull` ary maka ny version farany an'ny kaody avy any GitHub. **Tsy mila rebuild na maka sary Docker vaovao** mba hanavao ny app — afa-tsy raha miova ny sary mihitsy (Apache, PHP, extension). Ny rakitra `/data/.image_version` dia ahafahana manamarina ny version napetraka.
+:::
 
 ## 4) Mamorona sy manomboka ny container
 
@@ -114,6 +127,8 @@ Mba hamerenana : ajanona ny container, soloy ny rakitra, alefa indray.
 | Soritr'aretina | Antony | Vahaolana |
 |---|---|---|
 | Tsy mandeha ny container amin'ny hEX refresh | Sary taloha tsy misy variant arm/v5 | Maka ny sary farany |
+| `GITHUB_PRIVATE_ACCESS_TOKEN manquant` | Token tsy misy ary tsy misy kaody local | Ampio ao amin'ny `wimalite-env` |
+| `git clone failed` / tsy misy kaody | Token diso na GitHub tsy azo iditra | Hamarino ny token ITDevSuccess, zahao `/container/shell` + `curl https://github.com` |
 | `Can't connect to MikroTik API` | IP/user/password diso ao amin'ny config.php | Hanova amin'ny admin UI na mivantana `/data/config.php` |
 | Tsy mandeha ny login | Config simba | Esory `/data/config.php`, alefa indray (averina amin'ny default) |
 | Log foana | Ao anatin'ny container | `/container/shell [find name="wimalite"]` avy eo `tail -f /var/log/apache2/error.log` |

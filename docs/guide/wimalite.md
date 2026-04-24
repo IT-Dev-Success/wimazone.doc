@@ -50,13 +50,26 @@ Le dossier `/data` du container contient :
 - `config.php` — credentials MikroTik (serveur/user/password) et settings
 - `img-uploads/` — logos custom uploadés via l'admin
 
-## 3) Variables d'environnement (optionnel)
+## 3) Variables d'environnement
 
-wimalite n'exige **aucune variable** — la config se fait via l'admin UI. Seule variable utile :
+Comme `wimazone/billing`, l'image wimalite **ne contient pas le code PHP** — elle le **pull depuis GitHub au boot**. Deux variables obligatoires :
 
 ```routeros
+/container/envs/add list=wimalite-env key=GIT_REPOSITORY_URL value=https://github.com/ITDev-Success/wimalite.git
+/container/envs/add list=wimalite-env key=GITHUB_PRIVATE_ACCESS_TOKEN value=TOKEN_FOURNI_PAR_ITDEVSUCCESS
+/container/envs/add list=wimalite-env key=GIT_BRANCH value=main
+/container/envs/add list=wimalite-env key=GIT_SYNC_ENABLED value=true
+/container/envs/add list=wimalite-env key=GIT_OFFLINE_FALLBACK value=true
 /container/envs/add list=wimalite-env key=TZ value=Indian/Antananarivo
 ```
+
+::: info Licence / token
+`GITHUB_PRIVATE_ACCESS_TOKEN` est fourni par ITDevSuccess lors de l'achat d'une licence — **même token que pour wimazone/billing**.
+:::
+
+::: tip Mise à jour automatique
+À chaque `/container stop` + `/container start`, l'entrypoint fait un `git pull` et récupère la dernière version du code depuis GitHub. **Pas besoin de rebuild ni de pull d'une nouvelle image Docker** pour mettre à jour l'app — sauf si l'image elle-même change (Apache, PHP, extension). Le fichier `/data/.image_version` permet de vérifier la version d'image déployée.
+:::
 
 ## 4) Créer et démarrer le container
 
@@ -114,6 +127,8 @@ Pour restaurer : arrêter le container, remplacer le fichier, redémarrer.
 | Symptôme | Cause | Solution |
 |---|---|---|
 | Container ne démarre pas sur hEX refresh | Ancienne image sans variant arm/v5 | Pull la dernière image |
+| `GITHUB_PRIVATE_ACCESS_TOKEN manquant` | Token absent et pas de code local | Ajouter le token dans `wimalite-env` |
+| `git clone failed` / pas de code | Token invalide ou GitHub inaccessible | Vérifier le token ITDevSuccess, tester `/container/shell` + `curl https://github.com` |
 | `Can't connect to MikroTik API` | Mauvais IP/user/password dans config.php | Éditer via admin UI ou directement `/data/config.php` |
 | Login ne fonctionne pas | Config corrompue | Supprimer `/data/config.php`, redémarrer (réinit au défaut) |
 | Logs vides | Apache logs dans le container | `/container/shell [find name="wimalite"]` puis `tail -f /var/log/apache2/error.log` |
