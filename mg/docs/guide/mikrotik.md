@@ -13,22 +13,38 @@ Hamarino fa vita daholo ny [lisitra fepetra takiana](/mg/docs/guide/installation
 
 ## <Icon name="Router" color="warning" /> Routeur mifanaraka
 
-| Modely | Architecture | RAM | Fitoviana |
-|---|---|---:|---|
-| L009UiGS-2HaxD-IN | ARM 32 bits | 512 MB | Mifanaraka |
-| L009UiGS-RM | ARM 32 bits | 512 MB | Mifanaraka |
-| hAP ax2 | ARM 64 bits | 1 GB | Mifanaraka |
-| hAP ax3 | ARM 64 bits | 1 GB | Mifanaraka |
+| Modely | Product code | Architecture | RAM | Fitoviana |
+|---|---|---|---:|---|
+| hEX refresh | E50UG | ARM 32 bits (EN7562CT) | 512 MB | Mifanaraka |
+| hEX S 2025 | E60iUGS | ARM 32 bits (EN7562CT) | 512 MB | Mifanaraka |
+| L009UiGS-2HaxD-IN | — | ARM 32 bits | 512 MB | Mifanaraka |
+| L009UiGS-RM | — | ARM 32 bits | 512 MB | Mifanaraka |
+| hAP ax2 | — | ARM 64 bits | 1 GB | Mifanaraka |
+| hAP ax3 | — | ARM 64 bits | 1 GB | Mifanaraka |
 
 Azo vidiana ao amin'ny fivarotana an-tserasera : **[wimazone.mg/boutique](https://wimazone.mg/boutique)**
 
 ## <Icon name="Package" color="info" /> Sary kendrena
 
-- `linux/arm/v7` (MikroTik ARM 32)
-- `linux/arm64` (MikroTik ARM 64)
-- `linux/amd64` (serveur/CasaOS)
+Sary ho an'ny besinimaro : `wimazone/billing:latest` (Docker Hub) — **manifest multi-arch** tokana. Ny variant rehetra dia mampiasa Alpine + MariaDB.
 
-Sary ho an'ny besinimaro : `wimazone/billing:latest` (Docker Hub).
+| Kendrena | Routeur |
+|---|---|
+| `linux/arm/v5` (alias v7) | hEX refresh (E50UG), hEX S 2025 (E60iUGS) — ireo modely ireo dia manambara `archVariant:v5` amin'ny container engine MikroTik ; ny manifest dia mampiditra ny binary arm/v7 ho alias amin'izany |
+| `linux/arm/v7` | L009, RB4011, hAP ac², ary routeur voatanisa etsy ambony |
+| `linux/arm64` | hAP ax², hAP ax³, RB5009, CCR2004/2116 |
+| `linux/amd64` | serveur / CasaOS |
+
+Tsy misy kajy manokana ny MikroTik : ny engine container dia maka ny variant mifanaraka amin'ny architecture hita.
+
+::: danger Modely MIPS tsy tohanana
+Ny **hEX (RB750Gr3)** sy **hEX S taloha (RB760iGS, 2018)** dia mampiasa CPU MediaTek MT7621A **MIPS big-endian**, tsy mifanaraka amin'ny WimaZone (tsy misy sary PHP ho an'ny MIPS + RAM 256 Mo tsy ampy).
+
+Aza hafangaro :
+- **hEX refresh (E50UG)** — ARM 32 bits, 512 Mo, Cortex-A53 AArch32 → **tohanana**
+- **hEX S 2025 (E60iUGS)** — puce mitovy (EN7562CT), 512 Mo → **tohanana**
+- **hEX / hEX S taloha** (`RB750Gr3` / `RB760iGS`, MIPS) → tsy tohanana
+:::
 
 ---
 
@@ -151,7 +167,7 @@ Ny mount container dia tsy mandeha raha tsy amin'ny stockage voatsipika **ext4**
 ```routeros
 /container/envs/add list=billing-env key=APP_ENV value=production
 /container/envs/add list=billing-env key=APP_DEBUG value=false
-/container/envs/add list=billing-env key=B_CONNECTION value=mysql
+/container/envs/add list=billing-env key=DB_CONNECTION value=mysql
 /container/envs/add list=billing-env key=DB_HOST value=127.0.0.1
 /container/envs/add list=billing-env key=DB_PORT value=3306
 /container/envs/add list=billing-env key=DB_DATABASE value=wimazone
@@ -208,7 +224,15 @@ Ny mount container dia tsy mandeha raha tsy amin'ny stockage voatsipika **ext4**
 /container/log print follow where container="Wima Zone"
 ```
 
-Ny boot voalohany dia mety haharitra **2 ka hatramin'ny 5 minitra** (clone Git + migration Laravel). Tokony ho hitanao amin'ny farany :
+Haharetan'ny boot voalohany araka ny fitaovana :
+
+| Modely | Boot voalohany | Reboot manaraka |
+|---|---|---|
+| hAP ax³ / RB5009 | 2-3 min | 30 s |
+| hAP ax² / L009 | 3-5 min | 45 s |
+| hEX refresh / hEX S 2025 (E50UG / E60iUGS) | 4-6 min | 1 min |
+
+Tokony ho hitanao amin'ny farany :
 
 ```text
 [scheduler] started
@@ -372,6 +396,8 @@ Hafatra mahazatra :
 
 | Hafatra | Antony | Vahaolana |
 |---|---|---|
+| `exited with signal 4 (Illegal instruction)` | Sary Docker taloha, tsy misy alias `linux/arm/v5` → ny container engine MikroTik (manambara `archVariant:v5` amin'ny hEX refresh / hEX S 2025) dia mahazo binary tsy mety | Maka ny sary farany (`/container/remove` avy eo `/container/add`) ; ny manifest multi-arch ankehitriny dia misy alias `linux/arm/v5` → arm/v7 |
+| `unhealty` aorian'ny 30 s amin'ny hEX refresh | Normal : boot voalohany 4-6 min. Tsy voahaja foana ny `start-period=180s` amin'ny MikroTik | Miandrasa 10 min alohan'ny mihevitra ho tsy nety |
 | `SIGKILL` / `OOMKilled` | Tsy ampy RAM | Ahena ny queue workers, ampiasao ax2/ax3 |
 | `git clone failed` | Licence diso | Hamarino `GITHUB_PRIVATE_ACCESS_TOKEN` |
 | `Can't connect to MySQL server on '127.0.0.1'` | Mbola tsy vonona ny MariaDB | Miandrasa 30 s aorian'ny boot ; jereo `s6-svstat mariadb` |
@@ -427,7 +453,7 @@ Hamarino ny credentials sy ny port :
 ## <Icon name="BookOpen" color="info" /> Notes fampandehanana
 
 - `GIT_OFFLINE_FALLBACK=true` : ny container dia manomboka amin'ny kaody eto an-toerana raha tsy tafiditra ny GitHub.
-- Mount `/var/lib/mysql` amin'ny `usb1/billing-data/mysql` : ny data MariaDB dia maharitra na dia averina forona aza ny container.
+- Mount `/var/lib/mysql` amin'ny `usb1/billing-data/mysql` : maharitra ny data MariaDB na dia averina forona aza ny container.
 - `LARAVEL_AUTO_STORAGE_LINK=false` : misoroka olana amin'ny mount sasany.
 - Atao mialoha ny assets frontend (tsy atao amin'ny MikroTik ny build mavesatra).
 - Ho an'ny fanaraha-maso : `/container/log print follow where container="Wima Zone"`.
