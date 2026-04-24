@@ -5,6 +5,9 @@ description: Du plan tarifaire au ticket imprimé
 
 # Créer un forfait et générer des vouchers
 
+![Liste des forfaits internet](/screenshots/forfaits.png)
+*Facturation & Forfaits → Forfaits Internet — gestion des plans tarifaires*
+
 Ce tutoriel couvre la création d'un forfait internet et la génération de tickets vouchers prêts à vendre.
 
 ## <Icon name="Package" color="info" /> 1) Créer un forfait internet
@@ -24,6 +27,9 @@ Ce tutoriel couvre la création d'un forfait internet et la génération de tick
 | **Actif** | ✓ |
 
 1. **Enregistrer**. Wima Zone pousse automatiquement le profil sur le routeur.
+
+![Page Tickets / Vouchers](/screenshots/tickets.png)
+*Gestion des clients → Tickets — stock, statut et impression*
 
 ## <Icon name="Ticket" color="success" /> 2) Générer un lot de vouchers
 

@@ -5,6 +5,9 @@ description: Monitoring temps réel et déconnexion forcée
 
 # Suivre les sessions actives
 
+![Sessions actives en temps réel](/screenshots/sessions.png)
+*Gestion des clients → Sessions Actives — clients connectés en temps réel*
+
 Le panneau **Sessions Actives** donne une vue en temps réel de tous les clients connectés.
 
 ## <Icon name="Activity" color="info" /> 1) Ouvrir le panneau

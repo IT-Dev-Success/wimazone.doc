@@ -5,6 +5,9 @@ description: Découvrez Wima Zone Billing et configurez votre instance en 10 min
 
 # Première connexion et configuration initiale
 
+![Dashboard Wima Zone Billing](/screenshots/dashboard.png)
+*Dashboard post-login — KPIs, statut APIs, graphiques de ventes*
+
 Ce tutoriel vous guide lors du **tout premier démarrage** de Wima Zone Billing : login, sécurisation du compte, branding et comptes admin.
 
 ## <Icon name="LogIn" color="info" /> 1) Première connexion

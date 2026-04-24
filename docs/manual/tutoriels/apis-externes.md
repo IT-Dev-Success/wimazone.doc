@@ -5,6 +5,9 @@ description: MVola, SMS Befiana, SMTP — intégrations tiers
 
 # Configurer les APIs externes
 
+![Page APIs externes](/screenshots/apis.png)
+*Paramètres → APIs — vue d'ensemble des intégrations MVola, SMS, SMTP, Escrow*
+
 Wima Zone s'interface avec plusieurs services tiers. Voici comment les activer depuis l'interface admin.
 
 ## <Icon name="Smartphone" color="primary" /> MVola Mobile Money

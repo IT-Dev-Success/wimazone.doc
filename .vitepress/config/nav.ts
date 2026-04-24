@@ -4,7 +4,8 @@ export const navFr: DefaultTheme.NavItem[] = [
   { text: 'Accueil', link: '/' },
   { text: 'Guide', link: '/docs/guide/installation' },
   { text: 'Manuel', link: '/docs/manual/' },
-  { text: 'APIs', link: '/docs/manual/settings/apis' },
+  { text: 'Tutoriels', link: '/docs/manual/tutoriels/' },
+  { text: 'FAQ', link: '/docs/manual/faq' },
   { text: 'Versions', link: '/releases/' },
   { 
     text: 'Projet', 
@@ -20,7 +21,8 @@ export const navMg: DefaultTheme.NavItem[] = [
   { text: 'Fandraisana', link: '/mg/' },
   { text: 'Torolàlana', link: '/mg/docs/guide/installation' },
   { text: 'Boky', link: '/mg/docs/manual/' },
-  { text: 'API', link: '/mg/docs/manual/settings/apis' },
+  { text: 'Tutoriel', link: '/mg/docs/manual/tutoriels/' },
+  { text: 'FAQ', link: '/mg/docs/manual/faq' },
   { text: 'Famoahana', link: '/mg/releases/' },
   {
     text: 'Tetikasa',

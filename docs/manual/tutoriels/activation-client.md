@@ -5,6 +5,9 @@ description: Parcours complet du client hotspot
 
 # Activer un voucher côté client
 
+![Page Clients](/screenshots/clients.png)
+*Gestion des clients — vue globale après activation des vouchers*
+
 Ce que vit un client qui achète un ticket et se connecte au Wi-Fi.
 
 ## <Icon name="Wifi" color="info" /> 1) Connexion au Wi-Fi

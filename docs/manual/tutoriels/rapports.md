@@ -5,6 +5,9 @@ description: Revenus, ventes et taux d'utilisation
 
 # Consulter les rapports
 
+![Page Rapports](/screenshots/rapports.png)
+*Rapports & Analytique → Rapports — vue consolidée des revenus et ventes*
+
 WimaZone fournit des rapports consolidés pour piloter votre activité hotspot.
 
 ## <Icon name="BarChart" color="info" /> 1) Rapports disponibles

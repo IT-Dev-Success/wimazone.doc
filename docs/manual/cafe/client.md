@@ -1,10 +1,10 @@
 ---
-title: Client Flutter Cafe
+title: Client Logiciel Wima Cafe
 ---
 
-# Client Flutter Cafe
+# Client Logiciel Wima Cafe
 
-Le client Wima Zone Cafe est une application Flutter desktop installee sur chaque poste de travail du cyber cafe. Elle gere le verrouillage de l'ecran, le suivi de session et la communication avec le serveur billing.
+Le client **Wima Cafe** est une application Flutter desktop installee sur chaque poste de travail du cyber cafe. Elle gere le verrouillage de l'ecran, le suivi de session et la communication avec le serveur billing.
 
 ## Installation
 
@@ -34,7 +34,7 @@ Au premier lancement, l'ecran de configuration demande :
 | URL WebSocket | Adresse WebSocket pour les commandes temps reel | `ws://172.17.0.2:80/ws/cafe-client` |
 | Nom du poste | Identifiant unique du poste (doit correspondre au dashboard) | `PC-01` |
 | Code d'activation | Token au format `XXX-XXX-XXX-XXX` (12 chiffres) | `123-456-789-012` |
-| Nom de l'entreprise | Affiche sur l'ecran de verrouillage | `Wima Zone Cafe` |
+| Nom de l'entreprise | Affiche sur l'ecran de verrouillage | `Wima Cafe` |
 
 ### Code d'activation
 

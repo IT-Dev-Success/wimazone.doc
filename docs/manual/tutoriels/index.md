@@ -32,6 +32,10 @@ Assurez-vous que :
 - [Suivre les sessions actives](/docs/manual/tutoriels/sessions-actives) — monitoring temps réel et déconnexion forcée
 - [Consulter les rapports](/docs/manual/tutoriels/rapports) — revenus, ventes, taux d'utilisation
 
+### Module Cyber Café
+
+- [Module Cyber Café — parcours complet](/docs/manual/tutoriels/module-cafe) — poste, client Wima Cafe, sessions prépayées/postpayées, libre-service
+
 ## <Icon name="HelpCircle" color="warning" /> Besoin d'aide ?
 
 - [Manuel utilisateur](/docs/manual/) — référence complète

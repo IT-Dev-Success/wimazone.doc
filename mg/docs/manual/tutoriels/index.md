@@ -32,6 +32,10 @@ Hamarino fa :
 - [Manaraha ny session mavitrika](/mg/docs/manual/tutoriels/sessions-actives) — fanaraha-maso amin'ny fotoana tena izy sy fanaisorana
 - [Zahao ny tatitra](/mg/docs/manual/tutoriels/rapports) — vola miditra, varotra, taha fampiasana
 
+### Module Cyber Café
+
+- [Module Cyber Café — dingana feno](/mg/docs/manual/tutoriels/module-cafe) — poste, client Wima Cafe, session aloha vola / avy eo, libre-service
+
 ## <Icon name="HelpCircle" color="warning" /> Mila fanampiana ?
 
 - [Boky torolàlana](/mg/docs/manual/) — tahirin-kevitra feno
