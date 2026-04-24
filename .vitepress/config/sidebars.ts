@@ -22,6 +22,13 @@ export const sidebarFr: DefaultTheme.Sidebar = {
       ],
     },
     {
+      text: "wimalite (hEX refresh / hEX S 2025)",
+      collapsed: false,
+      items: [
+        { text: "Installation wimalite", link: "/docs/guide/wimalite" },
+      ],
+    },
+    {
       text: "Exploitation",
       collapsed: false,
       items: [
@@ -124,6 +131,13 @@ export const sidebarMg: DefaultTheme.Sidebar = {
           text: "Walled Garden",
           link: "/mg/docs/guide/mikrotik#walled-garden",
         },
+      ],
+    },
+    {
+      text: "wimalite (hEX refresh / hEX S 2025)",
+      collapsed: false,
+      items: [
+        { text: "Fametrahana wimalite", link: "/mg/docs/guide/wimalite" },
       ],
     },
     {

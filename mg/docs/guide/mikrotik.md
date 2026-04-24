@@ -46,6 +46,8 @@ Tsy misy kajy manokana ny MikroTik : ny engine container dia maka ny variant mif
 | hEX refresh (**E50UG**) | Sandbox arm32v5 soft-float ihany, tsy mifanaraka Alpine musl armhf |
 | hEX S 2025 (**E60iUGS**) | Mitovy CPU EN7562CT, fetra mitovy |
 
+Ho an'ireo modely ireo, apetraho [**wimalite**](/mg/docs/guide/wimalite) (version PHP madio multi-arch izay mampiditra arm/v5) eo amin'ny toerany.
+
 **CPU MIPS (tsy misy sary PHP multi-arch)** :
 
 | Modely | Antony |

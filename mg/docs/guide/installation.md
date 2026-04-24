@@ -19,8 +19,10 @@ Routeur MikroTik voatsapa sy tohanana :
 | hAP ax3 | ARM 64 bits | 1 GB | USB ≥ 16 GB |
 | RB5009 | ARM 64 bits | 1 GB | USB ≥ 16 GB |
 
-::: danger Modely tsy tohanana (EN7562CT)
-Ny **hEX refresh (E50UG)** sy ny **hEX S 2025 (E60iUGS)** dia mampiasa CPU Airoha EN7562CT, izay voafetra amin'ny **arm32v5 soft-float ihany** ao amin'ny sandbox container RouterOS ([doc ofisialin'ny MikroTik](https://help.mikrotik.com/docs/display/ROS/Container#Container-Requirements)). Izany dia tsy mifanaraka amin'ny Alpine musl armhf (ARMv7 hard-float) izay fototry ny `wimazone/billing`. Tsy tohanana ireo modely ireo — aleo maka L009, hAP ax² na RB5009.
+::: danger wimazone/billing : tsy tohanana (CPU EN7562CT)
+Ny **hEX refresh (E50UG)** sy ny **hEX S 2025 (E60iUGS)** dia mampiasa CPU Airoha EN7562CT, izay voafetra amin'ny **arm32v5 soft-float ihany** ao amin'ny sandbox container RouterOS ([doc ofisialin'ny MikroTik](https://help.mikrotik.com/docs/display/ROS/Container#Container-Requirements)). Izany dia tsy mifanaraka amin'ny Alpine musl armhf (ARMv7 hard-float) izay fototry ny `wimazone/billing`.
+
+**Safidy hafa** : ampiasao [**wimalite**](/mg/docs/guide/wimalite), version PHP madio an'ny Wima Zone izay ~100 Mo fotsiny ary mandeha amin'ny arm32v5 (mifanaraka amin'ny hEX refresh sy hEX S 2025).
 :::
 
 ::: tip Fivarotana

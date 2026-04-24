@@ -46,6 +46,8 @@ Tu n'as rien à spécifier côté MikroTik : l'engine container pull le variant 
 | hEX refresh (**E50UG**) | Sandbox arm32v5 soft-float uniquement, incompatible Alpine musl armhf |
 | hEX S 2025 (**E60iUGS**) | Même CPU EN7562CT, même restriction |
 
+Pour ces modèles, installer [**wimalite**](/docs/guide/wimalite) (version PHP pur multi-arch qui inclut arm/v5) à la place.
+
 **CPU MIPS (pas d'image PHP multi-arch)** :
 
 | Modèle | Raison |

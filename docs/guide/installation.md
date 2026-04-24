@@ -19,8 +19,10 @@ Routeurs MikroTik testés et supportés :
 | hAP ax3 | ARM 64 bits | 1 GB | USB ≥ 16 GB |
 | RB5009 | ARM 64 bits | 1 GB | USB ≥ 16 GB |
 
-::: danger Modèles non supportés (EN7562CT)
-Le **hEX refresh (E50UG)** et le **hEX S 2025 (E60iUGS)** utilisent le CPU Airoha EN7562CT, dont le sandbox container RouterOS est restreint à **arm32v5 soft-float uniquement** ([doc officielle MikroTik](https://help.mikrotik.com/docs/display/ROS/Container#Container-Requirements)). Cette contrainte est incompatible avec Alpine musl armhf (ARMv7 hard-float) qui est la base de `wimazone/billing`. Ces modèles ne sont pas supportés — prendre un L009, hAP ax² ou RB5009 à la place.
+::: danger wimazone/billing : non supporté (CPU EN7562CT)
+Le **hEX refresh (E50UG)** et le **hEX S 2025 (E60iUGS)** utilisent le CPU Airoha EN7562CT, dont le sandbox container RouterOS est restreint à **arm32v5 soft-float uniquement** ([doc officielle MikroTik](https://help.mikrotik.com/docs/display/ROS/Container#Container-Requirements)). Cette contrainte est incompatible avec Alpine musl armhf (ARMv7 hard-float) qui est la base de `wimazone/billing`.
+
+**Alternative** : utiliser [**wimalite**](/docs/guide/wimalite), une version PHP pur de Wima Zone qui tient en ~100 Mo et fonctionne sur arm32v5 (compatible hEX refresh et hEX S 2025).
 :::
 
 ::: tip Boutique
