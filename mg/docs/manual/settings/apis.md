@@ -25,8 +25,7 @@ Ny pejy API dia mampiray koa:
 
 - `platform_redirect_url` (URL redirect mpanjifa),
 - `platform_server_url` (URL serveur),
-- `ops_alert_webhook_url` (webhook fiasana),
-- `customer_portal_active_plugin` (plugin portail mpanjifa mavitrika).
+- `ops_alert_webhook_url` (webhook fiasana).
 
 ## Fanamarihana fiasana
 

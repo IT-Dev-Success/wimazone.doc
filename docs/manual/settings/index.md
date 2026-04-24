@@ -10,13 +10,12 @@ La section **Paramètres** centralise la configuration transversale de l'instanc
 - `Paramètres > SMTP` (`/settings/smtp`)
 - `Paramètres > Paiements` (`/settings/payments`)
 - `Paramètres > SMS` (`/settings/sms`)
-- `Paramètres > Plugins portail client` (`/settings/customer-portal/plugins`)
 - `Paramètres > Templates ticket` (`/settings/ticket-print/templates`)
 
 ## Permissions
 
 - Accès global: `manage-settings`
-- Actions sensibles (API, plugins/templates): généralement `Super Admin`
+- Actions sensibles (API, templates): généralement `Super Admin`
 
 ## Bonnes pratiques
 
@@ -31,5 +30,4 @@ La section **Paramètres** centralise la configuration transversale de l'instanc
 - [Templates de tickets](/docs/manual/settings/voucher-templates)
 - [Logos](/docs/manual/settings/logos)
 - [API & CORS](/docs/manual/settings/api-cors)
-- [Plugins](/docs/manual/settings/plugins)
 - [Système](/docs/manual/settings/system)

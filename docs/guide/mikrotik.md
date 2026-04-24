@@ -106,13 +106,35 @@ Ajouter le bridge à la liste d'interfaces **LAN** pour que les règles firewall
 /ip/firewall/nat/add chain=srcnat src-address=172.17.0.0/24 action=masquerade comment="Containers Internet"
 ```
 
-## 7) Configurer le DNS du routeur
+## 7) Règles firewall (redirection portail + accès admin)
+
+Rediriger le port externe **8080** du routeur vers le port 80 du container (c'est ainsi que les clients du LAN atteignent le portail WimaZone) :
+
+```routeros
+/ip/firewall/nat/add chain=dstnat protocol=tcp dst-port=8080 action=dst-nat \
+  to-addresses=172.17.0.2 to-ports=80 comment="Redirection portail Wima Zone"
+```
+
+Autoriser les ports entrants nécessaires (chain `input`) :
+
+```routeros
+/ip/firewall/filter/add chain=input protocol=tcp dst-port=8080 action=accept comment="Portail Wima Zone"
+/ip/firewall/filter/add chain=input protocol=tcp dst-port=8291 action=accept comment="Winbox"
+/ip/firewall/filter/add chain=input protocol=tcp dst-port=8728 action=accept comment="API MikroTik"
+/ip/firewall/filter/add chain=input protocol=tcp dst-port=8729 action=accept comment="API-SSL MikroTik"
+```
+
+::: tip Ordre des règles
+Placez ces règles **avant** toute règle `drop` globale du chain `input`. Sinon elles seront ignorées. Utilisez `/ip/firewall/filter/move` si besoin.
+:::
+
+## 8) Configurer le DNS du routeur
 
 ```routeros
 /ip/dns/set servers=1.1.1.1,8.8.8.8 allow-remote-requests=yes
 ```
 
-## 8) Créer le stockage persistant MariaDB
+## 9) Créer le stockage persistant MariaDB
 
 L'image embarque **MariaDB** ; il faut persister son répertoire de données sur l'USB pour survivre aux redémarrages / mises à jour.
 
@@ -124,7 +146,7 @@ L'image embarque **MariaDB** ; il faut persister son répertoire de données sur
 Les mounts container ne fonctionnent qu'avec un stockage formaté **ext4**. Vérifier avec `/disk/print` que le device `usb1` est bien reconnu. MariaDB refuse de démarrer sur FAT32/NTFS.
 :::
 
-## 9) Variables d'environnement du container
+## 10) Variables d'environnement du container
 
 ```routeros
 /container/envs/add list=billing-env key=APP_ENV value=production
@@ -160,7 +182,7 @@ Les mounts container ne fonctionnent qu'avec un stockage formaté **ext4**. Vér
 `GITHUB_PRIVATE_ACCESS_TOKEN` est fourni par ITDevSuccess lors de l'achat d'une licence.
 :::
 
-## 10) Créer le container Wima Zone
+## 11) Créer le container Wima Zone
 
 ```routeros
 /container/add \
@@ -174,13 +196,13 @@ Les mounts container ne fonctionnent qu'avec un stockage formaté **ext4**. Vér
   logging=yes
 ```
 
-## 11) Démarrer le container
+## 12) Démarrer le container
 
 ```routeros
 /container/start [find where name="Wima Zone"]
 ```
 
-## 12) Vérifier les logs
+## 13) Vérifier les logs
 
 ```routeros
 /container/log print follow where container="Wima Zone"
@@ -194,7 +216,7 @@ Le premier boot peut prendre **2 à 5 minutes** (clone Git + migrations Laravel)
 [nginx] listening on 0.0.0.0:80
 ```
 
-## 13) Walled Garden recommandé {#walled-garden}
+## 14) Walled Garden recommandé {#walled-garden}
 
 ### Walled Garden IP
 
@@ -225,7 +247,7 @@ Le premier boot peut prendre **2 à 5 minutes** (clone Git + migrations Laravel)
 /ip/hotspot/walled-garden/add dst-port=8291 action=allow comment="Winbox"
 ```
 
-## 14) Vérifications post-installation
+## 15) Vérifications post-installation
 
 ```routeros
 /interface/veth/print

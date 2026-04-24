@@ -3,7 +3,6 @@ import type { EnhanceAppContext } from 'vitepress'
 import Layout from './Layout.vue'
 import Icon from './components/Icon.vue'
 import 'flag-icons/css/flag-icons.min.css'
-import PluginRegistry from './components/PluginRegistry.vue'
 import './input.css'
 
 export default {
@@ -11,6 +10,5 @@ export default {
   Layout: Layout,
   enhanceApp({ app }: EnhanceAppContext) {
     app.component('Icon', Icon)
-    app.component('PluginRegistry', PluginRegistry)
   }
 }

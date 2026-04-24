@@ -18,7 +18,7 @@ Ity boky torolàlana ity dia mikasika ny asa andavanandro ao amin'ny **WimaZone 
 
 - Fitantanana routeur sy fitsapana fampifandraisana API.
 - API/CORS, SMTP, SMS sy configuration fandoavana.
-- Plugins portail mpanjifa sy modely fanontana tikety.
+- Modely fanontana tikety.
 - Marque (logo, loko, paramètre rafitra).
 
 ### [Asan'ny Routeur](/mg/docs/manual/router/)

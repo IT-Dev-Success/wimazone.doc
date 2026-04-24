@@ -106,13 +106,35 @@ Ampio ny bridge ao amin'ny lisitra interface **LAN** mba ampiharina ny firewall 
 /ip/firewall/nat/add chain=srcnat src-address=172.17.0.0/24 action=masquerade comment="Containers Internet"
 ```
 
-## 7) Apetraho ny DNS an'ny routeur
+## 7) Firewall (fanondranana portail + fidirana admin)
+
+Atondro ny port ivelany **8080** an'ny routeur mankany amin'ny port 80 an'ny container (izay no hidiran'ny mpanjifa LAN amin'ny portail WimaZone) :
+
+```routeros
+/ip/firewall/nat/add chain=dstnat protocol=tcp dst-port=8080 action=dst-nat \
+  to-addresses=172.17.0.2 to-ports=80 comment="Fanondranana portail Wima Zone"
+```
+
+Omena alalana ny port miditra (chain `input`) :
+
+```routeros
+/ip/firewall/filter/add chain=input protocol=tcp dst-port=8080 action=accept comment="Portail Wima Zone"
+/ip/firewall/filter/add chain=input protocol=tcp dst-port=8291 action=accept comment="Winbox"
+/ip/firewall/filter/add chain=input protocol=tcp dst-port=8728 action=accept comment="API MikroTik"
+/ip/firewall/filter/add chain=input protocol=tcp dst-port=8729 action=accept comment="API-SSL MikroTik"
+```
+
+::: tip Laharan'ny lalàna
+Apetraho ireo lalàna ireo **alohan'ny** `drop` ankapobeny amin'ny chain `input`. Raha tsy izany, tsy ampiasaina. Ampiasao `/ip/firewall/filter/move` raha ilaina.
+:::
+
+## 8) Apetraho ny DNS an'ny routeur
 
 ```routeros
 /ip/dns/set servers=1.1.1.1,8.8.8.8 allow-remote-requests=yes
 ```
 
-## 8) Mamorona fitehirizana MariaDB maharitra
+## 9) Mamorona fitehirizana MariaDB maharitra
 
 Ny sary dia mitondra **MariaDB** ao anatiny ; tsy maintsy atao maharitra amin'ny USB ny lahatahiry MariaDB mba ho tafita amin'ny redémarrage / fanavaozana.
 
@@ -124,7 +146,7 @@ Ny sary dia mitondra **MariaDB** ao anatiny ; tsy maintsy atao maharitra amin'ny
 Ny mount container dia tsy mandeha raha tsy amin'ny stockage voatsipika **ext4**. Hamarino amin'ny `/disk/print` fa hita ny `usb1`. Tsy handeha ny MariaDB amin'ny FAT32/NTFS.
 :::
 
-## 9) Variables tontolo iainana ho an'ny container
+## 10) Variables tontolo iainana ho an'ny container
 
 ```routeros
 /container/envs/add list=billing-env key=APP_ENV value=production
@@ -160,7 +182,7 @@ Ny mount container dia tsy mandeha raha tsy amin'ny stockage voatsipika **ext4**
 `GITHUB_PRIVATE_ACCESS_TOKEN` dia omen'ny ITDevSuccess rehefa mividy license.
 :::
 
-## 10) Mamorona container Wima Zone
+## 11) Mamorona container Wima Zone
 
 ```routeros
 /container/add \
@@ -174,13 +196,13 @@ Ny mount container dia tsy mandeha raha tsy amin'ny stockage voatsipika **ext4**
   logging=yes
 ```
 
-## 11) Manomboka ny container
+## 12) Manomboka ny container
 
 ```routeros
 /container/start [find where name="Wima Zone"]
 ```
 
-## 12) Hamarino ny log
+## 13) Hamarino ny log
 
 ```routeros
 /container/log print follow where container="Wima Zone"
@@ -194,7 +216,7 @@ Ny boot voalohany dia mety haharitra **2 ka hatramin'ny 5 minitra** (clone Git +
 [nginx] listening on 0.0.0.0:80
 ```
 
-## 13) Walled Garden soso-kevitra {#walled-garden}
+## 14) Walled Garden soso-kevitra {#walled-garden}
 
 ### Walled Garden IP
 
@@ -225,7 +247,7 @@ Ny boot voalohany dia mety haharitra **2 ka hatramin'ny 5 minitra** (clone Git +
 /ip/hotspot/walled-garden/add dst-port=8291 action=allow comment="Winbox"
 ```
 
-## 14) Fanamarinana aorian'ny fametrahana
+## 15) Fanamarinana aorian'ny fametrahana
 
 ```routeros
 /interface/veth/print

@@ -5,7 +5,6 @@ export const navFr: DefaultTheme.NavItem[] = [
   { text: 'Guide', link: '/docs/guide/installation' },
   { text: 'Manuel', link: '/docs/manual/' },
   { text: 'APIs', link: '/docs/manual/settings/apis' },
-  { text: 'Plugins', link: '/plugins/' },
   { text: 'Versions', link: '/releases/' },
   { 
     text: 'Projet', 
@@ -22,7 +21,6 @@ export const navMg: DefaultTheme.NavItem[] = [
   { text: 'Torolàlana', link: '/mg/docs/guide/installation' },
   { text: 'Boky', link: '/mg/docs/manual/' },
   { text: 'API', link: '/mg/docs/manual/settings/apis' },
-  { text: 'Plugins', link: '/mg/plugins/' },
   { text: 'Famoahana', link: '/mg/releases/' },
   {
     text: 'Tetikasa',

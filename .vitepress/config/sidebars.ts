@@ -6,8 +6,7 @@ export const sidebarFr: DefaultTheme.Sidebar = {
       text: 'Démarrage',
       collapsed: false,
       items: [
-        { text: 'Prérequis MikroTik', link: '/docs/guide/installation#requirements' },
-        { text: 'Plugins', link: '/plugins/' }
+        { text: 'Prérequis MikroTik', link: '/docs/guide/installation#requirements' }
       ]
     },
     {
@@ -26,12 +25,6 @@ export const sidebarFr: DefaultTheme.Sidebar = {
         { text: 'Backup & restore', link: '/docs/guide/mikrotik#backup-restore' },
         { text: 'Mise à jour', link: '/docs/guide/mikrotik#mise-a-jour' },
         { text: 'Dépannage', link: '/docs/guide/mikrotik#depannage' }
-      ]
-    },
-    {
-      text: 'Développement',
-      items: [
-        { text: 'Créer un plugin', link: '/docs/guide/plugin-development' }
       ]
     }
   ],
@@ -54,8 +47,7 @@ export const sidebarMg: DefaultTheme.Sidebar = {
       text: 'Fanombohana',
       collapsed: false,
       items: [
-        { text: 'Fepetra takiana MikroTik', link: '/mg/docs/guide/installation#requirements' },
-        { text: 'Plugins', link: '/mg/plugins/' }
+        { text: 'Fepetra takiana MikroTik', link: '/mg/docs/guide/installation#requirements' }
       ]
     },
     {
@@ -74,12 +66,6 @@ export const sidebarMg: DefaultTheme.Sidebar = {
         { text: 'Backup sy famerenana', link: '/mg/docs/guide/mikrotik#backup-restore' },
         { text: 'Fanavaozana', link: '/mg/docs/guide/mikrotik#mise-a-jour' },
         { text: 'Famahana olana', link: '/mg/docs/guide/mikrotik#depannage' }
-      ]
-    },
-    {
-      text: 'Fampandrosoana',
-      items: [
-        { text: 'Mamorona Plugin', link: '/mg/docs/guide/plugin-development' }
       ]
     }
   ],

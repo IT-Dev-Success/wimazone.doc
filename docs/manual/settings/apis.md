@@ -25,8 +25,7 @@ L'écran API centralise aussi:
 
 - `platform_redirect_url` (redirection client),
 - `platform_server_url` (URL serveur),
-- `ops_alert_webhook_url` (webhook alertes opérations),
-- `customer_portal_active_plugin` (plugin actif portail client).
+- `ops_alert_webhook_url` (webhook alertes opérations).
 
 ## Notes d'exploitation
 

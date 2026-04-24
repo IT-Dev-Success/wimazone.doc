@@ -18,7 +18,7 @@ Ce manuel décrit l'utilisation quotidienne de **WimaZone Billing** côté admin
 
 - Gestion des routeurs et test de connexion API.
 - Configuration API/CORS, SMTP, SMS, paiements.
-- Plugins portail client et templates d'impression ticket.
+- Templates d'impression ticket.
 - Branding (logos, couleurs, paramètres système).
 
 ### [Opérations routeur](/docs/manual/router/)

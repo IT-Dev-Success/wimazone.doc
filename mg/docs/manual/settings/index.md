@@ -10,13 +10,12 @@ Ny faritra **Paramètre** dia mampiray ny configuration sehatra ankapobeny.
 - `Paramètre > SMTP` (`/settings/smtp`)
 - `Paramètre > Fandoavana` (`/settings/payments`)
 - `Paramètre > SMS` (`/settings/sms`)
-- `Paramètre > Plugins Portail Mpanjifa` (`/settings/customer-portal/plugins`)
 - `Paramètre > Modely Fanontana Tikety` (`/settings/ticket-print/templates`)
 
 ## Alalana
 
 - Fidirana ankapobeny: `manage-settings`
-- Asa saro-pady (API, plugins/modely): matetika `Super Admin`
+- Asa saro-pady (API, modely): matetika `Super Admin`
 
 ## Fanao tsara indrindra
 
@@ -31,5 +30,4 @@ Ny faritra **Paramètre** dia mampiray ny configuration sehatra ankapobeny.
 - [Modely tikety](/mg/docs/manual/settings/voucher-templates)
 - [Logo](/mg/docs/manual/settings/logos)
 - [API & CORS](/mg/docs/manual/settings/api-cors)
-- [Plugins](/mg/docs/manual/settings/plugins)
 - [Rafitra](/mg/docs/manual/settings/system)
