@@ -103,14 +103,16 @@ Fidirana admin : `http://<ip-routeur>:8090`
 
 ## 6) Fidirana voalohany
 
-Ny config default :
+Credentials default :
 
 ```text
-Username : wimazone
-Password : mikhmon
+Username : wimalite
+Password : 1234
 ```
 
-**Ovao avy hatrany** avy amin'ny admin UI (menu Settings > Users).
+::: danger Ovao avy hatrany
+Ireo credentials ireo dia hita amin'ny code source open-source. Ovao alohan'ny hampasehoana ny container amin'ny tambajotra, avy amin'ny **Settings > Sessions** ao amin'ny admin UI, na mivantana amin'ny `/data/config.php` avy amin'ny MikroTik.
+:::
 
 ## <Icon name="Database" color="primary" /> Backup
 

@@ -103,14 +103,16 @@ Accès admin : `http://<ip-routeur>:8090`
 
 ## 6) Premier login
 
-La config par défaut est :
+Identifiants par défaut :
 
 ```text
-Username : wimazone
-Password : mikhmon
+Username : wimalite
+Password : 1234
 ```
 
-**À changer immédiatement** via l'admin UI (menu Settings > Users).
+::: danger À changer immédiatement
+Ces identifiants sont publics (code source open-source). Change-les avant d'exposer le container sur un réseau, via **Settings > Sessions** dans l'admin UI, ou directement en éditant `/data/config.php` côté MikroTik.
+:::
 
 ## <Icon name="Database" color="primary" /> Backup
 
