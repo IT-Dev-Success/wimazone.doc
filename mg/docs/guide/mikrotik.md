@@ -13,37 +13,48 @@ Hamarino fa vita daholo ny [lisitra fepetra takiana](/mg/docs/guide/installation
 
 ## <Icon name="Router" color="warning" /> Routeur mifanaraka
 
-| Modely | Product code | Architecture | RAM | Fitoviana |
-|---|---|---|---:|---|
-| hEX refresh | E50UG | ARM 32 bits (EN7562CT) | 512 MB | Mifanaraka |
-| hEX S 2025 | E60iUGS | ARM 32 bits (EN7562CT) | 512 MB | Mifanaraka |
-| L009UiGS-2HaxD-IN | — | ARM 32 bits | 512 MB | Mifanaraka |
-| L009UiGS-RM | — | ARM 32 bits | 512 MB | Mifanaraka |
-| hAP ax2 | — | ARM 64 bits | 1 GB | Mifanaraka |
-| hAP ax3 | — | ARM 64 bits | 1 GB | Mifanaraka |
+| Modely | Architecture | RAM | Fitoviana |
+|---|---|---:|---|
+| L009UiGS-2HaxD-IN | ARM 32 bits (armv7) | 512 MB | Mifanaraka |
+| L009UiGS-RM | ARM 32 bits (armv7) | 512 MB | Mifanaraka |
+| hAP ax2 | ARM 64 bits | 1 GB | Mifanaraka |
+| hAP ax3 | ARM 64 bits | 1 GB | Mifanaraka |
+| RB4011 | ARM 32 bits (armv7) | 1 GB | Mifanaraka |
+| RB5009 | ARM 64 bits | 1 GB | Mifanaraka |
 
 Azo vidiana ao amin'ny fivarotana an-tserasera : **[wimazone.mg/boutique](https://wimazone.mg/boutique)**
 
 ## <Icon name="Package" color="info" /> Sary kendrena
 
-Sary ho an'ny besinimaro : `wimazone/billing:latest` (Docker Hub) — **manifest multi-arch** tokana. Ny variant rehetra dia mampiasa Alpine + MariaDB.
+Sary ho an'ny besinimaro : `wimazone/billing:latest` (Docker Hub) — manifest multi-arch Alpine + MariaDB.
 
 | Kendrena | Routeur |
 |---|---|
-| `linux/arm/v5` (alias v7) | hEX refresh (E50UG), hEX S 2025 (E60iUGS) — ireo modely ireo dia manambara `archVariant:v5` amin'ny container engine MikroTik ; ny manifest dia mampiditra ny binary arm/v7 ho alias amin'izany |
-| `linux/arm/v7` | L009, RB4011, hAP ac², ary routeur voatanisa etsy ambony |
+| `linux/arm/v7` | L009, RB4011, hAP ac² |
 | `linux/arm64` | hAP ax², hAP ax³, RB5009, CCR2004/2116 |
 | `linux/amd64` | serveur / CasaOS |
 
 Tsy misy kajy manokana ny MikroTik : ny engine container dia maka ny variant mifanaraka amin'ny architecture hita.
 
-::: danger Modely MIPS tsy tohanana
-Ny **hEX (RB750Gr3)** sy **hEX S taloha (RB760iGS, 2018)** dia mampiasa CPU MediaTek MT7621A **MIPS big-endian**, tsy mifanaraka amin'ny WimaZone (tsy misy sary PHP ho an'ny MIPS + RAM 256 Mo tsy ampy).
+::: danger Modely tsy tohanana
 
-Aza hafangaro :
-- **hEX refresh (E50UG)** — ARM 32 bits, 512 Mo, Cortex-A53 AArch32 → **tohanana**
-- **hEX S 2025 (E60iUGS)** — puce mitovy (EN7562CT), 512 Mo → **tohanana**
-- **hEX / hEX S taloha** (`RB750Gr3` / `RB760iGS`, MIPS) → tsy tohanana
+**CPU EN7562CT (arm32v5 ihany)** — [doc ofisialin'ny MikroTik](https://help.mikrotik.com/docs/display/ROS/Container#Container-Requirements) :
+> For devices with EN7562CT CPU like the hEX Refresh, only arm32v5 container images are supported.
+
+| Modely | Antony |
+|---|---|
+| hEX refresh (**E50UG**) | Sandbox arm32v5 soft-float ihany, tsy mifanaraka Alpine musl armhf |
+| hEX S 2025 (**E60iUGS**) | Mitovy CPU EN7562CT, fetra mitovy |
+
+**CPU MIPS (tsy misy sary PHP multi-arch)** :
+
+| Modely | Antony |
+|---|---|
+| hEX taloha (RB750Gr3) | MT7621A MIPS-BE + 256 Mo RAM |
+| hEX S taloha (RB760iGS, 2018) | MT7621A MIPS-BE + 256 Mo RAM |
+| hAP ac lite, hAP lite | MIPS + RAM kely be |
+
+Tandremo tsy hafangaroana ny anarana : **hEX refresh ≠ hEX**, **hEX S 2025 ≠ hEX S taloha**, fa tsy tohanana izy ireo rehetra (antony samihafa). Aleo maka L009, hAP ax² na RB5009.
 :::
 
 ---
@@ -230,7 +241,6 @@ Haharetan'ny boot voalohany araka ny fitaovana :
 |---|---|---|
 | hAP ax³ / RB5009 | 2-3 min | 30 s |
 | hAP ax² / L009 | 3-5 min | 45 s |
-| hEX refresh / hEX S 2025 (E50UG / E60iUGS) | 4-6 min | 1 min |
 
 Tokony ho hitanao amin'ny farany :
 
@@ -396,8 +406,7 @@ Hafatra mahazatra :
 
 | Hafatra | Antony | Vahaolana |
 |---|---|---|
-| `exited with signal 4 (Illegal instruction)` | Sary Docker taloha, tsy misy alias `linux/arm/v5` → ny container engine MikroTik (manambara `archVariant:v5` amin'ny hEX refresh / hEX S 2025) dia mahazo binary tsy mety | Maka ny sary farany (`/container/remove` avy eo `/container/add`) ; ny manifest multi-arch ankehitriny dia misy alias `linux/arm/v5` → arm/v7 |
-| `unhealty` aorian'ny 30 s amin'ny hEX refresh | Normal : boot voalohany 4-6 min. Tsy voahaja foana ny `start-period=180s` amin'ny MikroTik | Miandrasa 10 min alohan'ny mihevitra ho tsy nety |
+| `exited with signal 4 (Illegal instruction)` | Routeur misy CPU EN7562CT (hEX refresh / hEX S 2025) manambara `archVariant:v5` → sandbox MikroTik voafetra amin'ny arm32v5 soft-float, tsy mifanaraka amin'ny Alpine armhf | Tsy tohanana ireo modely ireo. Ampiasao L009, hAP ax² na RB5009 |
 | `SIGKILL` / `OOMKilled` | Tsy ampy RAM | Ahena ny queue workers, ampiasao ax2/ax3 |
 | `git clone failed` | Licence diso | Hamarino `GITHUB_PRIVATE_ACCESS_TOKEN` |
 | `Can't connect to MySQL server on '127.0.0.1'` | Mbola tsy vonona ny MariaDB | Miandrasa 30 s aorian'ny boot ; jereo `s6-svstat mariadb` |

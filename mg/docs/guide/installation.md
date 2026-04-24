@@ -5,24 +5,23 @@ description: Fitaovana, RouterOS ary fanamarinana alohan'ny hametrahana Wima Zon
 
 # Fepetra Takiana MikroTik
 
-Ity pejy ity dia mamintina ny zavatra rehetra tokony ho vonona **alohan'ny** hanarahana ny [Torolàlana fametrahana MikroTik](/mg/docs/guide/mikrotik). Wima Zone Billing dia apetraka amin'ny **mode container RouterOS v7** ihany, miaraka amin'ny **MariaDB** ao anatin'ny container ary maharitra amin'ny USB. Ny sary Docker dia multi-arch ary mandray ARM 32 sy ARM 64 bits.
-
-::: info hEX refresh / hEX S 2025
-Ireo modely roa ireo dia mampiasa puce Airoha EN7562CT (Cortex-A53 amin'ny mode AArch32). Ny container engine MikroTik dia manambara `archVariant:v5` amin'ny registry Docker ; ny manifest dia mamoaka ny binary ARM 32 ho alias amin'izany mba ho voapaka tsara.
-:::
+Ity pejy ity dia mamintina ny zavatra rehetra tokony ho vonona **alohan'ny** hanarahana ny [Torolàlana fametrahana MikroTik](/mg/docs/guide/mikrotik). Wima Zone Billing dia apetraka amin'ny **mode container RouterOS v7** ihany, miaraka amin'ny **MariaDB** ao anatin'ny container ary maharitra amin'ny USB. Ny sary Docker dia multi-arch ho an'ny ARM 32 (armv7) sy ARM 64 bits.
 
 ## <Icon name="Router" color="warning" /> Fitaovana mifanaraka {#requirements}
 
 Routeur MikroTik voatsapa sy tohanana :
 
-| Modely | Product code | Architecture | RAM | USB soso-kevitra |
-|---|---|---|---:|---|
-| hEX refresh | E50UG | ARM 32 bits (EN7562CT) | 512 MB | USB ≥ 8 GB |
-| hEX S 2025 | E60iUGS | ARM 32 bits (EN7562CT) | 512 MB | USB ≥ 8 GB |
-| L009UiGS-2HaxD-IN | — | ARM 32 bits | 512 MB | USB ≥ 8 GB |
-| L009UiGS-RM | — | ARM 32 bits | 512 MB | USB ≥ 8 GB |
-| hAP ax2 | — | ARM 64 bits | 1 GB | USB ≥ 16 GB |
-| hAP ax3 | — | ARM 64 bits | 1 GB | USB ≥ 16 GB |
+| Modely | Architecture | RAM | USB soso-kevitra |
+|---|---|---:|---|
+| L009UiGS-2HaxD-IN | ARM 32 bits (armv7) | 512 MB | USB ≥ 8 GB |
+| L009UiGS-RM | ARM 32 bits (armv7) | 512 MB | USB ≥ 8 GB |
+| hAP ax2 | ARM 64 bits | 1 GB | USB ≥ 16 GB |
+| hAP ax3 | ARM 64 bits | 1 GB | USB ≥ 16 GB |
+| RB5009 | ARM 64 bits | 1 GB | USB ≥ 16 GB |
+
+::: danger Modely tsy tohanana (EN7562CT)
+Ny **hEX refresh (E50UG)** sy ny **hEX S 2025 (E60iUGS)** dia mampiasa CPU Airoha EN7562CT, izay voafetra amin'ny **arm32v5 soft-float ihany** ao amin'ny sandbox container RouterOS ([doc ofisialin'ny MikroTik](https://help.mikrotik.com/docs/display/ROS/Container#Container-Requirements)). Izany dia tsy mifanaraka amin'ny Alpine musl armhf (ARMv7 hard-float) izay fototry ny `wimazone/billing`. Tsy tohanana ireo modely ireo — aleo maka L009, hAP ax² na RB5009.
+:::
 
 ::: tip Fivarotana
 Ireo modely ireo dia azo vidiana ao amin'ny **[wimazone.mg/boutique](https://wimazone.mg/boutique)**.
@@ -40,7 +39,6 @@ Ireo modely ireo dia azo vidiana ao amin'ny **[wimazone.mg/boutique](https://wim
 
 - USB voatsipika amin'ny **ext4** (tsy handeha ny MariaDB amin'ny FAT32/NTFS).
 - **16 GB** soso-kevitra (sary ~150 MB + data MariaDB + backup + log).
-- **8 GB** ampy ho an'ny hEX refresh / hEX S 2025 (RAM 512 Mo = backup kelikely).
 - Herinaratra mirindra : halaviro ny USB hub tsy misy adapteur amin'ny ax2/ax3.
 
 ## <Icon name="Network" color="success" /> Tambajotra

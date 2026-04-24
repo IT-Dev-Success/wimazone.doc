@@ -13,37 +13,48 @@ Assurez-vous d'avoir validé toute la [checklist de prérequis](/docs/guide/inst
 
 ## <Icon name="Router" color="warning" /> Routeurs compatibles
 
-| Modèle | Product code | Architecture | RAM | Compatibilité |
-|---|---|---|---:|---|
-| hEX refresh | E50UG | ARM 32 bits (EN7562CT) | 512 MB | Compatible |
-| hEX S 2025 | E60iUGS | ARM 32 bits (EN7562CT) | 512 MB | Compatible |
-| L009UiGS-2HaxD-IN | — | ARM 32 bits | 512 MB | Compatible |
-| L009UiGS-RM | — | ARM 32 bits | 512 MB | Compatible |
-| hAP ax2 | — | ARM 64 bits | 1 GB | Compatible |
-| hAP ax3 | — | ARM 64 bits | 1 GB | Compatible |
+| Modèle | Architecture | RAM | Compatibilité |
+|---|---|---:|---|
+| L009UiGS-2HaxD-IN | ARM 32 bits (armv7) | 512 MB | Compatible |
+| L009UiGS-RM | ARM 32 bits (armv7) | 512 MB | Compatible |
+| hAP ax2 | ARM 64 bits | 1 GB | Compatible |
+| hAP ax3 | ARM 64 bits | 1 GB | Compatible |
+| RB4011 | ARM 32 bits (armv7) | 1 GB | Compatible |
+| RB5009 | ARM 64 bits | 1 GB | Compatible |
 
 Les routeurs MikroTik compatibles sont disponibles à l'achat sur la boutique en ligne : **[wimazone.mg/boutique](https://wimazone.mg/boutique)**
 
 ## <Icon name="Package" color="info" /> Cibles d'image
 
-Image publique : `wimazone/billing:latest` (Docker Hub) — **manifest multi-arch** unique. Tous les variants utilisent Alpine + MariaDB.
+Image publique : `wimazone/billing:latest` (Docker Hub) — manifest multi-arch Alpine + MariaDB.
 
 | Cible | Routeurs |
 |---|---|
-| `linux/arm/v5` (alias de v7) | hEX refresh (E50UG), hEX S 2025 (E60iUGS) — le container engine MikroTik déclare `archVariant:v5` sur ces modèles ; l'image publie le binaire arm/v7 sous cet alias pour qu'il soit trouvé |
-| `linux/arm/v7` | L009, RB4011, hAP ac², et routeurs ci-dessus |
+| `linux/arm/v7` | L009, RB4011, hAP ac² |
 | `linux/arm64` | hAP ax², hAP ax³, RB5009, CCR2004/2116 |
 | `linux/amd64` | serveur / CasaOS |
 
 Tu n'as rien à spécifier côté MikroTik : l'engine container pull le variant correspondant à son architecture déclarée.
 
-::: danger Modèles MIPS non supportés
-Le **hEX (RB750Gr3)** et le **hEX S original (RB760iGS, 2018)** utilisent un CPU MediaTek MT7621A **MIPS big-endian**, incompatible avec WimaZone (pas d'image PHP multi-arch pour MIPS + 256 Mo RAM insuffisants).
+::: danger Modèles non supportés
 
-Ne pas confondre :
-- **hEX refresh (E50UG)** — ARM 32 bits, 512 Mo, Cortex-A53 en mode AArch32 → **supporté**
-- **hEX S 2025 (E60iUGS)** — même puce (EN7562CT), 512 Mo → **supporté**
-- **hEX / hEX S original** (codes `RB750Gr3` / `RB760iGS`, MIPS) → non supportés
+**CPU EN7562CT (arm32v5 only)** — [doc officielle MikroTik](https://help.mikrotik.com/docs/display/ROS/Container#Container-Requirements) :
+> For devices with EN7562CT CPU like the hEX Refresh, only arm32v5 container images are supported.
+
+| Modèle | Raison |
+|---|---|
+| hEX refresh (**E50UG**) | Sandbox arm32v5 soft-float uniquement, incompatible Alpine musl armhf |
+| hEX S 2025 (**E60iUGS**) | Même CPU EN7562CT, même restriction |
+
+**CPU MIPS (pas d'image PHP multi-arch)** :
+
+| Modèle | Raison |
+|---|---|
+| hEX original (RB750Gr3) | MT7621A MIPS-BE + 256 Mo RAM |
+| hEX S original (RB760iGS, 2018) | MT7621A MIPS-BE + 256 Mo RAM |
+| hAP ac lite, hAP lite | MIPS + RAM très limitée |
+
+Attention à ne pas confondre les noms : **hEX refresh ≠ hEX**, **hEX S 2025 ≠ hEX S original**, mais aucun n'est supporté (pour des raisons différentes). Prendre un L009, hAP ax² ou RB5009 à la place.
 :::
 
 ---
@@ -230,7 +241,6 @@ Durée du premier boot selon le matériel :
 |---|---|---|
 | hAP ax³ / RB5009 | 2-3 min | 30 s |
 | hAP ax² / L009 | 3-5 min | 45 s |
-| hEX refresh / hEX S 2025 (E50UG / E60iUGS) | 4-6 min | 1 min |
 
 Vous devriez voir à la fin :
 
@@ -396,8 +406,7 @@ Symptômes courants :
 
 | Message | Cause probable | Solution |
 |---|---|---|
-| `exited with signal 4 (Illegal instruction)` | Image Docker ancienne, sans alias `linux/arm/v5` → le container engine MikroTik (qui réclame `archVariant:v5` sur hEX refresh / hEX S 2025) récupère un binaire incompatible | Pull la dernière image (`/container/remove` puis `/container/add`) ; le manifest multi-arch actuel contient l'alias `linux/arm/v5` → arm/v7 |
-| `unhealty` après 30 s sur hEX refresh | Normal : premier boot 4-6 min. MikroTik ne respecte pas toujours `start-period=180s` | Attendre 10 min avant de considérer comme échec |
+| `exited with signal 4 (Illegal instruction)` | Routeur avec CPU EN7562CT (hEX refresh / hEX S 2025) qui réclame `archVariant:v5` → sandbox MikroTik restreint à arm32v5 soft-float, incompatible avec Alpine armhf | Ces modèles ne sont pas supportés. Utiliser un L009, hAP ax² ou RB5009 |
 | `SIGKILL` / `OOMKilled` | Manque de RAM | Réduire les workers queue, utiliser modèle ax2/ax3 |
 | `git clone failed` | Licence invalide | Vérifier `GITHUB_PRIVATE_ACCESS_TOKEN` |
 | `Can't connect to MySQL server on '127.0.0.1'` | MariaDB pas encore prête | Attendre 30 s après le démarrage ; vérifier `s6-svstat mariadb` |
