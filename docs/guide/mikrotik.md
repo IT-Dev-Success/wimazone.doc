@@ -202,9 +202,11 @@ Les mounts container ne fonctionnent qu'avec un stockage formaté **ext4**. Vér
 /container/envs/add list=billing-env key=HOTSPOT_STATUS_TIMEOUT_SECONDS value=2
 /container/envs/add list=billing-env key=HOTSPOT_STATUS_CACHE_SECONDS value=3
 /container/envs/add list=billing-env key=HOTSPOT_STATUS_FAILURE_COOLDOWN_SECONDS value=20
-/container/envs/add list=billing-env key=MIKROTIK_BOOT_HOTSPOT_SYNC value=false
+/container/envs/add list=billing-env key=MIKROTIK_BOOT_HOTSPOT_SYNC value=true
 /container/envs/add list=billing-env key=MIKROTIK_BOOT_HOTSPOT_SYNC_ONLY_ONLINE value=true
-/container/envs/add list=billing-env key=MIKROTIK_BOOT_HOTSPOT_SYNC_PROCESS_NOW value=false
+/container/envs/add list=billing-env key=MIKROTIK_BOOT_HOTSPOT_SYNC_PROCESS_NOW value=true
+/container/envs/add list=billing-env key=LARAVEL_ENABLE_REVERB value=false
+/container/envs/add list=billing-env key=BROADCAST_CONNECTION value=log
 ```
 
 ::: info Licence
