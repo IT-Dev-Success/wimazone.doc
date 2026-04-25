@@ -168,7 +168,7 @@ Apetraho ireo lalàna ireo **alohan'ny** `drop` ankapobeny amin'ny chain `input`
 Ny sary dia mitondra **MariaDB** ao anatiny ; tsy maintsy atao maharitra amin'ny USB ny lahatahiry MariaDB mba ho tafita amin'ny redémarrage / fanavaozana.
 
 ```routeros
-/container/mounts/add name=billing-db src=usb1/billing-data/mysql dst=/var/lib/mysql
+/container/mounts/add src=usb1/billing-data/mysql dst=/var/lib/mysql list=billing-db
 ```
 
 ::: warning USB ext4 ilaina

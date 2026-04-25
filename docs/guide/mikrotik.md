@@ -168,7 +168,7 @@ Placez ces règles **avant** toute règle `drop` globale du chain `input`. Sinon
 L'image embarque **MariaDB** ; il faut persister son répertoire de données sur l'USB pour survivre aux redémarrages / mises à jour.
 
 ```routeros
-/container/mounts/add name=billing-db src=usb1/billing-data/mysql dst=/var/lib/mysql
+/container/mounts/add src=usb1/billing-data/mysql dst=/var/lib/mysql list=billing-db
 ```
 
 ::: warning Clé USB ext4 obligatoire
