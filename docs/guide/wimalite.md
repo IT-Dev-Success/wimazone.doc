@@ -1,6 +1,6 @@
 ---
 title: Installation wimalite (MikroTik CPU EN7562CT)
-description: Déploiement de wimalite, version légère PHP pur de WimaZone, compatible hEX refresh et hEX S 2025 (CPU EN7562CT arm32v5)
+description: Déploiement de wimalite, version légère PHP pur de Wima Zone, compatible hEX refresh et hEX S 2025 (CPU EN7562CT arm32v5)
 ---
 
 # Installation wimalite

@@ -42,7 +42,7 @@ Lisitra domain nahazoana alalana **tsy misy fanamarinana** : MVola, SMS Befiana,
 Fifandraisana IP amin'ny profil MikroTik (`blocked`, `bypassed`, `regular`). Ampiasaina hanakanana poste cybercafé.
 
 ### SSID {#ssid}
-Anaran'ny tambajotra Wi-Fi (oh. `WimaZone-Hotspot`).
+Anaran'ny tambajotra Wi-Fi (oh. `Wima Zone-Hotspot`).
 
 ## <Icon name="Receipt" color="success" /> Faktiora
 

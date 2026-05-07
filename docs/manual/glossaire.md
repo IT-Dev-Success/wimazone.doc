@@ -42,7 +42,7 @@ Liste d'adresses / domaines autorisés **sans authentification** : MVola, SMS Be
 Association persistante d'une adresse IP à un profil MikroTik (`blocked`, `bypassed`, `regular`). Utilisé pour bloquer/débloquer un poste cybercafé.
 
 ### SSID {#ssid}
-Nom du réseau Wi-Fi visible par les clients (ex. `WimaZone-Hotspot`).
+Nom du réseau Wi-Fi visible par les clients (ex. `Wima Zone-Hotspot`).
 
 ## <Icon name="Receipt" color="success" /> Facturation
 

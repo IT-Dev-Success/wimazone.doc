@@ -12,7 +12,7 @@ Ce que vit un client qui achète un ticket et se connecte au Wi-Fi.
 
 ## <Icon name="Wifi" color="info" /> 1) Connexion au Wi-Fi
 
-Le client se connecte au SSID du hotspot (ex. `WimaZone-Hotspot`). Le portail captif s'ouvre automatiquement sur la page :
+Le client se connecte au SSID du hotspot (ex. `Wima Zone-Hotspot`). Le portail captif s'ouvre automatiquement sur la page :
 
 ```
 http://wima-zone.wifi/login

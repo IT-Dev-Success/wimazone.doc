@@ -43,7 +43,7 @@ Pour chaque session :
 2. Clic sur **Déconnecter** (bouton rouge)
 3. Confirmer
 
-WimaZone envoie une commande `/ip/hotspot/active/remove` au routeur et la session disparaît immédiatement.
+Wima Zone envoie une commande `/ip/hotspot/active/remove` au routeur et la session disparaît immédiatement.
 
 ::: warning Déconnexion massive
 Pour déconnecter tous les clients d'un routeur (maintenance), utilisez **Routeurs → Actions → Déconnecter tous les clients**.

@@ -137,7 +137,7 @@ Ajouter le bridge à la liste d'interfaces **LAN** pour que les règles firewall
 
 ## 7) Règles firewall (redirection portail + accès admin)
 
-Rediriger le port externe **8080** du routeur vers le port 80 du container (c'est ainsi que les clients du LAN atteignent le portail WimaZone) :
+Rediriger le port externe **8080** du routeur vers le port 80 du container (c'est ainsi que les clients du LAN atteignent le portail Wima Zone) :
 
 ```routeros
 /ip/firewall/nat/add chain=dstnat protocol=tcp dst-port=8080 action=dst-nat \

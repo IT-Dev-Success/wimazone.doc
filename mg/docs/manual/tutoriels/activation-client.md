@@ -9,7 +9,7 @@ Izay iainan'ny mpanjifa rehefa mividy tikety ary mifandray amin'ny Wi-Fi.
 
 ## <Icon name="Wifi" color="info" /> 1) Fifandraisana Wi-Fi
 
-Mifandray amin'ny SSID hotspot (oh. `WimaZone-Hotspot`) ny mpanjifa. Misokatra ho azy ny portail captif :
+Mifandray amin'ny SSID hotspot (oh. `Wima Zone-Hotspot`) ny mpanjifa. Misokatra ho azy ny portail captif :
 
 ```
 http://wima-zone.wifi/login

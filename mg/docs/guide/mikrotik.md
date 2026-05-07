@@ -137,7 +137,7 @@ Ampio ny bridge ao amin'ny lisitra interface **LAN** mba ampiharina ny firewall 
 
 ## 7) Firewall (fanondranana portail + fidirana admin)
 
-Atondro ny port ivelany **8080** an'ny routeur mankany amin'ny port 80 an'ny container (izay no hidiran'ny mpanjifa LAN amin'ny portail WimaZone) :
+Atondro ny port ivelany **8080** an'ny routeur mankany amin'ny port 80 an'ny container (izay no hidiran'ny mpanjifa LAN amin'ny portail Wima Zone) :
 
 ```routeros
 /ip/firewall/nat/add chain=dstnat protocol=tcp dst-port=8080 action=dst-nat \

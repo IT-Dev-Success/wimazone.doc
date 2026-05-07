@@ -27,7 +27,7 @@ Ovay amin'ny **Paramètres → Général** ny laharana MVola mpivarotra hiseho a
 1. Menu → **Paramètres → APIs → SMS (Befiana)**
 2. Fenoy :
    - **API Key Befiana**
-   - **Sender ID** (oh. `WimaZone`, 11 litera max)
+   - **Sender ID** (oh. `Wima Zone`, 11 litera max)
 3. Alefaso ny gabarit :
    - **Fanombohana voucher**
    - **Fahataperana akaiky** (X minitra alohan'ny farany)

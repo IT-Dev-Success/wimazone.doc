@@ -1,6 +1,6 @@
 ---
 title: Fametrahana wimalite (MikroTik CPU EN7562CT)
-description: Fametrahana wimalite, version maivana PHP madio an'ny WimaZone, mifanaraka amin'ny hEX refresh sy hEX S 2025 (CPU EN7562CT arm32v5)
+description: Fametrahana wimalite, version maivana PHP madio an'ny Wima Zone, mifanaraka amin'ny hEX refresh sy hEX S 2025 (CPU EN7562CT arm32v5)
 ---
 
 # Fametrahana wimalite
