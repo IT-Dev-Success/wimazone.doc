@@ -8,7 +8,7 @@ description: Déploiement de wimalite, version légère PHP pur de Wima Zone, co
 **wimalite** est une version ultra-légère de Wima Zone, écrite en **PHP pur** (fork de Mikhmon). Contrairement à `wimazone/billing` (Laravel 11 + MariaDB), wimalite tient en **~100 Mo d'image** et consomme **~30-50 Mo de RAM** au runtime — ce qui la rend compatible avec les MikroTik à CPU **EN7562CT** (hEX refresh, hEX S 2025) dont le sandbox container est restreint à arm32v5 soft-float.
 
 ::: tip Quand utiliser wimalite vs wimazone/billing
-- **wimazone/billing** → hotspot complet avec MariaDB, facturation avancée, multi-routeurs, MVola intégré. Pour L009, hAP ax², RB5009, CCR.
+- **wimazone/billing** → hotspot complet avec MariaDB, facturation avancée, multi-routeurs, MVola intégré. Pour L009, hAP ax³, RB5009, CCR.
 - **wimalite** → gestion hotspot basique (vouchers, sessions, bandwidth). Single-router, PHP pur. **Seule option pour hEX refresh et hEX S 2025**.
 :::
 
@@ -22,7 +22,7 @@ L'image `wimazone/wimalite:latest` est **multi-arch** et couvre :
 | hEX S 2025 | E60iUGS | arm/v5 (EN7562CT) | 512 MB |
 | L009UiGS | — | arm/v7 | 512 MB |
 | RB4011 | RB4011iGS+ | arm/v7 | 1 GB |
-| hAP ax² / ax³ | — | arm64 | 1 GB |
+| hAP ax³ | — | arm64 | 1 GB |
 | RB5009 | — | arm64 | 1 GB |
 | CCR2004 / 2116 | — | arm64 | 4 GB+ |
 | serveur x86 / CasaOS | — | amd64 | — |

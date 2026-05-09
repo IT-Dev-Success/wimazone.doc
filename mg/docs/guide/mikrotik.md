@@ -17,7 +17,6 @@ Hamarino fa vita daholo ny [lisitra fepetra takiana](/mg/docs/guide/installation
 |---|---|---:|---|
 | L009UiGS-2HaxD-IN | ARM 32 bits (armv7) | 512 MB | Mifanaraka |
 | L009UiGS-RM | ARM 32 bits (armv7) | 512 MB | Mifanaraka |
-| hAP ax2 | ARM 64 bits | 1 GB | Mifanaraka |
 | hAP ax3 | ARM 64 bits | 1 GB | Mifanaraka |
 | RB4011 | ARM 32 bits (armv7) | 1 GB | Mifanaraka |
 | RB5009 | ARM 64 bits | 1 GB | Mifanaraka |
@@ -31,7 +30,7 @@ Sary ho an'ny besinimaro : `wimazone/billing:latest` (Docker Hub) — manifest m
 | Kendrena | Routeur |
 |---|---|
 | `linux/arm/v7` | L009, RB4011, hAP ac² |
-| `linux/arm64` | hAP ax², hAP ax³, RB5009, CCR2004/2116 |
+| `linux/arm64` | hAP ax³, RB5009, CCR2004/2116 |
 | `linux/amd64` | serveur / CasaOS |
 
 Tsy misy kajy manokana ny MikroTik : ny engine container dia maka ny variant mifanaraka amin'ny architecture hita.
@@ -56,14 +55,14 @@ Ho an'ireo modely ireo, apetraho [**wimalite**](/mg/docs/guide/wimalite) (versio
 | hEX S taloha (RB760iGS, 2018) | MT7621A MIPS-BE + 256 Mo RAM |
 | hAP ac lite, hAP lite | MIPS + RAM kely be |
 
-Tandremo tsy hafangaroana ny anarana : **hEX refresh ≠ hEX**, **hEX S 2025 ≠ hEX S taloha**, fa tsy tohanana izy ireo rehetra (antony samihafa). Aleo maka L009, hAP ax² na RB5009.
+Tandremo tsy hafangaroana ny anarana : **hEX refresh ≠ hEX**, **hEX S 2025 ≠ hEX S taloha**, fa tsy tohanana izy ireo rehetra (antony samihafa). Aleo maka L009, hAP ax³ na RB5009.
 :::
 
 ---
 
 ## 1) Hamarino ny device-mode
 
-Ny routeur sasany (indrindra ny hAP ax2) dia `mode=home` rehefa avy amin'ny orinasa, ka **tsy mandeha** ny container. Hamarino aloha :
+Ny routeur sasany dia `mode=home` rehefa avy amin'ny orinasa, ka **tsy mandeha** ny container. Hamarino aloha :
 
 ```routeros
 /system/device-mode/print
@@ -242,7 +241,7 @@ Haharetan'ny boot voalohany araka ny fitaovana :
 | Modely | Boot voalohany | Reboot manaraka |
 |---|---|---|
 | hAP ax³ / RB5009 | 2-3 min | 30 s |
-| hAP ax² / L009 | 3-5 min | 45 s |
+| L009 | 3-5 min | 45 s |
 
 Tokony ho hitanao amin'ny farany :
 
@@ -408,8 +407,8 @@ Hafatra mahazatra :
 
 | Hafatra | Antony | Vahaolana |
 |---|---|---|
-| `exited with signal 4 (Illegal instruction)` | Routeur misy CPU EN7562CT (hEX refresh / hEX S 2025) manambara `archVariant:v5` → sandbox MikroTik voafetra amin'ny arm32v5 soft-float, tsy mifanaraka amin'ny Alpine armhf | Tsy tohanana ireo modely ireo. Ampiasao L009, hAP ax² na RB5009 |
-| `SIGKILL` / `OOMKilled` | Tsy ampy RAM | Ahena ny queue workers, ampiasao ax2/ax3 |
+| `exited with signal 4 (Illegal instruction)` | Routeur misy CPU EN7562CT (hEX refresh / hEX S 2025) manambara `archVariant:v5` → sandbox MikroTik voafetra amin'ny arm32v5 soft-float, tsy mifanaraka amin'ny Alpine armhf | Tsy tohanana ireo modely ireo. Ampiasao L009, hAP ax³ na RB5009 |
+| `SIGKILL` / `OOMKilled` | Tsy ampy RAM | Ahena ny queue workers, ampiasao ax³ |
 | `git clone failed` | Licence diso | Hamarino `GITHUB_PRIVATE_ACCESS_TOKEN` |
 | `Can't connect to MySQL server on '127.0.0.1'` | Mbola tsy vonona ny MariaDB | Miandrasa 30 s aorian'ny boot ; jereo `s6-svstat mariadb` |
 | `Access denied for user 'wimazone'` | Tenimiafina DB diso | Hamarino `DB_PASSWORD` sy `MARIADB_ROOT_PASSWORD` |

@@ -12,7 +12,7 @@ Fanontaniana mahazatra apetraky ny admin sy ny mpanjifa Wima Zone Billing.
 <details>
 <summary><strong>Inona no routeur MikroTik tokony ho vidiana ?</strong></summary>
 
-Ho an'ny fametrahana tsara, ampiasao **hAP ax2** na **hAP ax3** (ARM 64 bits, 1 GB RAM). Ny modely 32 bits dia mandeha fa voafetra kokoa. Jereo ny [Fepetra takiana MikroTik](/mg/docs/guide/installation#requirements).
+Ho an'ny fametrahana tsara, ampiasao ny **hAP ax3** (ARM 64 bits, 1 GB RAM). Ny modely 32 bits dia mandeha fa voafetra kokoa. Jereo ny [Fepetra takiana MikroTik](/mg/docs/guide/installation#requirements).
 </details>
 
 <details>

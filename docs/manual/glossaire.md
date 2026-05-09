@@ -10,7 +10,7 @@ Les termes techniques que vous croiserez dans la doc, les tutoriels et l'interfa
 ## <Icon name="Router" color="warning" /> Matériel & réseau
 
 ### MikroTik {#mikrotik}
-Fabricant letton de routeurs réseau. Wima Zone Billing cible les modèles **hAP ax2 / ax3** (RouterOS v7, ARM 64 bits) capables d'exécuter des containers Docker directement.
+Fabricant letton de routeurs réseau. Wima Zone Billing cible le modèle **hAP ax3** (RouterOS v7, ARM 64 bits) capable d'exécuter des containers Docker directement.
 
 ### RouterOS {#routeros}
 Système d'exploitation propriétaire MikroTik. La **version 7.10+** est requise pour le mode container utilisé par Wima Zone.

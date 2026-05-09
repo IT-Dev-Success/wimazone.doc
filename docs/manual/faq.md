@@ -12,7 +12,7 @@ Une sélection des questions que reçoivent le plus les admins et les clients de
 <details>
 <summary><strong>Quel routeur MikroTik dois-je acheter ?</strong></summary>
 
-Pour un déploiement confortable, utilisez **hAP ax2** ou **hAP ax3** (ARM 64 bits, 1 GB RAM). Les modèles 32 bits (hAP ac2, L009) fonctionnent mais sont plus limités sur la taille d'image container. Voir la table complète sur [Prérequis MikroTik](/docs/guide/installation#requirements).
+Pour un déploiement confortable, utilisez le **hAP ax3** (ARM 64 bits, 1 GB RAM). Les modèles 32 bits (hAP ac², L009) fonctionnent mais sont plus limités sur la taille d'image container. Voir la table complète sur [Prérequis MikroTik](/docs/guide/installation#requirements).
 </details>
 
 <details>

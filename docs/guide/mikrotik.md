@@ -17,7 +17,6 @@ Assurez-vous d'avoir validé toute la [checklist de prérequis](/docs/guide/inst
 |---|---|---:|---|
 | L009UiGS-2HaxD-IN | ARM 32 bits (armv7) | 512 MB | Compatible |
 | L009UiGS-RM | ARM 32 bits (armv7) | 512 MB | Compatible |
-| hAP ax2 | ARM 64 bits | 1 GB | Compatible |
 | hAP ax3 | ARM 64 bits | 1 GB | Compatible |
 | RB4011 | ARM 32 bits (armv7) | 1 GB | Compatible |
 | RB5009 | ARM 64 bits | 1 GB | Compatible |
@@ -31,7 +30,7 @@ Image publique : `wimazone/billing:latest` (Docker Hub) — manifest multi-arch 
 | Cible | Routeurs |
 |---|---|
 | `linux/arm/v7` | L009, RB4011, hAP ac² |
-| `linux/arm64` | hAP ax², hAP ax³, RB5009, CCR2004/2116 |
+| `linux/arm64` | hAP ax³, RB5009, CCR2004/2116 |
 | `linux/amd64` | serveur / CasaOS |
 
 Tu n'as rien à spécifier côté MikroTik : l'engine container pull le variant correspondant à son architecture déclarée.
@@ -56,14 +55,14 @@ Pour ces modèles, installer [**wimalite**](/docs/guide/wimalite) (version PHP p
 | hEX S original (RB760iGS, 2018) | MT7621A MIPS-BE + 256 Mo RAM |
 | hAP ac lite, hAP lite | MIPS + RAM très limitée |
 
-Attention à ne pas confondre les noms : **hEX refresh ≠ hEX**, **hEX S 2025 ≠ hEX S original**, mais aucun n'est supporté (pour des raisons différentes). Prendre un L009, hAP ax² ou RB5009 à la place.
+Attention à ne pas confondre les noms : **hEX refresh ≠ hEX**, **hEX S 2025 ≠ hEX S original**, mais aucun n'est supporté (pour des raisons différentes). Prendre un L009, hAP ax³ ou RB5009 à la place.
 :::
 
 ---
 
 ## 1) Vérifier le device-mode
 
-Certains routeurs sortent d'usine avec `mode=home` (hAP ax2 notamment), ce qui **désactive** la fonctionnalité container. Vérifier d'abord :
+Certains routeurs sortent d'usine avec `mode=home`, ce qui **désactive** la fonctionnalité container. Vérifier d'abord :
 
 ```routeros
 /system/device-mode/print
@@ -244,7 +243,7 @@ Durée du premier boot selon le matériel :
 | Modèle | Premier boot | Reboots suivants |
 |---|---|---|
 | hAP ax³ / RB5009 | 2-3 min | 30 s |
-| hAP ax² / L009 | 3-5 min | 45 s |
+| L009 | 3-5 min | 45 s |
 
 Vous devriez voir à la fin :
 
@@ -410,8 +409,8 @@ Symptômes courants :
 
 | Message | Cause probable | Solution |
 |---|---|---|
-| `exited with signal 4 (Illegal instruction)` | Routeur avec CPU EN7562CT (hEX refresh / hEX S 2025) qui réclame `archVariant:v5` → sandbox MikroTik restreint à arm32v5 soft-float, incompatible avec Alpine armhf | Ces modèles ne sont pas supportés. Utiliser un L009, hAP ax² ou RB5009 |
-| `SIGKILL` / `OOMKilled` | Manque de RAM | Réduire les workers queue, utiliser modèle ax2/ax3 |
+| `exited with signal 4 (Illegal instruction)` | Routeur avec CPU EN7562CT (hEX refresh / hEX S 2025) qui réclame `archVariant:v5` → sandbox MikroTik restreint à arm32v5 soft-float, incompatible avec Alpine armhf | Ces modèles ne sont pas supportés. Utiliser un L009, hAP ax³ ou RB5009 |
+| `SIGKILL` / `OOMKilled` | Manque de RAM | Réduire les workers queue, utiliser modèle ax³ |
 | `git clone failed` | Licence invalide | Vérifier `GITHUB_PRIVATE_ACCESS_TOKEN` |
 | `Can't connect to MySQL server on '127.0.0.1'` | MariaDB pas encore prête | Attendre 30 s après le démarrage ; vérifier `s6-svstat mariadb` |
 | `Access denied for user 'wimazone'` | Mot de passe DB incorrect | Vérifier `DB_PASSWORD` et `MARIADB_ROOT_PASSWORD` |

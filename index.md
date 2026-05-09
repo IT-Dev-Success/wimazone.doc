@@ -49,5 +49,5 @@ Wima Zone Billing est un **système de facturation hotspot** conçu pour tourner
 - <Icon name="Wrench" color="primary" /> **Outillage ops** : scheduler, queue, diagnostics API MikroTik, mises à jour container en une commande.
 
 ::: tip Matériel recommandé
-Les routeurs **hAP ax2 / ax3** (ARM 64, 1 GB RAM) offrent le meilleur confort d'exécution. Disponibles sur [wimazone.mg/boutique](https://wimazone.mg/boutique).
+Le routeur **hAP ax3** (ARM 64, 1 GB RAM) offre le meilleur confort d'exécution. Disponible sur [wimazone.mg/boutique](https://wimazone.mg/boutique).
 :::

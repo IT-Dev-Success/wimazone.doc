@@ -49,5 +49,5 @@ Wima Zone Billing dia **rafitra faktiora hotspot** natao mba handeha **mivantana
 - <Icon name="Wrench" color="primary" /> **Fitaovana ops** : scheduler, queue, diagnostika API MikroTik, fanavaozana container amin'ny baiko iray.
 
 ::: tip Fitaovana soso-kevitra
-Ny routeur **hAP ax2 / ax3** (ARM 64, 1 GB RAM) no tsara indrindra. Azo vidiana ao amin'ny [wimazone.mg/boutique](https://wimazone.mg/boutique).
+Ny routeur **hAP ax3** (ARM 64, 1 GB RAM) no tsara indrindra. Azo vidiana ao amin'ny [wimazone.mg/boutique](https://wimazone.mg/boutique).
 :::

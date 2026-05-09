@@ -10,7 +10,7 @@ Ny voambolana ara-teknika ho hitanao ao amin'ny torolàlana sy ny interface.
 ## <Icon name="Router" color="warning" /> Fitaovana & tambajotra
 
 ### MikroTik {#mikrotik}
-Mpamorona routeur Letoney. Wima Zone Billing dia mikasika ny modely **hAP ax2 / ax3** (RouterOS v7, ARM 64 bits) afaka mandefa container Docker mivantana.
+Mpamorona routeur Letoney. Wima Zone Billing dia mikasika ny modely **hAP ax3** (RouterOS v7, ARM 64 bits) afaka mandefa container Docker mivantana.
 
 ### RouterOS {#routeros}
 System OS an'ny MikroTik. **V7.10+** no takiana ho an'ny mode container.

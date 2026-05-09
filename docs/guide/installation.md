@@ -15,7 +15,6 @@ Routeurs MikroTik testés et supportés :
 |---|---|---:|---|
 | L009UiGS-2HaxD-IN | ARM 32 bits (armv7) | 512 MB | USB ≥ 8 GB |
 | L009UiGS-RM | ARM 32 bits (armv7) | 512 MB | USB ≥ 8 GB |
-| hAP ax2 | ARM 64 bits | 1 GB | USB ≥ 16 GB |
 | hAP ax3 | ARM 64 bits | 1 GB | USB ≥ 16 GB |
 | RB5009 | ARM 64 bits | 1 GB | USB ≥ 16 GB |
 

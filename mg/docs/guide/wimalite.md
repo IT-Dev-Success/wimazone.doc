@@ -8,7 +8,7 @@ description: Fametrahana wimalite, version maivana PHP madio an'ny Wima Zone, mi
 **wimalite** dia version maivana be an'ny Wima Zone, nosoratana amin'ny **PHP madio** (fork an'ny Mikhmon). Tsy toa ny `wimazone/billing` (Laravel 11 + MariaDB), ny wimalite dia ~100 Mo fotsiny ny sary ary mihinan'angovo ~30-50 Mo RAM — izay mahatonga azy mifanaraka amin'ny MikroTik misy CPU **EN7562CT** (hEX refresh, hEX S 2025) izay voafetra amin'ny arm32v5 soft-float.
 
 ::: tip Rahoviana no ampiasaina wimalite vs wimazone/billing
-- **wimazone/billing** → hotspot feno miaraka amin'ny MariaDB, facturation miabo, routeur maro, MVola. Ho an'ny L009, hAP ax², RB5009, CCR.
+- **wimazone/billing** → hotspot feno miaraka amin'ny MariaDB, facturation miabo, routeur maro, MVola. Ho an'ny L009, hAP ax³, RB5009, CCR.
 - **wimalite** → fitantanana hotspot fototra (voucher, session, bandwidth). Routeur tokana, PHP madio. **Hany safidy ho an'ny hEX refresh sy hEX S 2025**.
 :::
 
@@ -22,7 +22,7 @@ Ny sary `wimazone/wimalite:latest` dia **multi-arch** ary mandray :
 | hEX S 2025 | E60iUGS | arm/v5 (EN7562CT) | 512 MB |
 | L009UiGS | — | arm/v7 | 512 MB |
 | RB4011 | RB4011iGS+ | arm/v7 | 1 GB |
-| hAP ax² / ax³ | — | arm64 | 1 GB |
+| hAP ax³ | — | arm64 | 1 GB |
 | RB5009 | — | arm64 | 1 GB |
 | CCR2004 / 2116 | — | arm64 | 4 GB+ |
 | serveur x86 / CasaOS | — | amd64 | — |
