@@ -214,7 +214,13 @@ Si tu utilises `root-dir=usb1/wimazone`, alors `src=` doit pointer vers un dossi
 ```
 
 ::: info Licence
-`WIMAZONE_LICENSE_KEY` est fourni par ITDevSuccess lors de l'achat d'une licence — chaque routeur a sa propre clé, révocable individuellement depuis le portail admin.
+`WIMAZONE_LICENSE_KEY` t'est envoyée **par email** par ITDevSuccess après l'achat. Ajoute-la à ton `billing-env` :
+
+```routeros
+/container/envs/add list=billing-env key=WIMAZONE_LICENSE_KEY value=<clé reçue par email>
+```
+
+Chaque routeur a sa propre clé, révocable individuellement depuis le portail admin.
 :::
 
 ::: warning Identité matérielle anti-fraude

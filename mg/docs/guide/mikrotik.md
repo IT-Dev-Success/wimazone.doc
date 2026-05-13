@@ -193,7 +193,6 @@ Raha mampiasa `root-dir=usb1/wimazone` ianao, ny `src=` dia tokony hanondro laha
 /container/envs/add list=billing-env key=DB_USERNAME value=wimazone
 /container/envs/add list=billing-env key=SYNC_ENABLED value=true
 /container/envs/add list=billing-env key=OFFLINE_FALLBACK value=true
-/container/envs/add list=billing-env key=WIMAZONE_LICENSE_KEY value=LIC-XXXXXXXX-XXXXXXXX-XXXXXXXX-XXXXXXXX
 /container/envs/add list=billing-env key=MIKROTIK_API_HOST value=172.17.0.1
 /container/envs/add list=billing-env key=MIKROTIK_API_USER value=admin
 /container/envs/add list=billing-env key=MIKROTIK_API_PASSWORD value=PASSWORD_ADMIN_ROUTEROS
@@ -213,7 +212,13 @@ Raha mampiasa `root-dir=usb1/wimazone` ianao, ny `src=` dia tokony hanondro laha
 ```
 
 ::: info Licence
-`WIMAZONE_LICENSE_KEY` dia omen'ny ITDevSuccess rehefa mividy license — manana clé manokana ny routeur tsirairay, azo foanana isaky ny iray amin'ny portail admin.
+`WIMAZONE_LICENSE_KEY` dia alefa **amin'ny mail** an'ny ITDevSuccess rehefa avy mividy. Ampio ao amin'ny `billing-env` :
+
+```routeros
+/container/envs/add list=billing-env key=WIMAZONE_LICENSE_KEY value=<clé azo tamin'ny mail>
+```
+
+Manana clé manokana ny routeur tsirairay, azo foanana isaky ny iray amin'ny portail admin.
 :::
 
 ::: warning Identité matérielle anti-fraude
