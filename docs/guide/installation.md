@@ -51,7 +51,7 @@ Les modèles ci-dessus sont disponibles à l'achat sur **[wimazone.mg/boutique](
 
 ## <Icon name="Key" color="warning" /> Licence & accès
 
-- **Licence** fourni par ITDevSuccess (variable `GITHUB_PRIVATE_ACCESS_TOKEN`).
+- **Licence** fournie par ITDevSuccess (variable `WIMAZONE_LICENSE_KEY`).
 - Identifiants **MVola** prêts si paiement mobile activé.
 - Accès **Befiana SMS** si notifications SMS activées.
 

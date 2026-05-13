@@ -51,7 +51,7 @@ Ireo modely ireo dia azo vidiana ao amin'ny **[wimazone.mg/boutique](https://wim
 
 ## <Icon name="Key" color="warning" /> License & fidirana
 
-- **Licence** omen'ny ITDevSuccess (variable `GITHUB_PRIVATE_ACCESS_TOKEN`).
+- **Licence** omen'ny ITDevSuccess (variable `WIMAZONE_LICENSE_KEY`).
 - Porofon'ny **MVola** raha alefa ny fandoavana mobile.
 - Fidirana **Befiana SMS** raha alefa ny fampandrenesana SMS.
 

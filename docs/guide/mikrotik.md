@@ -99,7 +99,7 @@ Par défaut, RouterOS utilise la RAM pour les fichiers temporaires et les couche
 /container/config/set \
   registry-url=https://registry-1.docker.io \
   tmpdir=usb1/tmp \
-  layerdir=usb1/layer
+  layer-dir=usb1/layer
 ```
 
 Vérifier :
@@ -190,14 +190,14 @@ Les mounts container ne fonctionnent qu'avec un stockage formaté **ext4**. Vér
 /container/envs/add list=billing-env key=GIT_REPOSITORY_URL value=https://github.com/ITDev-Success/billing.git
 /container/envs/add list=billing-env key=GIT_BRANCH value=main
 /container/envs/add list=billing-env key=GIT_OFFLINE_FALLBACK value=true
-/container/envs/add list=billing-env key=GITHUB_PRIVATE_ACCESS_TOKEN value=TOKEN_FOURNI_PAR_ITDEVSUCCESS
+/container/envs/add list=billing-env key=WIMAZONE_LICENSE_KEY value=LIC-XXXXXXXX-XXXXXXXX-XXXXXXXX-XXXXXXXX
 /container/envs/add list=billing-env key=LARAVEL_AUTO_MIGRATION value=true
 /container/envs/add list=billing-env key=LARAVEL_AUTO_MIGRATION_OPTIONS value=--force
 /container/envs/add list=billing-env key=LARAVEL_AUTO_STORAGE_LINK value=false
 /container/envs/add list=billing-env key=LARAVEL_ENABLE_QUEUE_WORKER value=true
 /container/envs/add list=billing-env key=LARAVEL_ENABLE_SCHEDULER value=true
 /container/envs/add list=billing-env key=LARAVEL_QUEUE_WORKER_OPTIONS value="--queue=mikrotik,default --tries=1 --timeout=1200 --sleep=2"
-/container/envs/add list=billing-env key=REDIRECT_URL value=https://votre-portail.example.com
+/container/envs/add list=billing-env key=REDIRECT_URL value=http://votre-portail.wifi
 /container/envs/add list=billing-env key=HOTSPOT_STATUS_TIMEOUT_SECONDS value=2
 /container/envs/add list=billing-env key=HOTSPOT_STATUS_CACHE_SECONDS value=3
 /container/envs/add list=billing-env key=HOTSPOT_STATUS_FAILURE_COOLDOWN_SECONDS value=20
@@ -209,7 +209,7 @@ Les mounts container ne fonctionnent qu'avec un stockage formaté **ext4**. Vér
 ```
 
 ::: info Licence
-`GITHUB_PRIVATE_ACCESS_TOKEN` est fourni par ITDevSuccess lors de l'achat d'une licence.
+`WIMAZONE_LICENSE_KEY` est fourni par ITDevSuccess lors de l'achat d'une licence — chaque routeur a sa propre clé, révocable individuellement depuis le portail admin.
 :::
 
 ## 11) Créer le container Wima Zone
@@ -411,7 +411,7 @@ Symptômes courants :
 |---|---|---|
 | `exited with signal 4 (Illegal instruction)` | Routeur avec CPU EN7562CT (hEX refresh / hEX S 2025) qui réclame `archVariant:v5` → sandbox MikroTik restreint à arm32v5 soft-float, incompatible avec Alpine armhf | Ces modèles ne sont pas supportés. Utiliser un L009, hAP ax³ ou RB5009 |
 | `SIGKILL` / `OOMKilled` | Manque de RAM | Réduire les workers queue, utiliser modèle ax³ |
-| `git clone failed` | Licence invalide | Vérifier `GITHUB_PRIVATE_ACCESS_TOKEN` |
+| `licence rejetee (HTTP 401/403)` | Licence invalide ou révoquée | Vérifier `WIMAZONE_LICENSE_KEY` dans l'admin portal |
 | `Can't connect to MySQL server on '127.0.0.1'` | MariaDB pas encore prête | Attendre 30 s après le démarrage ; vérifier `s6-svstat mariadb` |
 | `Access denied for user 'wimazone'` | Mot de passe DB incorrect | Vérifier `DB_PASSWORD` et `MARIADB_ROOT_PASSWORD` |
 | `Unknown database 'wimazone'` | Mount `/var/lib/mysql` vide ou corrompu | Supprimer le mount, laisser MariaDB réinitialiser |

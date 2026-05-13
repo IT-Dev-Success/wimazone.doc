@@ -99,7 +99,7 @@ Rehefa tsy voaova, RouterOS dia mampiasa RAM ho an'ny rakitra vonjimaika sy ny c
 /container/config/set \
   registry-url=https://registry-1.docker.io \
   tmpdir=usb1/tmp \
-  layerdir=usb1/layer
+  layer-dir=usb1/layer
 ```
 
 Hamarino :
@@ -190,7 +190,7 @@ Ny mount container dia tsy mandeha raha tsy amin'ny stockage voatsipika **ext4**
 /container/envs/add list=billing-env key=GIT_REPOSITORY_URL value=https://github.com/ITDev-Success/billing.git
 /container/envs/add list=billing-env key=GIT_BRANCH value=main
 /container/envs/add list=billing-env key=GIT_OFFLINE_FALLBACK value=true
-/container/envs/add list=billing-env key=GITHUB_PRIVATE_ACCESS_TOKEN value=TOKEN_OMEN_ITDEVSUCCESS
+/container/envs/add list=billing-env key=WIMAZONE_LICENSE_KEY value=LIC-XXXXXXXX-XXXXXXXX-XXXXXXXX-XXXXXXXX
 /container/envs/add list=billing-env key=LARAVEL_AUTO_MIGRATION value=true
 /container/envs/add list=billing-env key=LARAVEL_AUTO_MIGRATION_OPTIONS value=--force
 /container/envs/add list=billing-env key=LARAVEL_AUTO_STORAGE_LINK value=false
@@ -207,7 +207,7 @@ Ny mount container dia tsy mandeha raha tsy amin'ny stockage voatsipika **ext4**
 ```
 
 ::: info Licence
-`GITHUB_PRIVATE_ACCESS_TOKEN` dia omen'ny ITDevSuccess rehefa mividy license.
+`WIMAZONE_LICENSE_KEY` dia omen'ny ITDevSuccess rehefa mividy license — manana clé manokana ny routeur tsirairay, azo foanana isaky ny iray amin'ny portail admin.
 :::
 
 ## 11) Mamorona container Wima Zone
@@ -409,7 +409,7 @@ Hafatra mahazatra :
 |---|---|---|
 | `exited with signal 4 (Illegal instruction)` | Routeur misy CPU EN7562CT (hEX refresh / hEX S 2025) manambara `archVariant:v5` → sandbox MikroTik voafetra amin'ny arm32v5 soft-float, tsy mifanaraka amin'ny Alpine armhf | Tsy tohanana ireo modely ireo. Ampiasao L009, hAP ax³ na RB5009 |
 | `SIGKILL` / `OOMKilled` | Tsy ampy RAM | Ahena ny queue workers, ampiasao ax³ |
-| `git clone failed` | Licence diso | Hamarino `GITHUB_PRIVATE_ACCESS_TOKEN` |
+| `licence rejetee (HTTP 401/403)` | Licence diso na voafoana | Hamarino `WIMAZONE_LICENSE_KEY` ao amin'ny portail admin |
 | `Can't connect to MySQL server on '127.0.0.1'` | Mbola tsy vonona ny MariaDB | Miandrasa 30 s aorian'ny boot ; jereo `s6-svstat mariadb` |
 | `Access denied for user 'wimazone'` | Tenimiafina DB diso | Hamarino `DB_PASSWORD` sy `MARIADB_ROOT_PASSWORD` |
 | `Unknown database 'wimazone'` | Mount `/var/lib/mysql` foana na simba | Esory ny mount, avelao ny MariaDB hamorona indray |
