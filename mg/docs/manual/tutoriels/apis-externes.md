@@ -14,7 +14,7 @@ Ny Wima Zone dia mifandray amin'ny serivisy ivelany maro. Ireto ny fomba fametra
    - **Consumer Key** (omen'ny MVola)
    - **Consumer Secret**
    - **Partner Name**
-   - **Callback URL** : `https://portail-anao.example.com/webhooks/mvola`
+   - **Callback URL** : `http://portail-anao.wifi/webhooks/mvola`
 3. Mode **Sandbox** ho an'ny fitsapana, **Production** aorian'ny fanamarinana
 4. Kitio **Tsapao ny fifandraisana**
 
@@ -48,7 +48,7 @@ Ovay amin'ny **Paramètres → Général** ny laharana MVola mpivarotra hiseho a
 | **Tenimiafina** | tenimiafina app Gmail |
 | **From** | `billing@wimazone.mg` |
 
-3. Kitio **Mandefa mailaka fitsapana**
+1. Kitio **Mandefa mailaka fitsapana**
 
 ::: warning Production
 Ho an'ny mailaka marobe, ampiasao serivisy manokana (Mailgun, SendGrid, AWS SES).

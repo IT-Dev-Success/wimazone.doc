@@ -184,22 +184,19 @@ Ny mount container dia tsy mandeha raha tsy amin'ny stockage voatsipika **ext4**
 /container/envs/add list=billing-env key=DB_PORT value=3306
 /container/envs/add list=billing-env key=DB_DATABASE value=wimazone
 /container/envs/add list=billing-env key=DB_USERNAME value=wimazone
-/container/envs/add list=billing-env key=DB_PASSWORD value=SOLOY_AMIN_NY_TENIMIAFINA_MATANJAKA
-/container/envs/add list=billing-env key=MARIADB_ROOT_PASSWORD value=SOLOY_AMIN_NY_TENIMIAFINA_ROOT
 /container/envs/add list=billing-env key=SYNC_ENABLED value=true
 /container/envs/add list=billing-env key=OFFLINE_FALLBACK value=true
-/container/envs/add list=billing-env key=WIMAZONE_LICENSE_KEY value=LIC-XXXXXXXX-XXXXXXXX-XXXXXXXX-XXXXXXXX
 /container/envs/add list=billing-env key=LARAVEL_AUTO_MIGRATION value=true
 /container/envs/add list=billing-env key=LARAVEL_AUTO_MIGRATION_OPTIONS value=--force
-/container/envs/add list=billing-env key=LARAVEL_AUTO_STORAGE_LINK value=false
+/container/envs/add list=billing-env key=LARAVEL_AUTO_STORAGE_LINK value=true
 /container/envs/add list=billing-env key=LARAVEL_ENABLE_QUEUE_WORKER value=true
 /container/envs/add list=billing-env key=LARAVEL_ENABLE_SCHEDULER value=true
 /container/envs/add list=billing-env key=LARAVEL_QUEUE_WORKER_OPTIONS value="--queue=mikrotik,default --tries=1 --timeout=1200 --sleep=2"
-/container/envs/add list=billing-env key=REDIRECT_URL value=https://portail-anao.example.com
+/container/envs/add list=billing-env key=REDIRECT_URL value=http://portail-anao.wifi
 /container/envs/add list=billing-env key=HOTSPOT_STATUS_TIMEOUT_SECONDS value=2
 /container/envs/add list=billing-env key=HOTSPOT_STATUS_CACHE_SECONDS value=3
 /container/envs/add list=billing-env key=HOTSPOT_STATUS_FAILURE_COOLDOWN_SECONDS value=20
-/container/envs/add list=billing-env key=MIKROTIK_BOOT_HOTSPOT_SYNC value=false
+/container/envs/add list=billing-env key=MIKROTIK_BOOT_HOTSPOT_SYNC value=true
 /container/envs/add list=billing-env key=MIKROTIK_BOOT_HOTSPOT_SYNC_ONLY_ONLINE value=true
 /container/envs/add list=billing-env key=MIKROTIK_BOOT_HOTSPOT_SYNC_PROCESS_NOW value=false
 ```

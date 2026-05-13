@@ -184,14 +184,11 @@ Les mounts container ne fonctionnent qu'avec un stockage formaté **ext4**. Vér
 /container/envs/add list=billing-env key=DB_PORT value=3306
 /container/envs/add list=billing-env key=DB_DATABASE value=wimazone
 /container/envs/add list=billing-env key=DB_USERNAME value=wimazone
-/container/envs/add list=billing-env key=DB_PASSWORD value=REMPLACER_PAR_UN_MOT_DE_PASSE_FORT
-/container/envs/add list=billing-env key=MARIADB_ROOT_PASSWORD value=REMPLACER_PAR_UN_MOT_DE_PASSE_ROOT
 /container/envs/add list=billing-env key=SYNC_ENABLED value=true
 /container/envs/add list=billing-env key=OFFLINE_FALLBACK value=true
-/container/envs/add list=billing-env key=WIMAZONE_LICENSE_KEY value=LIC-XXXXXXXX-XXXXXXXX-XXXXXXXX-XXXXXXXX
 /container/envs/add list=billing-env key=LARAVEL_AUTO_MIGRATION value=true
 /container/envs/add list=billing-env key=LARAVEL_AUTO_MIGRATION_OPTIONS value=--force
-/container/envs/add list=billing-env key=LARAVEL_AUTO_STORAGE_LINK value=false
+/container/envs/add list=billing-env key=LARAVEL_AUTO_STORAGE_LINK value=true
 /container/envs/add list=billing-env key=LARAVEL_ENABLE_QUEUE_WORKER value=true
 /container/envs/add list=billing-env key=LARAVEL_ENABLE_SCHEDULER value=true
 /container/envs/add list=billing-env key=LARAVEL_QUEUE_WORKER_OPTIONS value="--queue=mikrotik,default --tries=1 --timeout=1200 --sleep=2"
