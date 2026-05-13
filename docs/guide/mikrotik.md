@@ -174,6 +174,13 @@ L'image embarque **MariaDB** ; il faut persister son répertoire de données sur
 Les mounts container ne fonctionnent qu'avec un stockage formaté **ext4**. Vérifier avec `/disk/print` que le device `usb1` est bien reconnu. MariaDB refuse de démarrer sur FAT32/NTFS.
 :::
 
+::: danger `src=` doit être EN DEHORS de `root-dir`
+Si tu utilises `root-dir=usb1/wimazone`, alors `src=` doit pointer vers un dossier **frère** (ex `usb1/billing-data/...`), **pas un sous-dossier** de `root-dir`. Sinon le mount est wipé au prochain `/container/remove` + repull — tu perds MariaDB **et** le fingerprint de licence, et le routeur sera rejeté HTTP 403 au prochain boot.
+
+✅ OK : `root-dir=usb1/wimazone` + `src=usb1/billing-data/mysql`
+❌ KO : `root-dir=usb1/wimazone` + `src=usb1/wimazone/data/mysql`
+:::
+
 ## 10) Variables d'environnement du container
 
 ```routeros
@@ -186,6 +193,9 @@ Les mounts container ne fonctionnent qu'avec un stockage formaté **ext4**. Vér
 /container/envs/add list=billing-env key=DB_USERNAME value=wimazone
 /container/envs/add list=billing-env key=SYNC_ENABLED value=true
 /container/envs/add list=billing-env key=OFFLINE_FALLBACK value=true
+/container/envs/add list=billing-env key=MIKROTIK_API_HOST value=172.17.0.1
+/container/envs/add list=billing-env key=MIKROTIK_API_USER value=admin
+/container/envs/add list=billing-env key=MIKROTIK_API_PASSWORD value=VOTRE_PASSWORD_ADMIN_ROUTEROS
 /container/envs/add list=billing-env key=LARAVEL_AUTO_MIGRATION value=true
 /container/envs/add list=billing-env key=LARAVEL_AUTO_MIGRATION_OPTIONS value=--force
 /container/envs/add list=billing-env key=LARAVEL_AUTO_STORAGE_LINK value=true
@@ -205,6 +215,20 @@ Les mounts container ne fonctionnent qu'avec un stockage formaté **ext4**. Vér
 
 ::: info Licence
 `WIMAZONE_LICENSE_KEY` est fourni par ITDevSuccess lors de l'achat d'une licence — chaque routeur a sa propre clé, révocable individuellement depuis le portail admin.
+:::
+
+::: warning Identité matérielle anti-fraude
+La licence est **liée au serial matériel** du routeur (1 seat = 1 MikroTik). Au premier boot, le container interroge RouterOS via REST API (`https://172.17.0.1/rest/system/routerboard`) avec les credentials `MIKROTIK_API_USER` / `MIKROTIK_API_PASSWORD` pour lire le serial directement depuis le matériel — **impossible à falsifier**.
+
+Le fingerprint envoyé au serveur de licences devient `serial-<SN>`, **stable au repull / reboot / réinstall RouterOS**. Un autre routeur tentant la même licence sera rejeté (HTTP 403).
+
+::: tip Activer le service www sur MikroTik
+```routeros
+/ip/service/enable www
+# Optionnel mais recommandé : restreindre à 172.17.0.0/24
+/ip/service/set www address=172.17.0.0/24
+```
+:::
 :::
 
 ## 11) Créer le container Wima Zone
@@ -406,12 +430,46 @@ Symptômes courants :
 |---|---|---|
 | `exited with signal 4 (Illegal instruction)` | Routeur avec CPU EN7562CT (hEX refresh / hEX S 2025) qui réclame `archVariant:v5` → sandbox MikroTik restreint à arm32v5 soft-float, incompatible avec Alpine armhf | Ces modèles ne sont pas supportés. Utiliser un L009, hAP ax³ ou RB5009 |
 | `SIGKILL` / `OOMKilled` | Manque de RAM | Réduire les workers queue, utiliser modèle ax³ |
-| `licence rejetee (HTTP 401/403)` | Licence invalide ou révoquée | Vérifier `WIMAZONE_LICENSE_KEY` dans l'admin portal |
+| `licence rejetee (HTTP 401/403)` | Licence invalide, révoquée, ou seat déjà pris par un autre fingerprint | Voir section [Repull a wipé /data](#repull-fingerprint-perdu) ci-dessous |
+| `impossible de lire le serial via RouterOS REST API` | Credentials `MIKROTIK_API_*` invalides ou service `www` désactivé | `/ip/service/enable www` + vérifier user/password admin RouterOS |
 | `Can't connect to MySQL server on '127.0.0.1'` | MariaDB pas encore prête | Attendre 30 s après le démarrage ; vérifier `s6-svstat mariadb` |
 | `Access denied for user 'wimazone'` | Mot de passe DB incorrect | Vérifier `DB_PASSWORD` et `MARIADB_ROOT_PASSWORD` |
 | `Unknown database 'wimazone'` | Mount `/var/lib/mysql` vide ou corrompu | Supprimer le mount, laisser MariaDB réinitialiser |
 | `502 Bad Gateway` | PHP-FPM saturé | Baisser `HOTSPOT_STATUS_TIMEOUT_SECONDS` à 1 |
 | `max_children reached` | Trop de requêtes simultanées | Garder `MIKROTIK_BOOT_HOTSPOT_SYNC_PROCESS_NOW=false` |
+
+### Repull a wipé /data — licence rejetée HTTP 403 {#repull-fingerprint-perdu}
+
+**Symptôme** au boot après `/container/remove` + repull :
+
+```
+[startup] ERREUR: licence rejetee (HTTP 403) — verifier WIMAZONE_LICENSE_KEY
+[startup] ERREUR: licence invalide — pas de fallback offline pour ce cas.
+```
+
+**Cause** : le mount `/data` n'était pas correctement persistant (voir [warning section 9](#9-créer-le-stockage-persistant-mariadb)). Le fichier `/data/.fingerprint` a été perdu. Si le fingerprint était un UUID aléatoire (ancien client < v4.10.2), l'ancien usage occupe encore le seat côté serveur → le nouveau est rejeté.
+
+**Recovery** (à faire 1 fois) :
+
+1. **Côté wimazone.mg/admin/licenses** : trouver la licence, identifier l'ancien usage (`uuid-...`), cliquer **« Libérer »** pour révoquer le seat.
+2. **Sur le MikroTik**, vérifier que les credentials API sont configurés :
+
+   ```routeros
+   /ip/service/enable www
+   /container envs add list=billing-env key=MIKROTIK_API_USER value=admin
+   /container envs add list=billing-env key=MIKROTIK_API_PASSWORD value=<pass>
+   /container stop  [find name=billing]
+   /container start [find name=billing]
+   ```
+
+3. **Au prochain boot**, le container lit directement le serial via REST API et l'enregistre côté serveur. Cette identité matérielle est **stable au repull, reboot, et même réinstall RouterOS** — le problème ne se reproduira plus.
+
+4. **Corriger le mount** pour aussi sauver MariaDB :
+
+   ```routeros
+   /container/mounts/add src=usb1/billing-data dst=/data list=billing-db
+   # src= EN DEHORS de root-dir (cf section 9)
+   ```
 
 ### Diagnostics réseau (VETH / bridge)
 

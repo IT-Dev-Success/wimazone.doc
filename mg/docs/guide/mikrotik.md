@@ -8,7 +8,7 @@ description: Torolàlana feno hametrahana ny Wima Zone Billing amin'ny container
 Ity torolàlana ity dia mikasika ny fametrahana **dingana tsirairay** ny Wima Zone Billing amin'ny mode container amin'ny routeur MikroTik RouterOS v7.
 
 ::: tip Alohan'ny hanombohana
-Hamarino fa vita daholo ny [lisitra fepetra takiana](/mg/docs/guide/installation#requirements) : RouterOS v7.10+, USB ext4, token GitHub ITDevSuccess.
+Hamarino fa vita daholo ny [lisitra fepetra takiana](/mg/docs/guide/installation#requirements) : RouterOS v7.10+, USB ext4, licence WimaZone ITDevSuccess.
 :::
 
 ## <Icon name="Router" color="warning" /> Routeur mifanaraka
@@ -174,6 +174,13 @@ Ny sary dia mitondra **MariaDB** ao anatiny ; tsy maintsy atao maharitra amin'ny
 Ny mount container dia tsy mandeha raha tsy amin'ny stockage voatsipika **ext4**. Hamarino amin'ny `/disk/print` fa hita ny `usb1`. Tsy handeha ny MariaDB amin'ny FAT32/NTFS.
 :::
 
+::: danger `src=` tsy maintsy ALOHAN'ny `root-dir`
+Raha mampiasa `root-dir=usb1/wimazone` ianao, ny `src=` dia tokony hanondro lahatahiry **mpiray tampo** (oh. `usb1/billing-data/...`), **fa tsy sub-folder** ao anaty `root-dir`. Raha tsy izany dia voafafa ny mount rehefa `/container/remove` + repull — very ny MariaDB **sy** ny fingerprint licence, ka ho lavina HTTP 403 amin'ny boot manaraka.
+
+✅ OK : `root-dir=usb1/wimazone` + `src=usb1/billing-data/mysql`
+❌ KO : `root-dir=usb1/wimazone` + `src=usb1/wimazone/data/mysql`
+:::
+
 ## 10) Variables tontolo iainana ho an'ny container
 
 ```routeros
@@ -186,6 +193,10 @@ Ny mount container dia tsy mandeha raha tsy amin'ny stockage voatsipika **ext4**
 /container/envs/add list=billing-env key=DB_USERNAME value=wimazone
 /container/envs/add list=billing-env key=SYNC_ENABLED value=true
 /container/envs/add list=billing-env key=OFFLINE_FALLBACK value=true
+/container/envs/add list=billing-env key=WIMAZONE_LICENSE_KEY value=LIC-XXXXXXXX-XXXXXXXX-XXXXXXXX-XXXXXXXX
+/container/envs/add list=billing-env key=MIKROTIK_API_HOST value=172.17.0.1
+/container/envs/add list=billing-env key=MIKROTIK_API_USER value=admin
+/container/envs/add list=billing-env key=MIKROTIK_API_PASSWORD value=PASSWORD_ADMIN_ROUTEROS
 /container/envs/add list=billing-env key=LARAVEL_AUTO_MIGRATION value=true
 /container/envs/add list=billing-env key=LARAVEL_AUTO_MIGRATION_OPTIONS value=--force
 /container/envs/add list=billing-env key=LARAVEL_AUTO_STORAGE_LINK value=true
@@ -203,6 +214,20 @@ Ny mount container dia tsy mandeha raha tsy amin'ny stockage voatsipika **ext4**
 
 ::: info Licence
 `WIMAZONE_LICENSE_KEY` dia omen'ny ITDevSuccess rehefa mividy license — manana clé manokana ny routeur tsirairay, azo foanana isaky ny iray amin'ny portail admin.
+:::
+
+::: warning Identité matérielle anti-fraude
+Ny licence dia **mifamatotra amin'ny serial materially** an'ny routeur (1 seat = 1 MikroTik). Amin'ny boot voalohany, ny container dia manontany ny RouterOS REST API (`https://172.17.0.1/rest/system/routerboard`) miaraka amin'ny `MIKROTIK_API_USER` / `MIKROTIK_API_PASSWORD` mba haka ny serial mivantana avy amin'ny matériel — **tsy azo amaivanana**.
+
+Ny fingerprint alefa amin'ny serveur licence dia lasa `serial-<SN>`, **maharitra na avy amin'ny repull / reboot / réinstall RouterOS**. Raha misy routeur hafa miezaka mampiasa io licence io, ho lavina (HTTP 403).
+
+::: tip Alefaso ny www service amin'ny MikroTik
+```routeros
+/ip/service/enable www
+# Tsara raha voafetra amin'ny 172.17.0.0/24
+/ip/service/set www address=172.17.0.0/24
+```
+:::
 :::
 
 ## 11) Mamorona container Wima Zone
@@ -404,12 +429,46 @@ Hafatra mahazatra :
 |---|---|---|
 | `exited with signal 4 (Illegal instruction)` | Routeur misy CPU EN7562CT (hEX refresh / hEX S 2025) manambara `archVariant:v5` → sandbox MikroTik voafetra amin'ny arm32v5 soft-float, tsy mifanaraka amin'ny Alpine armhf | Tsy tohanana ireo modely ireo. Ampiasao L009, hAP ax³ na RB5009 |
 | `SIGKILL` / `OOMKilled` | Tsy ampy RAM | Ahena ny queue workers, ampiasao ax³ |
-| `licence rejetee (HTTP 401/403)` | Licence diso na voafoana | Hamarino `WIMAZONE_LICENSE_KEY` ao amin'ny portail admin |
+| `licence rejetee (HTTP 401/403)` | Licence diso, voafoana, na seat efa azon'ny fingerprint hafa | Jereo fizarana [Repull namafa /data](#repull-fingerprint-very) etsy ambany |
+| `impossible de lire le serial via RouterOS REST API` | `MIKROTIK_API_*` diso na tsy mandeha ny service `www` | `/ip/service/enable www` + hamarino user/password admin RouterOS |
 | `Can't connect to MySQL server on '127.0.0.1'` | Mbola tsy vonona ny MariaDB | Miandrasa 30 s aorian'ny boot ; jereo `s6-svstat mariadb` |
 | `Access denied for user 'wimazone'` | Tenimiafina DB diso | Hamarino `DB_PASSWORD` sy `MARIADB_ROOT_PASSWORD` |
 | `Unknown database 'wimazone'` | Mount `/var/lib/mysql` foana na simba | Esory ny mount, avelao ny MariaDB hamorona indray |
 | `502 Bad Gateway` | PHP-FPM feno | Ahena `HOTSPOT_STATUS_TIMEOUT_SECONDS=1` |
 | `max_children reached` | Fangatahana be loatra | Hajao `MIKROTIK_BOOT_HOTSPOT_SYNC_PROCESS_NOW=false` |
+
+### Repull namafa /data — licence lavina HTTP 403 {#repull-fingerprint-very}
+
+**Soritr'aretina** amin'ny boot aorian'ny `/container/remove` + repull :
+
+```
+[startup] ERREUR: licence rejetee (HTTP 403) — verifier WIMAZONE_LICENSE_KEY
+[startup] ERREUR: licence invalide — pas de fallback offline pour ce cas.
+```
+
+**Antony** : tsy maharitra tsara ny mount `/data` (jereo [warning fizarana 9](#9-mamorona-fitehirizana-mariadb-maharitra)). Very ny `/data/.fingerprint`. Raha ny fingerprint taloha dia UUID kisendrasendra (client taloha < v4.10.2), mbola mihazona ny seat amin'ny serveur izany → lavina ny vaovao.
+
+**Vahaolana** (atao indray mandeha) :
+
+1. **Amin'ny wimazone.mg/admin/licenses** : tadiavo ny licence, fantaro ny usage taloha (`uuid-...`), tsindrio **« Libérer »** mba hanafoanana ny seat.
+2. **Amin'ny MikroTik**, hamarino fa ny credentials API dia napetraka :
+
+   ```routeros
+   /ip/service/enable www
+   /container envs add list=billing-env key=MIKROTIK_API_USER value=admin
+   /container envs add list=billing-env key=MIKROTIK_API_PASSWORD value=<pass>
+   /container stop  [find name=billing]
+   /container start [find name=billing]
+   ```
+
+3. **Amin'ny boot manaraka**, ny container dia maka ny serial mivantana avy amin'ny REST API ary mametraka azy amin'ny serveur. **Maharitra na avy amin'ny repull, reboot, ary na dia réinstall RouterOS aza** io identité matérielle io — tsy hiverina intsony ny olana.
+
+4. **Hahitsy ny mount** mba hahatafita koa ny MariaDB :
+
+   ```routeros
+   /container/mounts/add src=usb1/billing-data dst=/data list=billing-db
+   # src= ALOHAN'ny root-dir (jereo fizarana 9)
+   ```
 
 ### Diagnostic tambajotra (VETH / bridge)
 
