@@ -75,7 +75,7 @@ Menu → **Paramètres → Général → Portail**
 
 | Champ | Description |
 |---|---|
-| **URL portail** | `http://wima-zone.wifi` (ou votre domaine) |
+| **URL portail** | `http://wimazone.wifi` (ou votre domaine) |
 | **Page d'accueil** | Template HTML de la page de login |
 | **Fallback redirect** | URL de secours si portail indisponible |
 

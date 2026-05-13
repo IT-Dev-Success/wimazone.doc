@@ -15,7 +15,7 @@ Ce que vit un client qui achète un ticket et se connecte au Wi-Fi.
 Le client se connecte au SSID du hotspot (ex. `Wima Zone-Hotspot`). Le portail captif s'ouvre automatiquement sur la page :
 
 ```
-http://wima-zone.wifi/login
+http://wimazone.wifi/login
 ```
 
 ## <Icon name="Key" color="success" /> 2) Saisie du code
@@ -36,7 +36,7 @@ Le système vérifie le code :
 Une fois connecté, le client accède à son espace :
 
 ```
-http://wima-zone.wifi/customer
+http://wimazone.wifi/customer
 ```
 
 Il y voit :
@@ -74,7 +74,7 @@ Dans **Gestion des clients → Sessions Actives** :
 
 | Symptôme | Cause | Solution |
 |---|---|---|
-| Portail ne s'ouvre pas | DNS bloqué | Vérifier walled-garden `wima-zone.wifi` |
+| Portail ne s'ouvre pas | DNS bloqué | Vérifier walled-garden `wimazone.wifi` |
 | Code accepté mais pas d'internet | Profil MikroTik absent | Re-synchroniser le routeur |
 | Déconnexion immédiate | Bandwidth profile non appliqué | Vérifier *Gestion Hotspot* sur le routeur |
 

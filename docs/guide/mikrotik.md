@@ -292,9 +292,15 @@ Vous devriez voir à la fin :
 ### Walled Garden host
 
 ```routeros
-/ip/hotspot/walled-garden/add dst-host=wima-zone.wifi action=allow
-/ip/hotspot/walled-garden/add dst-host=*.wima-zone.wifi action=allow
-/ip/hotspot/walled-garden/add dst-host=portal.wima-zone.wifi action=allow
+/ip/hotspot/walled-garden/add dst-host=wimazone.wifi action=allow
+/ip/hotspot/walled-garden/add dst-host=*.wimazone.wifi action=allow
+/ip/hotspot/walled-garden/add dst-host=portal.wimazone.wifi action=allow
+/ip/hotspot/walled-garden/add dst-host=wimazone.mg action=allow
+/ip/hotspot/walled-garden/add dst-host=*.wimazone.mg action=allow
+/ip/hotspot/walled-garden/add dst-host=wimacloud.mg action=allow
+/ip/hotspot/walled-garden/add dst-host=*.wimacloud.mg action=allow
+/ip/hotspot/walled-garden/add dst-host=itdevsuccess.com action=allow
+/ip/hotspot/walled-garden/add dst-host=*.itdevsuccess.com action=allow
 /ip/hotspot/walled-garden/add dst-host=embed.tawk.to action=allow
 /ip/hotspot/walled-garden/add dst-host=va.tawk.to action=allow
 /ip/hotspot/walled-garden/add dst-host=*.tawk.to action=allow

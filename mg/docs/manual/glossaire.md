@@ -33,7 +33,7 @@ Network Address Translation — lalàna firewall mamadika IP anaty (172.17.0.0/2
 Serivisy MikroTik mahasakana ny Wi-Fi tsy voamarina ary mampiseho **portail captif** mangataka code voucher.
 
 ### Portail captif {#portail-captif}
-Pejy web mipoitra ho azy amin'ny mpanjifa Wi-Fi alohan'ny fidirana amin'ny Internet. Amin'ny Wima Zone : `http://wima-zone.wifi/login`.
+Pejy web mipoitra ho azy amin'ny mpanjifa Wi-Fi alohan'ny fidirana amin'ny Internet. Amin'ny Wima Zone : `http://wimazone.wifi/login`.
 
 ### Walled Garden {#walled-garden}
 Lisitra domain nahazoana alalana **tsy misy fanamarinana** : MVola, SMS Befiana, Tawk.to, domain portail. Ilaina mba afaka mandoa vola ny mpanjifa aloha.

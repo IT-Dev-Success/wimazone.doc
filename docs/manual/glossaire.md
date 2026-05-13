@@ -33,7 +33,7 @@ Network Address Translation — règle firewall qui traduit les adresses IP priv
 Service MikroTik qui intercepte le trafic d'un client Wi-Fi non authentifié et affiche un **portail captif** demandant un code voucher ou un login.
 
 ### Portail captif {#portail-captif}
-Page web présentée automatiquement aux clients Wi-Fi avant qu'ils n'aient accès à Internet. Sur Wima Zone : `http://wima-zone.wifi/login`.
+Page web présentée automatiquement aux clients Wi-Fi avant qu'ils n'aient accès à Internet. Sur Wima Zone : `http://wimazone.wifi/login`.
 
 ### Walled Garden {#walled-garden}
 Liste d'adresses / domaines autorisés **sans authentification** : MVola, SMS Befiana, Tawk.to, domaine du portail. Indispensable pour que le client puisse payer avant d'être connecté.

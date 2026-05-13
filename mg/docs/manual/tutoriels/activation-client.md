@@ -12,7 +12,7 @@ Izay iainan'ny mpanjifa rehefa mividy tikety ary mifandray amin'ny Wi-Fi.
 Mifandray amin'ny SSID hotspot (oh. `Wima Zone-Hotspot`) ny mpanjifa. Misokatra ho azy ny portail captif :
 
 ```
-http://wima-zone.wifi/login
+http://wimazone.wifi/login
 ```
 
 ## <Icon name="Key" color="success" /> 2) Fampidirana code
@@ -33,7 +33,7 @@ Manamarina ny code ny rafitra :
 Rehefa tafiditra, mankanesa :
 
 ```
-http://wima-zone.wifi/customer
+http://wimazone.wifi/customer
 ```
 
 Hita eo :
@@ -71,7 +71,7 @@ Ao amin'ny **Gestion des clients → Sessions Mavitrika** :
 
 | Tarehy | Antony | Vahaolana |
 |---|---|---|
-| Tsy misokatra ny portail | DNS voasakana | Jereo walled-garden `wima-zone.wifi` |
+| Tsy misokatra ny portail | DNS voasakana | Jereo walled-garden `wimazone.wifi` |
 | Code ekena fa tsy misy internet | Profil MikroTik tsy misy | Sync ny routeur |
 | Voaisotra avy hatrany | Bandwidth profile tsy voapetraka | Jereo Gestion Hotspot |
 

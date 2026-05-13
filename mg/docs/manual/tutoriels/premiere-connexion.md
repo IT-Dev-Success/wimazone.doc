@@ -72,7 +72,7 @@ Menu → **Paramètres → Général → Portail**
 
 | Saha | Famaritana |
 |---|---|
-| **URL portail** | `http://wima-zone.wifi` (na domain-nao) |
+| **URL portail** | `http://wimazone.wifi` (na domain-nao) |
 | **Pejy fidirana** | Template HTML |
 | **Fallback redirect** | URL vonjimaika |
 
