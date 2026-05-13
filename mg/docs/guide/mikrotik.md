@@ -186,10 +186,8 @@ Ny mount container dia tsy mandeha raha tsy amin'ny stockage voatsipika **ext4**
 /container/envs/add list=billing-env key=DB_USERNAME value=wimazone
 /container/envs/add list=billing-env key=DB_PASSWORD value=SOLOY_AMIN_NY_TENIMIAFINA_MATANJAKA
 /container/envs/add list=billing-env key=MARIADB_ROOT_PASSWORD value=SOLOY_AMIN_NY_TENIMIAFINA_ROOT
-/container/envs/add list=billing-env key=GIT_SYNC_ENABLED value=true
-/container/envs/add list=billing-env key=GIT_REPOSITORY_URL value=https://github.com/ITDev-Success/billing.git
-/container/envs/add list=billing-env key=GIT_BRANCH value=main
-/container/envs/add list=billing-env key=GIT_OFFLINE_FALLBACK value=true
+/container/envs/add list=billing-env key=SYNC_ENABLED value=true
+/container/envs/add list=billing-env key=OFFLINE_FALLBACK value=true
 /container/envs/add list=billing-env key=WIMAZONE_LICENSE_KEY value=LIC-XXXXXXXX-XXXXXXXX-XXXXXXXX-XXXXXXXX
 /container/envs/add list=billing-env key=LARAVEL_AUTO_MIGRATION value=true
 /container/envs/add list=billing-env key=LARAVEL_AUTO_MIGRATION_OPTIONS value=--force
@@ -462,7 +460,7 @@ Hamarino ny credentials sy ny port :
 
 ## <Icon name="BookOpen" color="info" /> Notes fampandehanana
 
-- `GIT_OFFLINE_FALLBACK=true` : ny container dia manomboka amin'ny kaody eto an-toerana raha tsy tafiditra ny GitHub.
+- `OFFLINE_FALLBACK=true` : ny container dia manomboka amin'ny kaody eto an-toerana raha tsy tafiditra ny API wimazone.
 - Mount `/var/lib/mysql` amin'ny `usb1/billing-data/mysql` : maharitra ny data MariaDB na dia averina forona aza ny container.
 - `LARAVEL_AUTO_STORAGE_LINK=false` : misoroka olana amin'ny mount sasany.
 - Atao mialoha ny assets frontend (tsy atao amin'ny MikroTik ny build mavesatra).

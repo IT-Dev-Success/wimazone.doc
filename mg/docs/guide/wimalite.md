@@ -56,7 +56,7 @@ Toy ny `wimazone/billing`, ny sary wimalite **tsy mitondra ny kaody PHP** — iz
 
 ```routeros
 /container/envs/add list=wimalite-env key=WIMAZONE_LICENSE_KEY value=LIC-XXXXXXXX-XXXXXXXX-XXXXXXXX-XXXXXXXX
-/container/envs/add list=wimalite-env key=GIT_OFFLINE_FALLBACK value=true
+/container/envs/add list=wimalite-env key=OFFLINE_FALLBACK value=true
 /container/envs/add list=wimalite-env key=TZ value=Indian/Antananarivo
 ```
 

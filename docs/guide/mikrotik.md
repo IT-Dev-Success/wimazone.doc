@@ -8,7 +8,7 @@ description: Guide complet pour installer Wima Zone Billing en container sur Mik
 Ce guide couvre l'installation **pas-à-pas** de Wima Zone Billing en mode container sur un routeur MikroTik RouterOS v7.
 
 ::: tip Avant de commencer
-Assurez-vous d'avoir validé toute la [checklist de prérequis](/docs/guide/installation#requirements) : RouterOS v7.10+, USB ext4, token GitHub ITDevSuccess.
+Assurez-vous d'avoir validé toute la [checklist de prérequis](/docs/guide/installation#requirements) : RouterOS v7.10+, USB ext4, licence WimaZone ITDevSuccess.
 :::
 
 ## <Icon name="Router" color="warning" /> Routeurs compatibles
@@ -186,10 +186,8 @@ Les mounts container ne fonctionnent qu'avec un stockage formaté **ext4**. Vér
 /container/envs/add list=billing-env key=DB_USERNAME value=wimazone
 /container/envs/add list=billing-env key=DB_PASSWORD value=REMPLACER_PAR_UN_MOT_DE_PASSE_FORT
 /container/envs/add list=billing-env key=MARIADB_ROOT_PASSWORD value=REMPLACER_PAR_UN_MOT_DE_PASSE_ROOT
-/container/envs/add list=billing-env key=GIT_SYNC_ENABLED value=true
-/container/envs/add list=billing-env key=GIT_REPOSITORY_URL value=https://github.com/ITDev-Success/billing.git
-/container/envs/add list=billing-env key=GIT_BRANCH value=main
-/container/envs/add list=billing-env key=GIT_OFFLINE_FALLBACK value=true
+/container/envs/add list=billing-env key=SYNC_ENABLED value=true
+/container/envs/add list=billing-env key=OFFLINE_FALLBACK value=true
 /container/envs/add list=billing-env key=WIMAZONE_LICENSE_KEY value=LIC-XXXXXXXX-XXXXXXXX-XXXXXXXX-XXXXXXXX
 /container/envs/add list=billing-env key=LARAVEL_AUTO_MIGRATION value=true
 /container/envs/add list=billing-env key=LARAVEL_AUTO_MIGRATION_OPTIONS value=--force
@@ -464,7 +462,7 @@ Vérifier les credentials et le port :
 
 ## <Icon name="BookOpen" color="info" /> Notes d'exploitation
 
-- `GIT_OFFLINE_FALLBACK=true` : le container démarre avec le code local si GitHub est indisponible.
+- `OFFLINE_FALLBACK=true` : le container démarre avec le code local si l'API wimazone est indisponible.
 - Mount `/var/lib/mysql` sur `usb1/billing-data/mysql` : les données MariaDB survivent à la recréation du container.
 - `LARAVEL_AUTO_STORAGE_LINK=false` : évite un blocage au boot sur certains mounts.
 - Préparer les assets frontend en amont (pas de build frontend lourd sur MikroTik).

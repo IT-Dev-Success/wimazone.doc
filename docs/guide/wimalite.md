@@ -56,7 +56,7 @@ Comme `wimazone/billing`, l'image wimalite **ne contient pas le code PHP** — e
 
 ```routeros
 /container/envs/add list=wimalite-env key=WIMAZONE_LICENSE_KEY value=LIC-XXXXXXXX-XXXXXXXX-XXXXXXXX-XXXXXXXX
-/container/envs/add list=wimalite-env key=GIT_OFFLINE_FALLBACK value=true
+/container/envs/add list=wimalite-env key=OFFLINE_FALLBACK value=true
 /container/envs/add list=wimalite-env key=TZ value=Indian/Antananarivo
 ```
 
