@@ -29,6 +29,13 @@ export const sidebarFr: DefaultTheme.Sidebar = {
       ],
     },
     {
+      text: "Points d'accès Wi-Fi",
+      collapsed: false,
+      items: [
+        { text: "Configuration AP MikroTik", link: "/docs/guide/access-points" },
+      ],
+    },
+    {
       text: "Exploitation",
       collapsed: false,
       items: [
@@ -138,6 +145,13 @@ export const sidebarMg: DefaultTheme.Sidebar = {
       collapsed: false,
       items: [
         { text: "Fametrahana wimalite", link: "/mg/docs/guide/wimalite" },
+      ],
+    },
+    {
+      text: "Point d'accès Wi-Fi",
+      collapsed: false,
+      items: [
+        { text: "Fametrahana AP MikroTik", link: "/mg/docs/guide/access-points" },
       ],
     },
     {
