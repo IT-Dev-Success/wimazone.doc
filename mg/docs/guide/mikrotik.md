@@ -221,6 +221,22 @@ Raha mampiasa `root-dir=usb1/wimazone` ianao, ny `src=` dia tokony hanondro laha
 Manana clé manokana ny routeur tsirairay, azo foanana isaky ny iray amin'ny portail admin.
 :::
 
+::: tip Reverb WebSocket (cyber-café ihany)
+Tsy alefa amin'ny default (`LARAVEL_ENABLE_REVERB=false`) satria tsy ilaina amin'ny hotspot tsotra. Ho an'ny **cyber-café** mila temps-réel (unlock haingana ny poste, monitoring sessions), alefaso :
+
+```routeros
+/container/envs/set [find list="billing-env" key="LARAVEL_ENABLE_REVERB"] value=true
+# Avahao ny port WebSocket 8081 amin'ny LAN :
+/ip/firewall/nat/add chain=dstnat protocol=tcp dst-port=8081 action=dst-nat \
+  to-addresses=172.17.0.2 to-ports=8081 comment="Reverb WebSocket"
+/ip/firewall/filter/add chain=input protocol=tcp dst-port=8081 action=accept comment="Reverb"
+/container/stop [find name="Wima Zone"]
+/container/start [find name="Wima Zone"]
+```
+
+Port 8081 (fa tsy 8080) mba hialana amin'ny disadisa amin'ny port portail captif.
+:::
+
 ::: warning Identité matérielle anti-fraude
 Ny licence dia **mifamatotra amin'ny serial materially** an'ny routeur (1 seat = 1 MikroTik). Amin'ny boot voalohany, ny container dia manontany ny RouterOS REST API (`https://172.17.0.1/rest/system/routerboard`) miaraka amin'ny `MIKROTIK_API_USER` / `MIKROTIK_API_PASSWORD` mba haka ny serial mivantana avy amin'ny matériel — **tsy azo amaivanana**.
 

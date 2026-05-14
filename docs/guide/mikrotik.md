@@ -223,6 +223,22 @@ Si tu utilises `root-dir=usb1/wimazone`, alors `src=` doit pointer vers un dossi
 Chaque routeur a sa propre clé, révocable individuellement depuis le portail admin.
 :::
 
+::: tip Reverb WebSocket (cyber-cafés uniquement)
+Désactivé par défaut (`LARAVEL_ENABLE_REVERB=false`) car non utilisé en mode hotspot classique. Pour les **cyber-cafés** qui ont besoin du temps-réel (unlock instantané du poste, monitoring sessions actives), activer :
+
+```routeros
+/container/envs/set [find list="billing-env" key="LARAVEL_ENABLE_REVERB"] value=true
+# Exposer le port WebSocket 8081 vers le LAN :
+/ip/firewall/nat/add chain=dstnat protocol=tcp dst-port=8081 action=dst-nat \
+  to-addresses=172.17.0.2 to-ports=8081 comment="Reverb WebSocket"
+/ip/firewall/filter/add chain=input protocol=tcp dst-port=8081 action=accept comment="Reverb"
+/container/stop [find name="Wima Zone"]
+/container/start [find name="Wima Zone"]
+```
+
+Port 8081 (et non 8080) pour éviter le conflit avec le port du portail captif.
+:::
+
 ::: warning Identité matérielle anti-fraude
 La licence est **liée au serial matériel** du routeur (1 seat = 1 MikroTik). Au premier boot, le container interroge RouterOS via REST API (`https://172.17.0.1/rest/system/routerboard`) avec les credentials `MIKROTIK_API_USER` / `MIKROTIK_API_PASSWORD` pour lire le serial directement depuis le matériel — **impossible à falsifier**.
 
