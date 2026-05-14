@@ -64,7 +64,7 @@ Passerelle SMS malgache utilisée pour les notifications aux clients (activation
 ## <Icon name="Database" color="primary" /> Stack technique
 
 ### MariaDB {#mariadb}
-Base de données relationnelle (fork de MySQL). Embarquée dans le container Wima Zone, persistée sur clé USB ext4 (`/var/lib/mysql`).
+Base de données relationnelle (fork de MySQL). Embarquée dans le container Wima Zone, persistée sur clé USB ext4 via le mount `/data` (datadir `/data/mysql`).
 
 ### Reverb {#reverb}
 Serveur WebSocket officiel de Laravel, utilisé pour pousser en temps réel les mises à jour de sessions au dashboard admin et au client Wima Cafe desktop.

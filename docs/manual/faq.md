@@ -36,7 +36,7 @@ Les mounts container et MariaDB exigent un système de fichiers **ext4**. FAT32 
 <details>
 <summary><strong>Mes données sont perdues après avoir recréé le container — que faire ?</strong></summary>
 
-Cela signifie que le mount `/var/lib/mysql` n'était pas persistant. Vérifiez avec `/container/mounts/print` que `src=usb1/billing-data/mysql` est bien défini **en dehors** de `root-dir`. Activez `MARIADB_REQUIRE_MOUNT=true` pour bloquer tout démarrage avec un mount invalide.
+Cause la plus fréquente : mount mal configuré. L'image attend `src=usb1/billing-data dst=/data` (le datadir MariaDB est `/data/mysql` **à l'intérieur** du mount `/data`). Si `dst=/var/lib/mysql`, MariaDB ignore le mount et écrit sur l'overlay du container — wipé à chaque pull. Vérifiez avec `/container/mounts/print` que `dst=/data` et `src` est **en dehors** de `root-dir`. Activez `MARIADB_REQUIRE_MOUNT=true` pour bloquer tout démarrage avec un mount invalide.
 </details>
 
 <details>

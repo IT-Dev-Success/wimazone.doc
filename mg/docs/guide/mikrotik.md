@@ -167,18 +167,25 @@ Apetraho ireo lalàna ireo **alohan'ny** `drop` ankapobeny amin'ny chain `input`
 Ny sary dia mitondra **MariaDB** ao anatiny ; tsy maintsy atao maharitra amin'ny USB ny lahatahiry MariaDB mba ho tafita amin'ny redémarrage / fanavaozana.
 
 ```routeros
-/container/mounts/add src=usb1/billing-data/mysql dst=/var/lib/mysql list=billing-db
+/container/mounts/add src=usb1/billing-data dst=/data list=billing-db
 ```
+
+::: danger `dst=` tsy maintsy `/data` (FA TSY `/var/lib/mysql`)
+Ny sary dia mampiasa `/data/mysql` ho datadir MariaDB **ao anatin'ny** mount maharitra `/data`. Ity mount ity koa no mitahiry ny `/data/.fingerprint` (licence).
+
+✅ OK : `src=usb1/billing-data` + `dst=/data`
+❌ KO : `src=usb1/billing-data/mysql` + `dst=/var/lib/mysql` (tsy hita ny datadir → DB vaovao isaky ny pull, miverina ny migrations, very ny data)
+:::
 
 ::: warning USB ext4 ilaina
 Ny mount container dia tsy mandeha raha tsy amin'ny stockage voatsipika **ext4**. Hamarino amin'ny `/disk/print` fa hita ny `usb1`. Tsy handeha ny MariaDB amin'ny FAT32/NTFS.
 :::
 
 ::: danger `src=` tsy maintsy ALOHAN'ny `root-dir`
-Raha mampiasa `root-dir=usb1/wimazone` ianao, ny `src=` dia tokony hanondro lahatahiry **mpiray tampo** (oh. `usb1/billing-data/...`), **fa tsy sub-folder** ao anaty `root-dir`. Raha tsy izany dia voafafa ny mount rehefa `/container/remove` + repull — very ny MariaDB **sy** ny fingerprint licence, ka ho lavina HTTP 403 amin'ny boot manaraka.
+Raha mampiasa `root-dir=usb1/wimazone` ianao, ny `src=` dia tokony hanondro lahatahiry **mpiray tampo** (oh. `usb1/billing-data`), **fa tsy sub-folder** ao anaty `root-dir`. Raha tsy izany dia voafafa ny mount rehefa `/container/remove` + repull — very ny MariaDB **sy** ny fingerprint licence, ka ho lavina HTTP 403 amin'ny boot manaraka.
 
-✅ OK : `root-dir=usb1/wimazone` + `src=usb1/billing-data/mysql`
-❌ KO : `root-dir=usb1/wimazone` + `src=usb1/wimazone/data/mysql`
+✅ OK : `root-dir=usb1/wimazone` + `src=usb1/billing-data`
+❌ KO : `root-dir=usb1/wimazone` + `src=usb1/wimazone/billing-data`
 :::
 
 ## 10) Variables tontolo iainana ho an'ny container
@@ -376,7 +383,7 @@ Sokafy ny shell anatin'ny container avy eo avoay amin'ny `mysqldump` :
 Avy eo ao anatin'ny shell :
 
 ```bash
-mysqldump -u root -p"$MARIADB_ROOT_PASSWORD" wimazone > /var/lib/mysql/backups/wimazone-$(date +%F).sql
+mysqldump -u root -p"$MARIADB_ROOT_PASSWORD" wimazone > /data/mysql/backups/wimazone-$(date +%F).sql
 ```
 
 Ny rakitra `.sql` dia hita avy amin'ny RouterOS ao amin'ny `usb1/billing-data/mysql/backups/`. Raha te-hampiasa lahatahiry backup manokana :
@@ -400,7 +407,7 @@ scp admin@192.168.88.1:/usb1/backup/wimazone-2026-04-24.sql ./
 Ao anatin'ny shell :
 
 ```bash
-mysql -u root -p"$MARIADB_ROOT_PASSWORD" wimazone < /var/lib/mysql/backups/wimazone-YYYY-MM-DD.sql
+mysql -u root -p"$MARIADB_ROOT_PASSWORD" wimazone < /data/mysql/backups/wimazone-YYYY-MM-DD.sql
 ```
 
 ::: tip Automatique
@@ -408,7 +415,7 @@ Ampio scheduler RouterOS manao dump isan'andro :
 
 ```routeros
 /system/scheduler/add name=billing-backup interval=1d start-time=03:00 on-event={
-  /container/shell [find where name="Wima Zone"] command="sh -c 'mysqldump -u root -p\"\$MARIADB_ROOT_PASSWORD\" wimazone > /var/lib/mysql/backups/wimazone-daily.sql'"
+  /container/shell [find where name="Wima Zone"] command="sh -c 'mysqldump -u root -p\"\$MARIADB_ROOT_PASSWORD\" wimazone > /data/mysql/backups/wimazone-daily.sql'"
 }
 ```
 
@@ -460,7 +467,8 @@ Hafatra mahazatra :
 | `impossible de lire le serial via RouterOS REST API` | `MIKROTIK_API_*` diso na tsy mandeha ny service `www` | `/ip/service/enable www` + hamarino user/password admin RouterOS |
 | `Can't connect to MySQL server on '127.0.0.1'` | Mbola tsy vonona ny MariaDB | Miandrasa 30 s aorian'ny boot ; jereo `s6-svstat mariadb` |
 | `Access denied for user 'wimazone'` | Tenimiafina DB diso | Hamarino `DB_PASSWORD` sy `MARIADB_ROOT_PASSWORD` |
-| `Unknown database 'wimazone'` | Mount `/var/lib/mysql` foana na simba | Esory ny mount, avelao ny MariaDB hamorona indray |
+| `Unknown database 'wimazone'` | Mount `/data` foana na simba | Hamarino `src=usb1/billing-data dst=/data`, foronina indray ny mount |
+| Miverina daholo ny migrations + DB vaovao isaky ny pull | Mount mampiasa `dst=` diso (oh. `/var/lib/mysql`) — tsy maharitra mihitsy ny datadir MariaDB | Foronina indray ny mount amin'ny `dst=/data` (jereo section 9) |
 | `502 Bad Gateway` | PHP-FPM feno | Ahena `HOTSPOT_STATUS_TIMEOUT_SECONDS=1` |
 | `max_children reached` | Fangatahana be loatra | Hajao `MIKROTIK_BOOT_HOTSPOT_SYNC_PROCESS_NOW=false` |
 
@@ -544,7 +552,7 @@ Hamarino ny credentials sy ny port :
 ## <Icon name="BookOpen" color="info" /> Notes fampandehanana
 
 - `OFFLINE_FALLBACK=true` : ny container dia manomboka amin'ny kaody eto an-toerana raha tsy tafiditra ny API wimazone.
-- Mount `/var/lib/mysql` amin'ny `usb1/billing-data/mysql` : maharitra ny data MariaDB na dia averina forona aza ny container.
+- Mount `/data` amin'ny `usb1/billing-data` : maharitra ny data MariaDB (`/data/mysql`) sy ny fingerprint licence (`/data/.fingerprint`) na dia averina forona aza ny container.
 - `LARAVEL_AUTO_STORAGE_LINK=false` : misoroka olana amin'ny mount sasany.
 - Atao mialoha ny assets frontend (tsy atao amin'ny MikroTik ny build mavesatra).
 - Ho an'ny fanaraha-maso : `/container/log print follow where container="Wima Zone"`.

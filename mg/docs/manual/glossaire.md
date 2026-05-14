@@ -64,7 +64,7 @@ Passerelle SMS malagasy ampiasaina amin'ny fampandrenesana (fanombohana voucher,
 ## <Icon name="Database" color="primary" /> Rafitra teknika
 
 ### MariaDB {#mariadb}
-Database (fork MySQL). Tafiditra ao anaty container Wima Zone, maharitra amin'ny USB ext4 (`/var/lib/mysql`).
+Database (fork MySQL). Tafiditra ao anaty container Wima Zone, maharitra amin'ny USB ext4 amin'ny alalan'ny mount `/data` (datadir `/data/mysql`).
 
 ### Reverb {#reverb}
 Serveur WebSocket ofisialy an'ny Laravel, ampiasaina handefasana fanavaozana amin'ny fotoana tena izy.

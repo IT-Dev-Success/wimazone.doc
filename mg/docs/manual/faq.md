@@ -36,7 +36,7 @@ Ny mount container sy MariaDB dia mitaky system fichier **ext4**. Tsy tohanana n
 <details>
 <summary><strong>Very ny data aorian'ny famoronana container indray — inona no atao ?</strong></summary>
 
-Midika izany fa tsy maharitra ny mount `/var/lib/mysql`. Hamarino `/container/mounts/print` fa ny `src=usb1/billing-data/mysql` dia **ivelan'ny** `root-dir`. Alefaso `MARIADB_REQUIRE_MOUNT=true` mba hanakanana ny container hanomboka raha diso ny mount.
+Antony matetika : mount diso. Mitaky `src=usb1/billing-data dst=/data` ny sary (ny datadir MariaDB dia `/data/mysql` **ao anatin'ny** mount `/data`). Raha `dst=/var/lib/mysql`, tsy hita mihitsy ny mount avy amin'ny MariaDB ka hanoratra amin'ny overlay container — voafafa isaky ny pull. Hamarino amin'ny `/container/mounts/print` fa `dst=/data` ary ny `src` dia **ivelan'ny** `root-dir`. Alefaso `MARIADB_REQUIRE_MOUNT=true` mba hanakanana ny container hanomboka raha diso ny mount.
 </details>
 
 <details>

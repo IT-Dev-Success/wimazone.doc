@@ -167,18 +167,25 @@ Placez ces règles **avant** toute règle `drop` globale du chain `input`. Sinon
 L'image embarque **MariaDB** ; il faut persister son répertoire de données sur l'USB pour survivre aux redémarrages / mises à jour.
 
 ```routeros
-/container/mounts/add src=usb1/billing-data/mysql dst=/var/lib/mysql list=billing-db
+/container/mounts/add src=usb1/billing-data dst=/data list=billing-db
 ```
+
+::: danger `dst=` doit être `/data` (PAS `/var/lib/mysql`)
+L'image utilise `/data/mysql` comme datadir MariaDB **à l'intérieur** d'un mount persistant `/data`. Le mount sert aussi à stocker `/data/.fingerprint` (licence).
+
+✅ OK : `src=usb1/billing-data` + `dst=/data`
+❌ KO : `src=usb1/billing-data/mysql` + `dst=/var/lib/mysql` (datadir ignoré → DB neuve à chaque pull, migrations rejouées, données perdues)
+:::
 
 ::: warning Clé USB ext4 obligatoire
 Les mounts container ne fonctionnent qu'avec un stockage formaté **ext4**. Vérifier avec `/disk/print` que le device `usb1` est bien reconnu. MariaDB refuse de démarrer sur FAT32/NTFS.
 :::
 
 ::: danger `src=` doit être EN DEHORS de `root-dir`
-Si tu utilises `root-dir=usb1/wimazone`, alors `src=` doit pointer vers un dossier **frère** (ex `usb1/billing-data/...`), **pas un sous-dossier** de `root-dir`. Sinon le mount est wipé au prochain `/container/remove` + repull — tu perds MariaDB **et** le fingerprint de licence, et le routeur sera rejeté HTTP 403 au prochain boot.
+Si tu utilises `root-dir=usb1/wimazone`, alors `src=` doit pointer vers un dossier **frère** (ex `usb1/billing-data`), **pas un sous-dossier** de `root-dir`. Sinon le mount est wipé au prochain `/container/remove` + repull — tu perds MariaDB **et** le fingerprint de licence, et le routeur sera rejeté HTTP 403 au prochain boot.
 
-✅ OK : `root-dir=usb1/wimazone` + `src=usb1/billing-data/mysql`
-❌ KO : `root-dir=usb1/wimazone` + `src=usb1/wimazone/data/mysql`
+✅ OK : `root-dir=usb1/wimazone` + `src=usb1/billing-data`
+❌ KO : `root-dir=usb1/wimazone` + `src=usb1/wimazone/billing-data`
 :::
 
 ## 10) Variables d'environnement du container
@@ -378,7 +385,7 @@ Ouvrir un shell dans le container et exporter via `mysqldump` :
 Puis, dans le shell du container :
 
 ```bash
-mysqldump -u root -p"$MARIADB_ROOT_PASSWORD" wimazone > /var/lib/mysql/backups/wimazone-$(date +%F).sql
+mysqldump -u root -p"$MARIADB_ROOT_PASSWORD" wimazone > /data/mysql/backups/wimazone-$(date +%F).sql
 ```
 
 Le fichier `.sql` est accessible depuis RouterOS dans `usb1/billing-data/mysql/backups/`. Pour le copier vers un dossier de sauvegarde dédié :
@@ -402,7 +409,7 @@ scp admin@192.168.88.1:/usb1/backup/wimazone-2026-04-24.sql ./
 Dans le shell du container :
 
 ```bash
-mysql -u root -p"$MARIADB_ROOT_PASSWORD" wimazone < /var/lib/mysql/backups/wimazone-YYYY-MM-DD.sql
+mysql -u root -p"$MARIADB_ROOT_PASSWORD" wimazone < /data/mysql/backups/wimazone-YYYY-MM-DD.sql
 ```
 
 ::: tip Automatisation
@@ -410,7 +417,7 @@ Ajoutez un scheduler RouterOS qui déclenche un dump quotidien via le container 
 
 ```routeros
 /system/scheduler/add name=billing-backup interval=1d start-time=03:00 on-event={
-  /container/shell [find where name="Wima Zone"] command="sh -c 'mysqldump -u root -p\"\$MARIADB_ROOT_PASSWORD\" wimazone > /var/lib/mysql/backups/wimazone-daily.sql'"
+  /container/shell [find where name="Wima Zone"] command="sh -c 'mysqldump -u root -p\"\$MARIADB_ROOT_PASSWORD\" wimazone > /data/mysql/backups/wimazone-daily.sql'"
 }
 ```
 
@@ -462,7 +469,8 @@ Symptômes courants :
 | `impossible de lire le serial via RouterOS REST API` | Credentials `MIKROTIK_API_*` invalides ou service `www` désactivé | `/ip/service/enable www` + vérifier user/password admin RouterOS |
 | `Can't connect to MySQL server on '127.0.0.1'` | MariaDB pas encore prête | Attendre 30 s après le démarrage ; vérifier `s6-svstat mariadb` |
 | `Access denied for user 'wimazone'` | Mot de passe DB incorrect | Vérifier `DB_PASSWORD` et `MARIADB_ROOT_PASSWORD` |
-| `Unknown database 'wimazone'` | Mount `/var/lib/mysql` vide ou corrompu | Supprimer le mount, laisser MariaDB réinitialiser |
+| `Unknown database 'wimazone'` | Mount `/data` vide ou corrompu | Vérifier `src=usb1/billing-data dst=/data`, recréer le mount |
+| Migrations rejouées + DB neuve à chaque pull | Mount avec mauvais `dst=` (ex `/var/lib/mysql`) — datadir MariaDB jamais persisté | Recréer le mount avec `dst=/data` (cf section 9) |
 | `502 Bad Gateway` | PHP-FPM saturé | Baisser `HOTSPOT_STATUS_TIMEOUT_SECONDS` à 1 |
 | `max_children reached` | Trop de requêtes simultanées | Garder `MIKROTIK_BOOT_HOTSPOT_SYNC_PROCESS_NOW=false` |
 
@@ -546,7 +554,7 @@ Vérifier les credentials et le port :
 ## <Icon name="BookOpen" color="info" /> Notes d'exploitation
 
 - `OFFLINE_FALLBACK=true` : le container démarre avec le code local si l'API wimazone est indisponible.
-- Mount `/var/lib/mysql` sur `usb1/billing-data/mysql` : les données MariaDB survivent à la recréation du container.
+- Mount `/data` sur `usb1/billing-data` : les données MariaDB (`/data/mysql`) et le fingerprint licence (`/data/.fingerprint`) survivent à la recréation du container.
 - `LARAVEL_AUTO_STORAGE_LINK=false` : évite un blocage au boot sur certains mounts.
 - Préparer les assets frontend en amont (pas de build frontend lourd sur MikroTik).
 - Pour surveiller en continu : `/container/log print follow where container="Wima Zone"`.
